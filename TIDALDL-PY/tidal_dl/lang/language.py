@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   language.py
 @Time    :   2020/08/19
 @Author  :   Yaronzz
 @Version :   1.0
 @Contact :   yaronhuang@foxmail.com
 @Desc    :
-'''
+"""
 
 from lang.arabic import LangArabic
 from lang.chinese import LangChinese
@@ -33,29 +33,30 @@ from lang.korean import LangKorean
 from lang.japanese import LangJapanese
 
 _ALL_LANGUAGE_ = [
-    ['English', LangEnglish()],
-    ['中文', LangChinese()],
-    ['Turkish', LangTurkish()],
-    ['Italian', LangItalian()],
-    ['Czech', LangCzech()],
-    ['Arabic', LangArabic()],
-    ['Russian', LangRussian()],
-    ['Filipino', LangFilipino()],
-    ['Croatian', LangCroatian()],
-    ['Spanish', LangSpanish()],
-    ['Portuguese', LangPortuguese()],
-    ['Ukrainian', LangUkrainian()],
-    ['Vietnamese', LangVietnamese()],
-    ['French', LangFrench()],
-    ['German', LangGerman()],
-    ['Danish', LangDanish()],
-    ['Hungarian', LangHungarian()],
-    ['Korean', LangKorean()],
-    ['Japanese', LangJapanese()],
-    ['Dutch', LangDutch()],
-    ['Polish', LangPolish()],
-    ['Norwegian', LangNorwegian()],
+    ["English", LangEnglish()],
+    ["中文", LangChinese()],
+    ["Turkish", LangTurkish()],
+    ["Italian", LangItalian()],
+    ["Czech", LangCzech()],
+    ["Arabic", LangArabic()],
+    ["Russian", LangRussian()],
+    ["Filipino", LangFilipino()],
+    ["Croatian", LangCroatian()],
+    ["Spanish", LangSpanish()],
+    ["Portuguese", LangPortuguese()],
+    ["Ukrainian", LangUkrainian()],
+    ["Vietnamese", LangVietnamese()],
+    ["French", LangFrench()],
+    ["German", LangGerman()],
+    ["Danish", LangDanish()],
+    ["Hungarian", LangHungarian()],
+    ["Korean", LangKorean()],
+    ["Japanese", LangJapanese()],
+    ["Dutch", LangDutch()],
+    ["Polish", LangPolish()],
+    ["Norwegian", LangNorwegian()],
 ]
+
 
 class Language(object):
     def __init__(self) -> None:
@@ -87,9 +88,9 @@ class Language(object):
             name = self.getLangName(index)
             if name == "":
                 break
-            array.append('\'' + str(index) + '\'-' + name)
+            array.append("'" + str(index) + "'-" + name)
             index += 1
-        return ','.join(array)
+        return ",".join(array)
 
 
 LANG = Language()

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   dutch.py
 @Time    :   2022/03/01
 @Author  :   bladeoner
 @Version :   1.0
 @Contact :
 @Desc    :   
-'''
+"""
 
 
 class LangDutch(object):
@@ -68,31 +68,49 @@ class LangDutch(object):
 
     CHANGE_START_SETTINGS = "Start instellingen('0'-Terugkeren,'1'-Ja):"
     CHANGE_DOWNLOAD_PATH = "Downloadpad('0'-niet wijzigen):"
-    CHANGE_AUDIO_QUALITY = "Audiokwaliteit('0'-Normaal,'1'-Hoog,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Audiokwaliteit('0'-Normaal,'1'-Hoog,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Videokwaliteit (1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "Converteer mp4 naar m4a('0'-Nee,'1'-Ja):"
-    CHANGE_ADD_EXPLICIT_TAG = "Expliciete tag toevoegen aan bestandsnamen('0'-Nee,'1'-Ja):"
-    CHANGE_ADD_HYPHEN = "Gebruik koppeltekens in plaats van spaties in bestandsnamen ('0'-Nee,'1'-Ja):"
+    CHANGE_ADD_EXPLICIT_TAG = (
+        "Expliciete tag toevoegen aan bestandsnamen('0'-Nee,'1'-Ja):"
+    )
+    CHANGE_ADD_HYPHEN = (
+        "Gebruik koppeltekens in plaats van spaties in bestandsnamen ('0'-Nee,'1'-Ja):"
+    )
     CHANGE_ADD_YEAR = "Jaar toevoegen aan albummapnamen ('0'-Nee,'1'-Ja):"
     CHANGE_USE_TRACK_NUM = "Voeg tracknummer toe voor bestandsnamen ('0'-Nee,'1'-Ja):"
-    CHANGE_CHECK_EXIST = "Controleer het bestaande bestand voordat u de track downloadt('0'-Nee,'1'-Ja):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Voeg artiestnaam toe voor de tracktitel ('0'-Nee,'1'-Ja):"
+    CHANGE_CHECK_EXIST = (
+        "Controleer het bestaande bestand voordat u de track downloadt('0'-Nee,'1'-Ja):"
+    )
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Voeg artiestnaam toe voor de tracktitel ('0'-Nee,'1'-Ja):"
+    )
     CHANGE_INCLUDE_EP = "Voeg singles en EP's toe bij het downloaden van de albums van een artiest('0'-Nee,'1'-Ja):"
     CHANGE_ALBUMID_BEFORE_FOLDER = "ID toevoegen voor albummap ('0'-Nee,'1'-Ja):"
     CHANGE_SAVE_COVERS = "Covers opslaan('0'-Nee,'1'-Ja):"
     CHANGE_LANGUAGE = "Selecteer taal"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Albummapindeling ('0'-niet wijzigen,'default'-om standaard in te stellen):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Albummapindeling ('0'-niet wijzigen,'default'-om standaard in te stellen):"
+    )
     CHANGE_PLAYLIST_FOLDER_FORMAT = "Afspeellijstmapindeling format('0'-niet wijzigen,'default'-om standaard in te stellen):"
     CHANGE_TRACK_FILE_FORMAT = "Bestandsformaat bijhouden ('0'-niet wijzigen,'default'-om standaard in te stellen):"
-    CHANGE_VIDEO_FILE_FORMAT = "Videobestandsindeling('0'-niet wijzigen,'default'-om standaard in te stellen):"
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Videobestandsindeling('0'-niet wijzigen,'default'-om standaard in te stellen):"
+    )
     CHANGE_SHOW_PROGRESS = "Voortgang weergeven('0'-Nee,'1'-Ja):"
     CHANGE_SHOW_TRACKINFO = "Toon trackinfo('0'-Nee,'1'-Ja):"
     CHANGE_SAVE_ALBUM_INFO = "Bewaar AlbumInfo.txt('0'-Nee,'1'-Ja):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Songtekst toevoegen('0'-Nee,'1'-Ja):"
     CHANGE_LYRICS_SERVER_PROXY = "Songtekst proxyserver('0'-niet wijzigen):"
     CHANGE_ADD_LRC_FILE = "Sla getimede songtekst .lrc-bestand op ('0'-Nee,'1'-Ja):"
-    CHANGE_ADD_TYPE_FOLDER = "Type-map toevoegen, bijv. Album/Video/Playlist('0'-Nee,'1'-Ja):"
+    CHANGE_ADD_TYPE_FOLDER = (
+        "Type-map toevoegen, bijv. Album/Video/Playlist('0'-Nee,'1'-Ja):"
+    )
     CHANGE_MULITHREAD_DOWNLOAD = "Multi thread download('0'-No,'1'-Yes):"
     CHANGE_USE_DOWNLOAD_DELAY = "Use Download Delay('0'-No,'1'-Yes):"
 
@@ -114,13 +132,13 @@ class LangDutch(object):
     MODEL_ARTIST_PROPERTY = "ARTIEST-EIGENSCHAP"
     MODEL_PLAYLIST_PROPERTY = "AFSPEELLIJST-EIGENSCHAP"
 
-    MODEL_TITLE = 'Titel'
-    MODEL_TRACK_NUMBER = 'Tracknummer'
-    MODEL_VIDEO_NUMBER = 'Videonummer'
-    MODEL_RELEASE_DATE = 'Publicatiedatum'
-    MODEL_VERSION = 'Versie'
-    MODEL_EXPLICIT = 'Expliciet'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Naam'
-    MODEL_TYPE = 'Type'
+    MODEL_TITLE = "Titel"
+    MODEL_TRACK_NUMBER = "Tracknummer"
+    MODEL_VIDEO_NUMBER = "Videonummer"
+    MODEL_RELEASE_DATE = "Publicatiedatum"
+    MODEL_VERSION = "Versie"
+    MODEL_EXPLICIT = "Expliciet"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Naam"
+    MODEL_TYPE = "Type"

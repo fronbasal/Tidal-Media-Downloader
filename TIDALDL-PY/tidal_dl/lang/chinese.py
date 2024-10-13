@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   chinese.py
 @Time    :   2020/08/19
 @Author  :   Yaronzz
 @Version :   1.0
 @Contact :   yaronhuang@foxmail.com
 @Desc    :   
-'''
+"""
 
 
 class LangChinese(object):
@@ -82,13 +82,19 @@ class LangChinese(object):
     CHANGE_SAVE_COVERS = "保存封面('0'-不,'1'-是):"
     CHANGE_LANGUAGE = "选择语言"
     CHANGE_ALBUM_FOLDER_FORMAT = "专辑目录格式('0' 不修改):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_TRACK_FILE_FORMAT = "歌曲文件名格式('0' 不修改):"
-    CHANGE_VIDEO_FILE_FORMAT = "视频文件名格式('0'-not modify,'default'-to set default):"
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "视频文件名格式('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "显示进度条('0'-不,'1'-是):"
     CHANGE_SHOW_TRACKINFO = "显示歌曲信息('0'-否,'1'-是):"
     CHANGE_SAVE_ALBUM_INFO = "保存AlbumInfo.txt('0'-否,'1'-是):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "添加歌词('0'-否,'1'-是):"
     CHANGE_LYRICS_SERVER_PROXY = "歌词服务器代理('0' 不修改):"
     CHANGE_ADD_LRC_FILE = "保存歌词文件 ('0'-否,'1'-是):"
@@ -114,13 +120,13 @@ class LangChinese(object):
     MODEL_ARTIST_PROPERTY = "歌手信息"
     MODEL_PLAYLIST_PROPERTY = "歌单信息"
 
-    MODEL_TITLE = '标题'
-    MODEL_TRACK_NUMBER = '歌曲数量'
-    MODEL_VIDEO_NUMBER = '视频数量'
-    MODEL_RELEASE_DATE = '发布时间'
-    MODEL_VERSION = '版本'
-    MODEL_EXPLICIT = '脏标'
-    MODEL_ALBUM = '专辑'
-    MODEL_ID = 'ID'
-    MODEL_NAME = '名称'
-    MODEL_TYPE = '类型'
+    MODEL_TITLE = "标题"
+    MODEL_TRACK_NUMBER = "歌曲数量"
+    MODEL_VIDEO_NUMBER = "视频数量"
+    MODEL_RELEASE_DATE = "发布时间"
+    MODEL_VERSION = "版本"
+    MODEL_EXPLICIT = "脏标"
+    MODEL_ALBUM = "专辑"
+    MODEL_ID = "ID"
+    MODEL_NAME = "名称"
+    MODEL_TYPE = "类型"

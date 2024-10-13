@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   turkish.py
 @Time    :   2020/09/13
 @Author  :   Gorgeous & shhade for hack & Mutlu ŞEN
 @Version :   1.0
 @Contact :   realmutlusen@gmail.com
 @Desc    :   Yanlış çeviri ya da düzenleme için 'realmutlusen@gmail.com'a mail atabilirsiniz.   
-'''
+"""
 
 
 class LangTurkish(object):
@@ -66,29 +66,49 @@ class LangTurkish(object):
     # PRINT_USERNAME = "Kullanıcı Adı ya da Mail Adresi:"
     # PRINT_PASSWORD = "Şifre:"
 
-    CHANGE_START_SETTINGS = ">>> Ayarları düzenlemek istediğine emin misin ? ('0'-Geri Dön,'1'-Evet): "
+    CHANGE_START_SETTINGS = (
+        ">>> Ayarları düzenlemek istediğine emin misin ? ('0'-Geri Dön,'1'-Evet): "
+    )
     CHANGE_DOWNLOAD_PATH = ">>> İndirme Konumu ('0' aynı kalsın): "
-    CHANGE_AUDIO_QUALITY = ">>> Ses Kalitesi ('0'-Normal,'1'-Yüksek,'2'-HiFi,'3'-[M]aster,'4'-Max): "
+    CHANGE_AUDIO_QUALITY = (
+        ">>> Ses Kalitesi ('0'-Normal,'1'-Yüksek,'2'-HiFi,'3'-[M]aster,'4'-Max): "
+    )
     CHANGE_VIDEO_QUALITY = ">>> Video Kalitesi (1080, 720, 480, 360): "
-    CHANGE_ONLYM4A = ">>> .mp4 uzantılı dosyalar .m4a'ya çevrilsin mi?('0'-Hayır,'1'-Evet): "
-    CHANGE_ADD_EXPLICIT_TAG = ">>> 'Explicit' yani 'küfürlü' etiketi eklensin mi?('0'-Hayır,'1'-Evet): "
+    CHANGE_ONLYM4A = (
+        ">>> .mp4 uzantılı dosyalar .m4a'ya çevrilsin mi?('0'-Hayır,'1'-Evet): "
+    )
+    CHANGE_ADD_EXPLICIT_TAG = (
+        ">>> 'Explicit' yani 'küfürlü' etiketi eklensin mi?('0'-Hayır,'1'-Evet): "
+    )
     CHANGE_ADD_HYPHEN = ">>> Şarkı dosyasının isminde boşluk yerine '-' eklensin mi ?('0'-Hayır,'1'-Evet): "
-    CHANGE_ADD_YEAR = ">>> Albüm klasörünün isminde yıl olsun mu ?('0'-Hayır,'1'-Evet): "
+    CHANGE_ADD_YEAR = (
+        ">>> Albüm klasörünün isminde yıl olsun mu ?('0'-Hayır,'1'-Evet): "
+    )
     CHANGE_USE_TRACK_NUM = ">>> Şarkı dosyasının isminde albümdeki sırası yazsın mı ?('0'-Hayır,'1'-Evet): "
     CHANGE_CHECK_EXIST = ">>> Dosya daha önce indirilmiş mi diye kontrol edilsin mi ?('0'-Hayır,'1'-Evet): "
-    CHANGE_ARTIST_BEFORE_TITLE = ">>> Şarkı dosyasının ismine sanatçının adı eklensin mi?('0'-Hayır,'1'-Evet): "
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        ">>> Şarkı dosyasının ismine sanatçının adı eklensin mi?('0'-Hayır,'1'-Evet): "
+    )
     CHANGE_INCLUDE_EP = ">>> Artist'in tüm albümlerini indirirken Single'leri ve EP'leri de dahil edilsin mi ?('0'-Hayır,'1'-Evet): "
-    CHANGE_ALBUMID_BEFORE_FOLDER = ">>> Albüm klasörünün ismine ID eklensin mi ?('0'-Hayır,'1'-Evet): "
+    CHANGE_ALBUMID_BEFORE_FOLDER = (
+        ">>> Albüm klasörünün ismine ID eklensin mi ?('0'-Hayır,'1'-Evet): "
+    )
     CHANGE_SAVE_COVERS = ">>> Albüm kapağı indirilsin mi?('0'-Hayır,'1'-Evet): "
     CHANGE_LANGUAGE = ">>> Lisan Seç "
     CHANGE_ALBUM_FOLDER_FORMAT = "Albüm Klasör İsmi Formatı('0' aynı kalsın):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_TRACK_FILE_FORMAT = "Dosya İsmi Formatı('0' aynı kalsın):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "İndirme Çubuğu Görüntülensin mi?('0'-Hayır,'1'-Evet):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +134,13 @@ class LangTurkish(object):
     MODEL_ARTIST_PROPERTY = "ARTİST-BİLGİLERİ"
     MODEL_PLAYLIST_PROPERTY = "OYNATMA LİSTESİ-BİLGİLERİ"
 
-    MODEL_TITLE = 'Şarkı/Albüm Adı:'
-    MODEL_TRACK_NUMBER = 'Şarkı Sayısı'
-    MODEL_VIDEO_NUMBER = 'Video Sayısı'
-    MODEL_RELEASE_DATE = 'Çıkış Yılı:'
-    MODEL_VERSION = 'Versiyon'
-    MODEL_EXPLICIT = 'Küfürlü'
-    MODEL_ALBUM = 'Albüm'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'İsim'
-    MODEL_TYPE = 'Türü'
+    MODEL_TITLE = "Şarkı/Albüm Adı:"
+    MODEL_TRACK_NUMBER = "Şarkı Sayısı"
+    MODEL_VIDEO_NUMBER = "Video Sayısı"
+    MODEL_RELEASE_DATE = "Çıkış Yılı:"
+    MODEL_VERSION = "Versiyon"
+    MODEL_EXPLICIT = "Küfürlü"
+    MODEL_ALBUM = "Albüm"
+    MODEL_ID = "ID"
+    MODEL_NAME = "İsim"
+    MODEL_TYPE = "Türü"

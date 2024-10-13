@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   italian.py
 @Time    :   2020/08/20
 @Author  :   Normando
 @Version :   1.0
 @Contact :   normando@me.com
 @Desc    :
-'''
+"""
 
 
 class LangItalian(object):
@@ -68,27 +68,51 @@ class LangItalian(object):
 
     CHANGE_START_SETTINGS = "Impostazioni all'avvio ('0'-Ritorna,'1'-Sì):"
     CHANGE_DOWNLOAD_PATH = "Percorso Download ('0' non modificare):"
-    CHANGE_AUDIO_QUALITY = "Qualità Audio ('0'-Normale, '1'-Alta, '2'-HiFi, '3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Qualità Audio ('0'-Normale, '1'-Alta, '2'-HiFi, '3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Qualità Video (1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "Convertire mp4 in m4a ('0'-No,'1'-):"
-    CHANGE_ADD_EXPLICIT_TAG = "Aggiungi tag 'Contenuto Esplicito' ai nomi dei file ('0'-No,'1'-Sì):"
-    CHANGE_ADD_HYPHEN = "Usare trattini al posto degli spazi nei nomi dei file ('0'-No,'1'-Sì):"
-    CHANGE_ADD_YEAR = "Aggiungere l'anno al nome della cartella dell'album ('0'-No,'1'-Sì):"
-    CHANGE_USE_TRACK_NUM = "Aggiungere il numero traccia prima del nome dei file ('0'-No,'1'-Sì):"
-    CHANGE_CHECK_EXIST = "Controllare se il file esiste prima di scaricare la traccia ('0'-No,'1'-Sì):"
+    CHANGE_ADD_EXPLICIT_TAG = (
+        "Aggiungi tag 'Contenuto Esplicito' ai nomi dei file ('0'-No,'1'-Sì):"
+    )
+    CHANGE_ADD_HYPHEN = (
+        "Usare trattini al posto degli spazi nei nomi dei file ('0'-No,'1'-Sì):"
+    )
+    CHANGE_ADD_YEAR = (
+        "Aggiungere l'anno al nome della cartella dell'album ('0'-No,'1'-Sì):"
+    )
+    CHANGE_USE_TRACK_NUM = (
+        "Aggiungere il numero traccia prima del nome dei file ('0'-No,'1'-Sì):"
+    )
+    CHANGE_CHECK_EXIST = (
+        "Controllare se il file esiste prima di scaricare la traccia ('0'-No,'1'-Sì):"
+    )
     CHANGE_ARTIST_BEFORE_TITLE = "Aggiungere il nome dell'artista prima del titolo della traccia ('0'-No,'1'-Sì):"
     CHANGE_INCLUDE_EP = "Includere singoli e EP quando si scaricano gli album di un artista ('0'-No,'1'-Sì):"
-    CHANGE_ALBUMID_BEFORE_FOLDER = "Aggiungere ID prima del nome della cartella per l'album ('0'-No,'1'-Sì):"
+    CHANGE_ALBUMID_BEFORE_FOLDER = (
+        "Aggiungere ID prima del nome della cartella per l'album ('0'-No,'1'-Sì):"
+    )
     CHANGE_SAVE_COVERS = "Salve copertine ('0'-No,'1'-Sì):"
     CHANGE_LANGUAGE = "Selezionare lingua"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Album folder format('0' not modify,'default'-to set default):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Track file format('0' not modify,'default'-to set default):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Album folder format('0' not modify,'default'-to set default):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Track file format('0' not modify,'default'-to set default):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Show progress('0'-No,'1'-Yes):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +138,13 @@ class LangItalian(object):
     MODEL_ARTIST_PROPERTY = "PROPRIETÀ-ARTISTA"
     MODEL_PLAYLIST_PROPERTY = "PROPRIETÀ-PLAYLIST"
 
-    MODEL_TITLE = 'Titolo'
-    MODEL_TRACK_NUMBER = 'Numero Traccia'
-    MODEL_VIDEO_NUMBER = 'Numero Video'
-    MODEL_RELEASE_DATE = 'Data uscita'
-    MODEL_VERSION = 'Versione'
-    MODEL_EXPLICIT = 'Contenuto Esplicito'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Nome'
-    MODEL_TYPE = 'Tipo'
+    MODEL_TITLE = "Titolo"
+    MODEL_TRACK_NUMBER = "Numero Traccia"
+    MODEL_VIDEO_NUMBER = "Numero Video"
+    MODEL_RELEASE_DATE = "Data uscita"
+    MODEL_VERSION = "Versione"
+    MODEL_EXPLICIT = "Contenuto Esplicito"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Nome"
+    MODEL_TYPE = "Tipo"

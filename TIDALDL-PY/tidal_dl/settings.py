@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   settings.py
 @Time    :   2020/11/08
 @Author  :   Yaronzz
 @Version :   3.0
 @Contact :   yaronhuang@foxmail.com
 @Desc    :
-'''
+"""
 import json
 import aigpy
 import base64
@@ -88,10 +88,10 @@ class Settings(aigpy.model.ModelBase):
 
     def save(self):
         data = aigpy.model.modelToDict(self)
-        data['audioQuality'] = self.audioQuality.name
-        data['videoQuality'] = self.videoQuality.name
+        data["audioQuality"] = self.audioQuality.name
+        data["videoQuality"] = self.videoQuality.name
         txt = json.dumps(data)
-        aigpy.file.write(self._path_, txt, 'w+')
+        aigpy.file.write(self._path_, txt, "w+")
 
 
 class TokenSettings(aigpy.model.ModelBase):
@@ -102,7 +102,7 @@ class TokenSettings(aigpy.model.ModelBase):
     expiresAfter = 0
 
     def __encode__(self, string):
-        sw = bytes(string, 'utf-8')
+        sw = bytes(string, "utf-8")
         st = base64.b64encode(sw)
         return st
 
@@ -124,7 +124,7 @@ class TokenSettings(aigpy.model.ModelBase):
     def save(self):
         data = aigpy.model.modelToDict(self)
         txt = json.dumps(data)
-        aigpy.file.write(self._path_, self.__encode__(txt), 'wb')
+        aigpy.file.write(self._path_, self.__encode__(txt), "wb")
 
 
 # Singleton

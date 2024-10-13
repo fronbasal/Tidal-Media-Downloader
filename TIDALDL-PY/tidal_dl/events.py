@@ -11,11 +11,11 @@
 
 from download import *
 
-'''
+"""
 =================================
 START DOWNLOAD
 =================================
-'''
+"""
 
 
 def start_album(obj: Album):
@@ -67,13 +67,13 @@ def start_file(string):
     if aigpy.string.isNull(txt):
         Printf.err("Nothing can read!")
         return
-    array = txt.split('\n')
+    array = txt.split("\n")
     for item in array:
         if aigpy.string.isNull(item):
             continue
-        if item[0] == '#':
+        if item[0] == "#":
             continue
-        if item[0] == '[':
+        if item[0] == "[":
             continue
         start(item)
 
@@ -95,7 +95,7 @@ def start_type(etype: Type, obj):
 
 def start(string):
     if aigpy.string.isNull(string):
-        Printf.err('Please enter something.')
+        Printf.err("Please enter something.")
         return
 
     strings = string.split(" ")
@@ -118,11 +118,11 @@ def start(string):
             Printf.err(str(e))
 
 
-'''
+"""
 =================================
 CHANGE SETTINGS
 =================================
-'''
+"""
 
 
 def changePathSettings():
@@ -130,37 +130,52 @@ def changePathSettings():
     SETTINGS.downloadPath = Printf.enterPath(
         LANG.select.CHANGE_DOWNLOAD_PATH,
         LANG.select.MSG_PATH_ERR,
-        '0',
-        SETTINGS.downloadPath)
+        "0",
+        SETTINGS.downloadPath,
+    )
     SETTINGS.albumFolderFormat = Printf.enterFormat(
         LANG.select.CHANGE_ALBUM_FOLDER_FORMAT,
         SETTINGS.albumFolderFormat,
-        SETTINGS.getDefaultPathFormat(Type.Album))
+        SETTINGS.getDefaultPathFormat(Type.Album),
+    )
     SETTINGS.playlistFolderFormat = Printf.enterFormat(
         LANG.select.CHANGE_PLAYLIST_FOLDER_FORMAT,
         SETTINGS.playlistFolderFormat,
-        SETTINGS.getDefaultPathFormat(Type.Playlist))
+        SETTINGS.getDefaultPathFormat(Type.Playlist),
+    )
     SETTINGS.trackFileFormat = Printf.enterFormat(
         LANG.select.CHANGE_TRACK_FILE_FORMAT,
         SETTINGS.trackFileFormat,
-        SETTINGS.getDefaultPathFormat(Type.Track))
+        SETTINGS.getDefaultPathFormat(Type.Track),
+    )
     SETTINGS.videoFileFormat = Printf.enterFormat(
         LANG.select.CHANGE_VIDEO_FILE_FORMAT,
         SETTINGS.videoFileFormat,
-        SETTINGS.getDefaultPathFormat(Type.Video))
+        SETTINGS.getDefaultPathFormat(Type.Video),
+    )
     SETTINGS.save()
 
 
 def changeQualitySettings():
     Printf.settings()
     SETTINGS.audioQuality = AudioQuality(
-        int(Printf.enterLimit(LANG.select.CHANGE_AUDIO_QUALITY,
-                              LANG.select.MSG_INPUT_ERR,
-                              ['0', '1', '2', '3', '4'])))
+        int(
+            Printf.enterLimit(
+                LANG.select.CHANGE_AUDIO_QUALITY,
+                LANG.select.MSG_INPUT_ERR,
+                ["0", "1", "2", "3", "4"],
+            )
+        )
+    )
     SETTINGS.videoQuality = VideoQuality(
-        int(Printf.enterLimit(LANG.select.CHANGE_VIDEO_QUALITY,
-                              LANG.select.MSG_INPUT_ERR,
-                              ['1080', '720', '480', '360'])))
+        int(
+            Printf.enterLimit(
+                LANG.select.CHANGE_VIDEO_QUALITY,
+                LANG.select.MSG_INPUT_ERR,
+                ["1080", "720", "480", "360"],
+            )
+        )
+    )
     SETTINGS.save()
 
 
@@ -175,9 +190,13 @@ def changeSettings():
     SETTINGS.downloadVideos = Printf.enterBool(LANG.select.CHANGE_DOWNLOAD_VIDEOS)
     SETTINGS.lyricFile = Printf.enterBool(LANG.select.CHANGE_ADD_LRC_FILE)
     SETTINGS.multiThread = Printf.enterBool(LANG.select.CHANGE_MULITHREAD_DOWNLOAD)
-    SETTINGS.usePlaylistFolder = Printf.enterBool(LANG.select.SETTING_USE_PLAYLIST_FOLDER + "('0'-No,'1'-Yes):")
+    SETTINGS.usePlaylistFolder = Printf.enterBool(
+        LANG.select.SETTING_USE_PLAYLIST_FOLDER + "('0'-No,'1'-Yes):"
+    )
     SETTINGS.downloadDelay = Printf.enterBool(LANG.select.CHANGE_USE_DOWNLOAD_DELAY)
-    SETTINGS.language = Printf.enter(LANG.select.CHANGE_LANGUAGE + "(" + LANG.getLangChoicePrint() + "):")
+    SETTINGS.language = Printf.enter(
+        LANG.select.CHANGE_LANGUAGE + "(" + LANG.getLangChoicePrint() + "):"
+    )
     LANG.setLang(SETTINGS.language)
     SETTINGS.save()
 
@@ -186,10 +205,16 @@ def changeApiKey():
     item = apiKey.getItem(SETTINGS.apiKeyIndex)
     ver = apiKey.getVersion()
 
-    Printf.info(f'Current APIKeys: {str(SETTINGS.apiKeyIndex)} {item["platform"]}-{item["formats"]}')
-    Printf.info(f'Current Version: {str(ver)}')
+    Printf.info(
+        f'Current APIKeys: {str(SETTINGS.apiKeyIndex)} {item["platform"]}-{item["formats"]}'
+    )
+    Printf.info(f"Current Version: {str(ver)}")
     Printf.apikeys(apiKey.getItems())
-    index = int(Printf.enterLimit("APIKEY index:", LANG.select.MSG_INPUT_ERR, apiKey.getLimitIndexs()))
+    index = int(
+        Printf.enterLimit(
+            "APIKEY index:", LANG.select.MSG_INPUT_ERR, apiKey.getLimitIndexs()
+        )
+    )
 
     if index != SETTINGS.apiKeyIndex:
         SETTINGS.apiKeyIndex = index
@@ -199,11 +224,11 @@ def changeApiKey():
     return False
 
 
-'''
+"""
 =================================
 LOGIN
 =================================
-'''
+"""
 
 
 def __displayTime__(seconds, granularity=2):
@@ -212,11 +237,11 @@ def __displayTime__(seconds, granularity=2):
 
     result = []
     intervals = (
-        ('weeks', 604800),
-        ('days', 86400),
-        ('hours', 3600),
-        ('minutes', 60),
-        ('seconds', 1),
+        ("weeks", 604800),
+        ("days", 86400),
+        ("hours", 3600),
+        ("minutes", 60),
+        ("seconds", 1),
     )
 
     for name, count in intervals:
@@ -224,9 +249,9 @@ def __displayTime__(seconds, granularity=2):
         if value:
             seconds -= value * count
             if value == 1:
-                name = name.rstrip('s')
+                name = name.rstrip("s")
             result.append("{} {}".format(value, name))
-    return ', '.join(result[:granularity])
+    return ", ".join(result[:granularity])
 
 
 def loginByWeb():
@@ -235,9 +260,12 @@ def loginByWeb():
         # get device code
         url = TIDAL_API.getDeviceCode()
 
-        print(LANG.select.AUTH_NEXT_STEP.format(
-            aigpy.cmd.green(url),
-            aigpy.cmd.yellow(__displayTime__(TIDAL_API.key.authCheckTimeout))))
+        print(
+            LANG.select.AUTH_NEXT_STEP.format(
+                aigpy.cmd.green(url),
+                aigpy.cmd.yellow(__displayTime__(TIDAL_API.key.authCheckTimeout)),
+            )
+        )
         print(LANG.select.AUTH_WAITING)
 
         start = time.time()
@@ -248,8 +276,11 @@ def loginByWeb():
                 time.sleep(TIDAL_API.key.authCheckInterval + 1)
                 continue
 
-            Printf.success(LANG.select.MSG_VALID_ACCESSTOKEN.format(
-                __displayTime__(int(TIDAL_API.key.expiresIn))))
+            Printf.success(
+                LANG.select.MSG_VALID_ACCESSTOKEN.format(
+                    __displayTime__(int(TIDAL_API.key.expiresIn))
+                )
+            )
 
             TOKEN.userid = TIDAL_API.key.userId
             TOKEN.countryCode = TIDAL_API.key.countryCode
@@ -265,24 +296,34 @@ def loginByWeb():
         return False
 
 
-def loginByConfig():
+def loginByConfig(silent=False):
     try:
         if aigpy.string.isNull(TOKEN.accessToken):
             return False
 
         if TIDAL_API.verifyAccessToken(TOKEN.accessToken):
-            Printf.info(LANG.select.MSG_VALID_ACCESSTOKEN.format(
-                __displayTime__(int(TOKEN.expiresAfter - time.time()))))
+            if not silent:
+                Printf.info(
+                    LANG.select.MSG_VALID_ACCESSTOKEN.format(
+                        __displayTime__(int(TOKEN.expiresAfter - time.time()))
+                    )
+                )
 
             TIDAL_API.key.countryCode = TOKEN.countryCode
             TIDAL_API.key.userId = TOKEN.userid
             TIDAL_API.key.accessToken = TOKEN.accessToken
             return True
 
-        Printf.info(LANG.select.MSG_INVALID_ACCESSTOKEN)
+        if not silent:
+            Printf.info(LANG.select.MSG_INVALID_ACCESSTOKEN)
+
         if TIDAL_API.refreshAccessToken(TOKEN.refreshToken):
-            Printf.success(LANG.select.MSG_VALID_ACCESSTOKEN.format(
-                __displayTime__(int(TIDAL_API.key.expiresIn))))
+            if not silent:
+                Printf.success(
+                    LANG.select.MSG_VALID_ACCESSTOKEN.format(
+                        __displayTime__(int(TIDAL_API.key.expiresIn))
+                    )
+                )
 
             TOKEN.userid = TIDAL_API.key.userId
             TOKEN.countryCode = TIDAL_API.key.countryCode
@@ -301,7 +342,7 @@ def loginByAccessToken():
     try:
         print("-------------AccessToken---------------")
         token = Printf.enter("accessToken('0' go back):")
-        if token == '0':
+        if token == "0":
             return
         TIDAL_API.loginByAccessToken(token, TOKEN.userid)
     except Exception as e:
@@ -310,7 +351,7 @@ def loginByAccessToken():
 
     print("-------------RefreshToken---------------")
     refreshToken = Printf.enter("refreshToken('0' to skip):")
-    if refreshToken == '0':
+    if refreshToken == "0":
         refreshToken = TOKEN.refreshToken
 
     TOKEN.accessToken = token

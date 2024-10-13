@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   english.py
 @Time    :   2021/11/24
 @Author  :   Yaronzz & jee019
 @Version :   1.2
 @Contact :   yaronhuang@foxmail.com
 @Desc    :   
-'''
+"""
 
 
 class LangEnglish(object):
@@ -68,7 +68,9 @@ class LangEnglish(object):
 
     CHANGE_START_SETTINGS = "Start settings('0'-Return,'1'-Yes):"
     CHANGE_DOWNLOAD_PATH = "Download path('0'-not modify):"
-    CHANGE_AUDIO_QUALITY = "Audio quality('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Audio quality('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Video quality(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "Convert mp4 to m4a('0'-No,'1'-Yes):"
     CHANGE_ADD_EXPLICIT_TAG = "Add explicit tag to file names('0'-No,'1'-Yes):"
@@ -77,18 +79,30 @@ class LangEnglish(object):
     CHANGE_USE_TRACK_NUM = "Add track number before file names('0'-No,'1'-Yes):"
     CHANGE_CHECK_EXIST = "Check exist file before download track('0'-No,'1'-Yes):"
     CHANGE_ARTIST_BEFORE_TITLE = "Add artistName before track title('0'-No,'1'-Yes):"
-    CHANGE_INCLUDE_EP = "Include singles and EPs when downloading an artist's albums('0'-No,'1'-Yes):"
+    CHANGE_INCLUDE_EP = (
+        "Include singles and EPs when downloading an artist's albums('0'-No,'1'-Yes):"
+    )
     CHANGE_ALBUMID_BEFORE_FOLDER = "Add id before album folder('0'-No,'1'-Yes):"
     CHANGE_SAVE_COVERS = "Save covers('0'-No,'1'-Yes):"
     CHANGE_LANGUAGE = "Select language"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Album folder format('0'-not modify,'default'-to set default):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Track file format('0'-not modify,'default'-to set default):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Album folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Track file format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Show progress('0'-No,'1'-Yes):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +128,13 @@ class LangEnglish(object):
     MODEL_ARTIST_PROPERTY = "ARTIST-PROPERTY"
     MODEL_PLAYLIST_PROPERTY = "PLAYLIST-PROPERTY"
 
-    MODEL_TITLE = 'Title'
-    MODEL_TRACK_NUMBER = 'Track Number'
-    MODEL_VIDEO_NUMBER = 'Video Number'
-    MODEL_RELEASE_DATE = 'Release Date'
-    MODEL_VERSION = 'Version'
-    MODEL_EXPLICIT = 'Explicit'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Name'
-    MODEL_TYPE = 'Type'
+    MODEL_TITLE = "Title"
+    MODEL_TRACK_NUMBER = "Track Number"
+    MODEL_VIDEO_NUMBER = "Video Number"
+    MODEL_RELEASE_DATE = "Release Date"
+    MODEL_VERSION = "Version"
+    MODEL_EXPLICIT = "Explicit"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Name"
+    MODEL_TYPE = "Type"

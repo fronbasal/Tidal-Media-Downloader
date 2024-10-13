@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   japanese.py
 @Time    :   2021/11/30
 @Author  :   jee019
 @Version :   1.0
 @Contact :   qwer010910@gmail.com
 @Desc    :   
-'''
+"""
 
 
 class LangJapanese(object):
@@ -68,27 +68,43 @@ class LangJapanese(object):
 
     CHANGE_START_SETTINGS = "設定を開始('0'-戻る,'1'-はい):"
     CHANGE_DOWNLOAD_PATH = "ダウンロードパス('0'-変更しない):"
-    CHANGE_AUDIO_QUALITY = "オーディオ品質('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "オーディオ品質('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "ビデオ品質(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "mp4をm4aに変換する('0'-いいえ,'1'-はい):"
     CHANGE_ADD_EXPLICIT_TAG = "Add explicit tag to file names('0'-いいえ,'1'-はい):"
-    CHANGE_ADD_HYPHEN = "Use hyphens instead of spaces in file names('0'-いいえ,'1'-はい):"
+    CHANGE_ADD_HYPHEN = (
+        "Use hyphens instead of spaces in file names('0'-いいえ,'1'-はい):"
+    )
     CHANGE_ADD_YEAR = "Add year to album folder names('0'-いいえ,'1'-はい):"
     CHANGE_USE_TRACK_NUM = "Add track number before file names('0'-いいえ,'1'-はい):"
     CHANGE_CHECK_EXIST = "Check exist file before download track('0'-いいえ,'1'-はい):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Add artistName before track title('0'-いいえ,'1'-はい):"
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Add artistName before track title('0'-いいえ,'1'-はい):"
+    )
     CHANGE_INCLUDE_EP = "Include singles and EPs when downloading an artist's albums('0'-いいえ,'1'-はい):"
     CHANGE_ALBUMID_BEFORE_FOLDER = "Add id before album folder('0'-いいえ,'1'-はい):"
     CHANGE_SAVE_COVERS = "カバーを保存('0'-いいえ,'1'-はい):"
     CHANGE_LANGUAGE = "言語を選択する"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Album folder format('0'-変更しない,'default'-デフォルトを設定するには):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Track file format('0'-変更しない,'default'-デフォルトを設定するには):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Album folder format('0'-変更しない,'default'-デフォルトを設定するには):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Track file format('0'-変更しない,'default'-デフォルトを設定するには):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Show progress('0'-いいえ,'1'-はい):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-いいえ,'1'-はい):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-いいえ,'1'-はい):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "歌詞を追加('0'-いいえ,'1'-はい):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-変更しない):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-いいえ,'1'-はい):"
@@ -114,13 +130,13 @@ class LangJapanese(object):
     MODEL_ARTIST_PROPERTY = "アーティスト-情報"
     MODEL_PLAYLIST_PROPERTY = "プレイリスト-情報"
 
-    MODEL_TITLE = '題名'
-    MODEL_TRACK_NUMBER = 'トラック番号'
-    MODEL_VIDEO_NUMBER = 'ビデオ番号'
-    MODEL_RELEASE_DATE = '発売日'
-    MODEL_VERSION = 'バージョン'
-    MODEL_EXPLICIT = 'Explicit'
-    MODEL_ALBUM = 'アルバム'
-    MODEL_ID = 'ID'
-    MODEL_NAME = '名前'
-    MODEL_TYPE = 'タイプ'
+    MODEL_TITLE = "題名"
+    MODEL_TRACK_NUMBER = "トラック番号"
+    MODEL_VIDEO_NUMBER = "ビデオ番号"
+    MODEL_RELEASE_DATE = "発売日"
+    MODEL_VERSION = "バージョン"
+    MODEL_EXPLICIT = "Explicit"
+    MODEL_ALBUM = "アルバム"
+    MODEL_ID = "ID"
+    MODEL_NAME = "名前"
+    MODEL_TYPE = "タイプ"

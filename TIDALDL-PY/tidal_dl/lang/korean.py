@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   korean.py
 @Time    :   2021/11/24
 @Author  :   jee019
 @Version :   1.1
 @Contact :   qwer010910@gmail.com
 @Desc    :   
-'''
+"""
 
 
 class LangKorean(object):
@@ -82,13 +82,19 @@ class LangKorean(object):
     CHANGE_SAVE_COVERS = "커버 저장('0'-아니요,'1'-예):"
     CHANGE_LANGUAGE = "언어 선택"
     CHANGE_ALBUM_FOLDER_FORMAT = "앨범 폴더 형식('0'-변경 안 함,'default'-기본 설정):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_TRACK_FILE_FORMAT = "트랙 파일 형식('0'-변경 안 함,'default'-기본 설정):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "진행 상태 표시('0'-아니요,'1'-예):"
     CHANGE_SHOW_TRACKINFO = "트랙 정보 표시('0'-아니요,'1'-예):"
     CHANGE_SAVE_ALBUM_INFO = "AlbumInfo.txt 저장('0'-아니요,'1'-예):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "가사 추가('0'-아니요,'1'-예):"
     CHANGE_LYRICS_SERVER_PROXY = "가사 서버 프록시('0'-변경 안 함):"
     CHANGE_ADD_LRC_FILE = "timed 가사 .lrc 파일 저장 ('0'-아니요,'1'-예):"
@@ -114,13 +120,13 @@ class LangKorean(object):
     MODEL_ARTIST_PROPERTY = "아티스트-정보"
     MODEL_PLAYLIST_PROPERTY = "재생목록-정보"
 
-    MODEL_TITLE = '제목'
-    MODEL_TRACK_NUMBER = '트랙 넘버'
-    MODEL_VIDEO_NUMBER = '영상 넘버'
-    MODEL_RELEASE_DATE = '발매일'
-    MODEL_VERSION = '버전'
-    MODEL_EXPLICIT = 'Explicit'
-    MODEL_ALBUM = '앨범'
-    MODEL_ID = '아이디'
-    MODEL_NAME = '이름'
-    MODEL_TYPE = '형식'
+    MODEL_TITLE = "제목"
+    MODEL_TRACK_NUMBER = "트랙 넘버"
+    MODEL_VIDEO_NUMBER = "영상 넘버"
+    MODEL_RELEASE_DATE = "발매일"
+    MODEL_VERSION = "버전"
+    MODEL_EXPLICIT = "Explicit"
+    MODEL_ALBUM = "앨범"
+    MODEL_ID = "아이디"
+    MODEL_NAME = "이름"
+    MODEL_TYPE = "형식"

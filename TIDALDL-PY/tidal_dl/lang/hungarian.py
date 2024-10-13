@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   hungarian.py
 @Time    :   2022/08/01
 @Author  :   Shanahan
 @Version :   1.2
 @Contact :   
 @Desc    :   
-'''
+"""
 
 
 class LangHungarian(object):
@@ -68,31 +68,47 @@ class LangHungarian(object):
 
     CHANGE_START_SETTINGS = "Beállítások indítása('0'- Vissza, '1'-Igen):"
     CHANGE_DOWNLOAD_PATH = "Letöltési útvonal('0' nincs módosítás):"
-    CHANGE_AUDIO_QUALITY = "Audió minőség('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Audió minőség('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Videó minőség(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "mp4 átalakítása m4a-ra('0'-Nem,'1'-Igen):"
-    CHANGE_ADD_EXPLICIT_TAG = "Explicit tag hozzáadása a fájlnevekhez('0'-Nem,'1'-Igen):"
-    CHANGE_ADD_HYPHEN = "Kötőjel használata szóköz helyett a fájlnevekben('0'-Nem,'1'-Igen):"
+    CHANGE_ADD_EXPLICIT_TAG = (
+        "Explicit tag hozzáadása a fájlnevekhez('0'-Nem,'1'-Igen):"
+    )
+    CHANGE_ADD_HYPHEN = (
+        "Kötőjel használata szóköz helyett a fájlnevekben('0'-Nem,'1'-Igen):"
+    )
     CHANGE_ADD_YEAR = "Évszám hozzáadása az album mappanevekhez('0'-Nem,'1'-Igen):"
     CHANGE_USE_TRACK_NUM = "Track szám hozzáadása a fájlnevek előtt('0'-Nem,'1'-Igen):"
     CHANGE_CHECK_EXIST = "Létező fájl ellenőrzése letöltés előtt('0'-Nem,'1'-Igen):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Előadó hozzáadása a szám címe előtt('0'-Nem,'1'-Igen):"
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Előadó hozzáadása a szám címe előtt('0'-Nem,'1'-Igen):"
+    )
     CHANGE_INCLUDE_EP = "A kislemezek és EP-k letöltése('0'-Nem, '1'-Igen):"
-    CHANGE_ALBUMID_BEFORE_FOLDER = "Azonosító (ID) az album mappa előtt('0'-Nem,'1'-Igen):"
+    CHANGE_ALBUMID_BEFORE_FOLDER = (
+        "Azonosító (ID) az album mappa előtt('0'-Nem,'1'-Igen):"
+    )
     CHANGE_SAVE_COVERS = "Borító mentése('0'-Nem, '1'-Igen):"
     CHANGE_LANGUAGE = "Nyelv kiválasztása"
     CHANGE_ALBUM_FOLDER_FORMAT = "Album mappa formátum('0' nincs módosítás,'default' az alapértelmezett beállításhoz):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_TRACK_FILE_FORMAT = "Track fájl neve('0' nincs módosítás,'default' az alapértelmezett beállításhoz):"
     CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-nincs módosítás,'default' az alapértelmezett beállításhoz):"
     CHANGE_SHOW_PROGRESS = "Haladás megjelenítése('0'-Nem, '1'-Igen):"
     CHANGE_SHOW_TRACKINFO = "Track infók megjelenítése('0'-Nem,'1'-Igen):"
     CHANGE_SAVE_ALBUM_INFO = "AlbumInfo.txt mentése('0'-Nem, '1'-Igen):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Dalszöveg hozzáadása('0'-Nem,'1'-Igen):"
     CHANGE_LYRICS_SERVER_PROXY = "Dalszöveg kiszolgáló proxy('0' nincs módosítás):"
     CHANGE_ADD_LRC_FILE = "Dalszöveg mentése időbélyeggel .lrc fájl('0'-Nem,'1'-Igen):"
-    CHANGE_ADD_TYPE_FOLDER = "Mappa típus hozzáadása, pl. Album/Video/Playlist('0'-Nem,'1'-Igen):"
+    CHANGE_ADD_TYPE_FOLDER = (
+        "Mappa típus hozzáadása, pl. Album/Video/Playlist('0'-Nem,'1'-Igen):"
+    )
     CHANGE_MULITHREAD_DOWNLOAD = "Többszálas letöltés('0'-Nem,'1'-Igen):"
     CHANGE_USE_DOWNLOAD_DELAY = "Use Download Delay('0'-No,'1'-Yes):"
 
@@ -114,13 +130,13 @@ class LangHungarian(object):
     MODEL_ARTIST_PROPERTY = "ELŐADÓ-INFÓ"
     MODEL_PLAYLIST_PROPERTY = "LEJÁTSZÁSI LISTA-INFÓ"
 
-    MODEL_TITLE = 'Cím'
-    MODEL_TRACK_NUMBER = 'Track száma'
-    MODEL_VIDEO_NUMBER = 'Videó száma'
-    MODEL_RELEASE_DATE = 'Megjelenés dátuma'
-    MODEL_VERSION = 'Verzió'
-    MODEL_EXPLICIT = 'Explicit'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Név'
-    MODEL_TYPE = 'Típus'
+    MODEL_TITLE = "Cím"
+    MODEL_TRACK_NUMBER = "Track száma"
+    MODEL_VIDEO_NUMBER = "Videó száma"
+    MODEL_RELEASE_DATE = "Megjelenés dátuma"
+    MODEL_VERSION = "Verzió"
+    MODEL_EXPLICIT = "Explicit"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Név"
+    MODEL_TYPE = "Típus"

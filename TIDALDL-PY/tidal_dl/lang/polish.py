@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   polish.py
 @Time    :   2022/03/04
 @Author  :   PatrykMis
 @Version :   1.0
 @Contact :   patryk.mis@member.fsf.org
 @Desc    :   
-'''
+"""
 
 
 class LangPolish(object):
@@ -68,31 +68,55 @@ class LangPolish(object):
 
     CHANGE_START_SETTINGS = "Uruchomić ustawienia('0'-Powrót,'1'-Tak):"
     CHANGE_DOWNLOAD_PATH = "Ścieżka pobierania('0'-bez zmian):"
-    CHANGE_AUDIO_QUALITY = "Jakość audio('0'-Normalna,'1'-Wysoka,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Jakość audio('0'-Normalna,'1'-Wysoka,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Jakość wideo(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "Konwertuj mp4 do m4a('0'-Nie,'1'-Tak):"
     CHANGE_ADD_EXPLICIT_TAG = "Dodaj tag jednoznaczne do nazwy pliku('0'-Nie,'1'-Tak):"
-    CHANGE_ADD_HYPHEN = "Używaj myślników zamiast spacji w nazwach plików('0'-Nie,'1'-Tak):"
+    CHANGE_ADD_HYPHEN = (
+        "Używaj myślników zamiast spacji w nazwach plików('0'-Nie,'1'-Tak):"
+    )
     CHANGE_ADD_YEAR = "Dodaj rok do nazw folderów albumów('0'-Nie,'1'-Tak):"
     CHANGE_USE_TRACK_NUM = "Dodaj numer utworu przed nazwami plików('0'-Nie,'1'-Tak):"
-    CHANGE_CHECK_EXIST = "Sprawdź istniejący plik przed pobraniem utworu('0'-Nie,'1'-Tak):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Dodaj nazwę artysty przed tytułem utworu('0'-Nie,'1'-Tak):"
-    CHANGE_INCLUDE_EP = "Uwzględnij single i EP podczas pobierania albumów wykonawcy('0'-Nie,'1'-Tak):"
+    CHANGE_CHECK_EXIST = (
+        "Sprawdź istniejący plik przed pobraniem utworu('0'-Nie,'1'-Tak):"
+    )
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Dodaj nazwę artysty przed tytułem utworu('0'-Nie,'1'-Tak):"
+    )
+    CHANGE_INCLUDE_EP = (
+        "Uwzględnij single i EP podczas pobierania albumów wykonawcy('0'-Nie,'1'-Tak):"
+    )
     CHANGE_ALBUMID_BEFORE_FOLDER = "Dodaj ID przed folderem albumu('0'-Nie,'1'-Tak):"
     CHANGE_SAVE_COVERS = "Zapisz okładki('0'-Nie,'1'-Tak):"
     CHANGE_LANGUAGE = "Wybierz język"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Format folderu albumu('0'-nie modyfikuj,'default'-by ustawić domyślny):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Format pliku utworu('0'-nie modyfikuj,'default'-by ustawić domyślny):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Format folderu albumu('0'-nie modyfikuj,'default'-by ustawić domyślny):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Format pliku utworu('0'-nie modyfikuj,'default'-by ustawić domyślny):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Pokaż postęp('0'-Nie,'1'-Tak):"
     CHANGE_SHOW_TRACKINFO = "Pokaż informacje o utworze('0'-Nie,'1'-Tak):"
     CHANGE_SAVE_ALBUM_INFO = "Zapisz AlbumInfo.txt('0'-Nie,'1'-Tak):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Dodaj teksty utworów('0'-Nie,'1'-Tak):"
     CHANGE_LYRICS_SERVER_PROXY = "Serwer proxy dla tekstów('0'-nie modyfikuj):"
-    CHANGE_ADD_LRC_FILE = "Zapisz plik .lrc czasowych tekstów utworów ('0'-Nie,'1'-Tak):"
-    CHANGE_ADD_TYPE_FOLDER = "Dodaj folder typu, np. Album/wideo/lista odtwarzania('0'-Nie,'1'-Tak):"
+    CHANGE_ADD_LRC_FILE = (
+        "Zapisz plik .lrc czasowych tekstów utworów ('0'-Nie,'1'-Tak):"
+    )
+    CHANGE_ADD_TYPE_FOLDER = (
+        "Dodaj folder typu, np. Album/wideo/lista odtwarzania('0'-Nie,'1'-Tak):"
+    )
     CHANGE_MULITHREAD_DOWNLOAD = "Multi thread download('0'-No,'1'-Yes):"
     CHANGE_USE_DOWNLOAD_DELAY = "Use Download Delay('0'-No,'1'-Yes):"
 
@@ -114,13 +138,13 @@ class LangPolish(object):
     MODEL_ARTIST_PROPERTY = "ARTYSTA-WŁAŚCIWOŚĆ"
     MODEL_PLAYLIST_PROPERTY = "PLAYLISTA-WŁAŚCIWOŚĆ"
 
-    MODEL_TITLE = 'Tytuł'
-    MODEL_TRACK_NUMBER = 'Numer Utworu'
-    MODEL_VIDEO_NUMBER = 'Numer Wideo'
-    MODEL_RELEASE_DATE = 'Data Wydania'
-    MODEL_VERSION = 'Wersja'
-    MODEL_EXPLICIT = 'Jednoznaczny'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Nazwa'
-    MODEL_TYPE = 'Typ'
+    MODEL_TITLE = "Tytuł"
+    MODEL_TRACK_NUMBER = "Numer Utworu"
+    MODEL_VIDEO_NUMBER = "Numer Wideo"
+    MODEL_RELEASE_DATE = "Data Wydania"
+    MODEL_VERSION = "Wersja"
+    MODEL_EXPLICIT = "Jednoznaczny"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Nazwa"
+    MODEL_TYPE = "Typ"
