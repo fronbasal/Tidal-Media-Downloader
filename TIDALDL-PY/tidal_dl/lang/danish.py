@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   danish.py
 @Time    :   2021/03/25
 @Author  :   KB885
 @Version :   1.0
 @Contact :   
 @Desc    :   
-'''
+"""
 
 
 class LangDanish(object):
@@ -68,11 +68,15 @@ class LangDanish(object):
 
     CHANGE_START_SETTINGS = "Start indstillinger('0'-Tilbage,'1'-Ja):"
     CHANGE_DOWNLOAD_PATH = "Download stil('0' ændrer ikke):"
-    CHANGE_AUDIO_QUALITY = "Lydkvalitet('0'-Normal,'1'-Høj,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Lydkvalitet('0'-Normal,'1'-Høj,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Videokvalitet(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "Konverter mp4 til m4a('0'-Nej,'1'-Ja):"
     CHANGE_ADD_EXPLICIT_TAG = "Tilføj eksplicit tag til filnavne('0'-Nej,'1'-Ja):"
-    CHANGE_ADD_HYPHEN = "Brug bindestreger i stedet for mellemrum i filnavne('0'-Nej,'1'-Ja):"
+    CHANGE_ADD_HYPHEN = (
+        "Brug bindestreger i stedet for mellemrum i filnavne('0'-Nej,'1'-Ja):"
+    )
     CHANGE_ADD_YEAR = "Tilføj år til albumnavne('0'-Nej,'1'-Ja):"
     CHANGE_USE_TRACK_NUM = "Tilføj titelnummer før filnavne('0'-Nej,'1'-Ja):"
     CHANGE_CHECK_EXIST = "Kontrollér filens eksistens før download('0'-Nej,'1'-Ja):"
@@ -81,14 +85,20 @@ class LangDanish(object):
     CHANGE_ALBUMID_BEFORE_FOLDER = "Tilføj id før albummappe('0'-Nej,'1'-Ja):"
     CHANGE_SAVE_COVERS = "Gem omslag('0'-Nej,'1'-Ja):"
     CHANGE_LANGUAGE = "Vælg sprog"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Albummappeformat('0' Ændrer ikke, 'default' for at indstille som standard):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Albummappeformat('0' Ændrer ikke, 'default' for at indstille som standard):"
+    )
     CHANGE_PLAYLIST_FOLDER_FORMAT = "Spillelistemappeformat('0' Ændrer ikke, 'default' for at indstille som standard):"
     CHANGE_TRACK_FILE_FORMAT = "Musiknummerets filformat('0' Ændrer ikke, 'default' for at indstille som standard):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Vis fremskridt('0'-Nej,'1'-Ja):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +124,13 @@ class LangDanish(object):
     MODEL_ARTIST_PROPERTY = "ARTIST-PROPERTY"
     MODEL_PLAYLIST_PROPERTY = "PLAYLIST-PROPERTY"
 
-    MODEL_TITLE = 'Titel'
-    MODEL_TRACK_NUMBER = 'Titelnummer'
-    MODEL_VIDEO_NUMBER = 'Videonummer'
-    MODEL_RELEASE_DATE = 'Udgivelses dato'
-    MODEL_VERSION = 'Version'
-    MODEL_EXPLICIT = 'Eksplicit'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Navn'
-    MODEL_TYPE = 'Type'
+    MODEL_TITLE = "Titel"
+    MODEL_TRACK_NUMBER = "Titelnummer"
+    MODEL_VIDEO_NUMBER = "Videonummer"
+    MODEL_RELEASE_DATE = "Udgivelses dato"
+    MODEL_VERSION = "Version"
+    MODEL_EXPLICIT = "Eksplicit"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Navn"
+    MODEL_TYPE = "Type"

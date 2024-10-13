@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   filipino.py
 @Time    :   2020/08/21
 @Author  :   Ni Ño
 @Version :   1.0
 @Contact :   
 @Desc    :   
-'''
+"""
 
 
 class LangFilipino(object):
@@ -68,27 +68,51 @@ class LangFilipino(object):
 
     CHANGE_START_SETTINGS = "Simulan ang settings('0'-Bumalik,'1'-Oo):"
     CHANGE_DOWNLOAD_PATH = "Paroroonan ng Download('0' walang babaguhin):"
-    CHANGE_AUDIO_QUALITY = "Kalidad ng Audio('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Kalidad ng Audio('0'-Normal,'1'-High,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Kalidad ng Audio Video(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "I-convert ang mp4 bilang m4a('0'-Hindi,'1'-Oo):"
-    CHANGE_ADD_EXPLICIT_TAG = "Lagyan ng explicit tag sa pangalan ng files('0'-Hindi,'1'-Oo):"
-    CHANGE_ADD_HYPHEN = "Gamitin ang hyphens kesa sa spaces sa pangalan ng files('0'-Hindi,'1'-Oo):"
+    CHANGE_ADD_EXPLICIT_TAG = (
+        "Lagyan ng explicit tag sa pangalan ng files('0'-Hindi,'1'-Oo):"
+    )
+    CHANGE_ADD_HYPHEN = (
+        "Gamitin ang hyphens kesa sa spaces sa pangalan ng files('0'-Hindi,'1'-Oo):"
+    )
     CHANGE_ADD_YEAR = "Lagyan ng taon sa pangalan ng album folder('0'-Hindi,'1'-Oo):"
-    CHANGE_USE_TRACK_NUM = "Lagyan ng bilang ng track bago ang pangalan ng files('0'-Hindi,'1'-Oo):"
-    CHANGE_CHECK_EXIST = "Suriin kung naidownload na bago mag download muli('0'-Hindi,'1'-Oo):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Lagyan ng pangalan ng artist bago ang pamagat ng kanta('0'-Hindi,'1'-Oo):"
+    CHANGE_USE_TRACK_NUM = (
+        "Lagyan ng bilang ng track bago ang pangalan ng files('0'-Hindi,'1'-Oo):"
+    )
+    CHANGE_CHECK_EXIST = (
+        "Suriin kung naidownload na bago mag download muli('0'-Hindi,'1'-Oo):"
+    )
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Lagyan ng pangalan ng artist bago ang pamagat ng kanta('0'-Hindi,'1'-Oo):"
+    )
     CHANGE_INCLUDE_EP = "Isama ang singles at EPs sa pagdownload ng mga album mula sa artist('0'-Hindi,'1'-Oo):"
-    CHANGE_ALBUMID_BEFORE_FOLDER = "Lagyan ng id bago ang album folder('0'-Hindi,'1'-Oo):"
+    CHANGE_ALBUMID_BEFORE_FOLDER = (
+        "Lagyan ng id bago ang album folder('0'-Hindi,'1'-Oo):"
+    )
     CHANGE_SAVE_COVERS = "I-save ang mga covers('0'-Hindi,'1'-Oo):"
     CHANGE_LANGUAGE = "Pumili ng lenggwahe"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Album folder format('0' not modify,'default'-to set default):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Track file format('0' not modify,'default'-to set default):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Album folder format('0' not modify,'default'-to set default):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Track file format('0' not modify,'default'-to set default):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Show progress('0'-No,'1'-Yes):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +138,13 @@ class LangFilipino(object):
     MODEL_ARTIST_PROPERTY = "PROPERTY NG ARTIST"
     MODEL_PLAYLIST_PROPERTY = "PROPERTY NG PLAYLIST"
 
-    MODEL_TITLE = 'Pamagat'
-    MODEL_TRACK_NUMBER = 'Bilang ng Track'
-    MODEL_VIDEO_NUMBER = 'Bilang ng Video'
-    MODEL_RELEASE_DATE = 'Petsa ng Pag-release'
-    MODEL_VERSION = 'Bersyon'
-    MODEL_EXPLICIT = 'Explicit'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Pangalan'
-    MODEL_TYPE = 'Uri'
+    MODEL_TITLE = "Pamagat"
+    MODEL_TRACK_NUMBER = "Bilang ng Track"
+    MODEL_VIDEO_NUMBER = "Bilang ng Video"
+    MODEL_RELEASE_DATE = "Petsa ng Pag-release"
+    MODEL_VERSION = "Bersyon"
+    MODEL_EXPLICIT = "Explicit"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Pangalan"
+    MODEL_TYPE = "Uri"

@@ -1,60 +1,82 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   __init__.py
 @Time    :   2020/11/08
 @Author  :   Yaronzz
 @Version :   3.0
 @Contact :   yaronhuang@foxmail.com
 @Desc    :
-'''
+"""
 import sys
 import getopt
 import aigpy
 
-from events import *
-from settings import *
-from gui import startGui
-from printf import Printf
+from .events import *
+from .settings import *
+from .gui import startGui
+from .printf import Printf
 
 
 def mainCommand():
     try:
-        opts, args = getopt.getopt(sys.argv[1:],
-                                   "hvgl:o:q:r:",
-                                   ["help", "version", "gui", "link=", "output=", "quality", "resolution"])
+        opts, args = getopt.getopt(
+            sys.argv[1:],
+            "hvglj:o:q:r:",
+            [
+                "help",
+                "version",
+                "gui",
+                "link=",
+                "output=",
+                "quality",
+                "resolution",
+                "json",
+            ],
+        )
     except getopt.GetoptError as errmsg:
-        Printf.err(vars(errmsg)['msg'] + ". Use 'tidal-dl -h' for usage.")
+        Printf.err(vars(errmsg)["msg"] + ". Use 'tidal-dl -h' for usage.")
         return
 
     link = None
     showGui = False
 
     for opt, val in opts:
-        if opt in ('-h', '--help'):
+        if opt in ("-h", "--help"):
             Printf.usage()
             return
-        if opt in ('-v', '--version'):
+        if opt in ("-v", "--version"):
             Printf.logo()
             return
-        if opt in ('-g', '--gui'):
+        if opt in ("-g", "--gui"):
             showGui = True
             continue
-        if opt in ('-l', '--link'):
+        if opt in ("-l", "--link"):
             link = val
             continue
-        if opt in ('-o', '--output'):
+        if opt in ("-o", "--output"):
             SETTINGS.downloadPath = val
             SETTINGS.save()
             continue
-        if opt in ('-q', '--quality'):
+        if opt in ("-q", "--quality"):
             SETTINGS.audioQuality = SETTINGS.getAudioQuality(val)
             SETTINGS.save()
             continue
-        if opt in ('-r', '--resolution'):
+        if opt in ("-r", "--resolution"):
             SETTINGS.videoQuality = SETTINGS.getVideoQuality(val)
             SETTINGS.save()
             continue
+
+        # special option: retrieve json data of item
+        # can only be used in junction with link option
+        if opt in ("--json", "-j") and link:
+            if not loginByConfig(True):
+                Printf.err(LANG.select.MSG_LOGIN_ERR)
+                return
+            etype, obj = TIDAL_API.getByString(link)
+            output = {"type": etype.name, "data": aigpy.modelHelper.modelToDict(obj)}
+            print(json.dumps(output, indent=4))
+            return
 
     if not aigpy.path.mkdirs(SETTINGS.downloadPath):
         Printf.err(LANG.select.MSG_PATH_ERR + SETTINGS.downloadPath)
@@ -67,8 +89,9 @@ def mainCommand():
     if link is not None:
         if not loginByConfig():
             loginByWeb()
-        Printf.info(LANG.select.SETTING_DOWNLOAD_PATH + ':' + SETTINGS.downloadPath)
+        Printf.info(LANG.select.SETTING_DOWNLOAD_PATH + ":" + SETTINGS.downloadPath)
         start(link)
+
 
 def main():
     SETTINGS.read(getProfilePath())
@@ -134,10 +157,16 @@ def test():
     SETTINGS.downloadVideos = True
     SETTINGS.downloadPath = "./download/"
     SETTINGS.usePlaylistFolder = True
-    SETTINGS.albumFolderFormat = R"{ArtistName}/{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]"
+    SETTINGS.albumFolderFormat = (
+        R"{ArtistName}/{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]"
+    )
     SETTINGS.playlistFolderFormat = R"Playlist/{PlaylistName} [{PlaylistUUID}]"
-    SETTINGS.trackFileFormat = R"{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}"
-    SETTINGS.videoFileFormat = R"{VideoNumber} - {ArtistName} - {VideoTitle}{ExplicitFlag}"
+    SETTINGS.trackFileFormat = (
+        R"{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}"
+    )
+    SETTINGS.videoFileFormat = (
+        R"{VideoNumber} - {ArtistName} - {VideoTitle}{ExplicitFlag}"
+    )
     SETTINGS.multiThread = False
     SETTINGS.apiKeyIndex = 4
     SETTINGS.checkExist = False
@@ -148,7 +177,7 @@ def test():
     # test example
     # https://tidal.com/browse/track/70973230
     # track 70973230  77798028 212657
-    start('242700165')
+    start("242700165")
     # album 58138532  77803199  21993753   79151897  56288918
     # start('58138532')
     # playlist 98235845-13e8-43b4-94e2-d9f8e603cee7
@@ -157,6 +186,6 @@ def test():
     # start("155608351")https://tidal.com/browse/track/199683732
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # test()
     main()

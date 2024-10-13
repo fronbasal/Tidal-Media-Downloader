@@ -1,13 +1,13 @@
 # !/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   croatian.py
 @Time    :   2020/08/19
 @Author  :   Yaronzz
 @Version :   1.0
 @Contact :   yaronhuang@foxmail.com
 @Desc    :   
-'''
+"""
 
 
 class LangCroatian(object):
@@ -68,27 +68,49 @@ class LangCroatian(object):
 
     CHANGE_START_SETTINGS = "Pokreni postavke (0'-Izlaz,'1'-Da):"
     CHANGE_DOWNLOAD_PATH = "Putanja preuzimanja('0' ne mijenjaj):"
-    CHANGE_AUDIO_QUALITY = "Kvaliteta zvuka('0'-Normalna,'1'-Visoka,'2'-HiFi,'3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Kvaliteta zvuka('0'-Normalna,'1'-Visoka,'2'-HiFi,'3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Kvaliteta videozapisa(1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "Pretvori mp4 u m4a('0'-Ne,'1'-Da):"
     CHANGE_ADD_EXPLICIT_TAG = "Dodaj eksplicitni znak u imeni datoteke('0'-Ne,'1'-Da):"
-    CHANGE_ADD_HYPHEN = "Koristi crtice umjesto razmaka u imeni datoteke ('0'-Ne,'1'-Da):"
+    CHANGE_ADD_HYPHEN = (
+        "Koristi crtice umjesto razmaka u imeni datoteke ('0'-Ne,'1'-Da):"
+    )
     CHANGE_ADD_YEAR = "Dodaj godinu u imenu albuma u mapi('0'-Ne,'1'-Da):"
-    CHANGE_USE_TRACK_NUM = "Dodaj broj pjesme prije imena pjesme u datoteci ('0'-Ne,'1'-Da):"
-    CHANGE_CHECK_EXIST = "Provjeri postoji li ista datoteka prije preuzimanja pjesme('0'-Ne,'1'-Da):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Dodaj ime izvodjaca prije imena pjesme('0'-Ne,'1'-Da):"
+    CHANGE_USE_TRACK_NUM = (
+        "Dodaj broj pjesme prije imena pjesme u datoteci ('0'-Ne,'1'-Da):"
+    )
+    CHANGE_CHECK_EXIST = (
+        "Provjeri postoji li ista datoteka prije preuzimanja pjesme('0'-Ne,'1'-Da):"
+    )
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Dodaj ime izvodjaca prije imena pjesme('0'-Ne,'1'-Da):"
+    )
     CHANGE_INCLUDE_EP = "Ukljuci singlove i EP-ove prilikom preuzimanja albuma izvodjaca('0'-Ne,'1'-Da):"
-    CHANGE_ALBUMID_BEFORE_FOLDER = "Dodaj ID oznaku prije imena albuma u datoteci('0'-Ne,'1'-Da):"
+    CHANGE_ALBUMID_BEFORE_FOLDER = (
+        "Dodaj ID oznaku prije imena albuma u datoteci('0'-Ne,'1'-Da):"
+    )
     CHANGE_SAVE_COVERS = "Spremi ilustracije albuma('0'-Ne,'1'-Da):"
     CHANGE_LANGUAGE = "Odaberi jezik"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Album folder format('0'-not modify,'default'-to set default):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Track file format('0'-not modify,'default'-to set default):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Album folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Track file format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Show progress('0'-No,'1'-Yes):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +136,13 @@ class LangCroatian(object):
     MODEL_ARTIST_PROPERTY = "IZVODJAC-SVOJSTVO"
     MODEL_PLAYLIST_PROPERTY = "PLAYLISTA-SVOJSTVO"
 
-    MODEL_TITLE = 'Naziv'
-    MODEL_TRACK_NUMBER = 'Broj pjesme'
-    MODEL_VIDEO_NUMBER = 'Broj videozapisa'
-    MODEL_RELEASE_DATE = 'Datum izlaska'
-    MODEL_VERSION = 'Verzija'
-    MODEL_EXPLICIT = 'Eksplicitno'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Naziv'
-    MODEL_TYPE = 'Vrsta'
+    MODEL_TITLE = "Naziv"
+    MODEL_TRACK_NUMBER = "Broj pjesme"
+    MODEL_VIDEO_NUMBER = "Broj videozapisa"
+    MODEL_RELEASE_DATE = "Datum izlaska"
+    MODEL_VERSION = "Verzija"
+    MODEL_EXPLICIT = "Eksplicitno"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Naziv"
+    MODEL_TYPE = "Vrsta"

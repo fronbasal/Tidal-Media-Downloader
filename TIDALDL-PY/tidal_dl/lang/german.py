@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   german.py
 @Time    :   2022/11/8
 @Authors :   Sematre, MineClashTV, Click1701
 @Version :   1.1
 @Contact :   
 @Desc    :   
-'''
+"""
 
 
 class LangGerman(object):
@@ -68,30 +68,48 @@ class LangGerman(object):
 
     CHANGE_START_SETTINGS = "Einstellungen starten ('0'-Zurück, '1'-Ja):"
     CHANGE_DOWNLOAD_PATH = "Downloadpfad ('0' nicht ändern):"
-    CHANGE_AUDIO_QUALITY = "Tonqualität ('0'-Normal, '1'-Hoch, '2'-HiFi, '3'-Master,'4'-Max):"
+    CHANGE_AUDIO_QUALITY = (
+        "Tonqualität ('0'-Normal, '1'-Hoch, '2'-HiFi, '3'-Master,'4'-Max):"
+    )
     CHANGE_VIDEO_QUALITY = "Videoqualität (1080, 720, 480, 360):"
     CHANGE_ONLYM4A = "mp4 in m4a konvertieren ('0'-Nein, '1'-Ja):"
-    CHANGE_ADD_EXPLICIT_TAG = "Explicit Tag zum Dateiname hinzufügen ('0'-Nein, '1'-Ja):"
-    CHANGE_ADD_HYPHEN = "Im Dateinamen Bindestriche statt Leerzeichen verwenden ('0'-Nein, '1'-Ja):"
+    CHANGE_ADD_EXPLICIT_TAG = (
+        "Explicit Tag zum Dateiname hinzufügen ('0'-Nein, '1'-Ja):"
+    )
+    CHANGE_ADD_HYPHEN = (
+        "Im Dateinamen Bindestriche statt Leerzeichen verwenden ('0'-Nein, '1'-Ja):"
+    )
     CHANGE_ADD_YEAR = "Jahr zu Album-Ordnernamen hinzufügen ('0'-Nein, '1'-Ja):"
     CHANGE_USE_TRACK_NUM = "Titelnummer vor Dateinamen hinzufügen ('0'-Nein, '1'-Ja):"
-    CHANGE_CHECK_EXIST = "Vor dem Download überprüfen, ob die Datei existiert ('0'-Nein, '1'-Ja):"
-    CHANGE_ARTIST_BEFORE_TITLE = "Künstlername vor den Songtitel hinzufügen ('0'-Nein, '1'-Ja):"
+    CHANGE_CHECK_EXIST = (
+        "Vor dem Download überprüfen, ob die Datei existiert ('0'-Nein, '1'-Ja):"
+    )
+    CHANGE_ARTIST_BEFORE_TITLE = (
+        "Künstlername vor den Songtitel hinzufügen ('0'-Nein, '1'-Ja):"
+    )
     CHANGE_INCLUDE_EP = "Singles und EPs beim Download von Alben eines Künstlers einbeziehen ('0'-Nein, '1'-Ja):"
     CHANGE_ALBUMID_BEFORE_FOLDER = "ID vor Album-Ordner hinzufügen ('0'-Nein, '1'-Ja):"
     CHANGE_SAVE_COVERS = "Cover speichern ('0'-Nein, '1'-Ja):"
     CHANGE_LANGUAGE = "Sprache auswählen"
     CHANGE_ALBUM_FOLDER_FORMAT = "Album-Ordnerformat ('0' überspringen):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist Ordner-Format ('0'-nicht ändern, 'default'-für Standard):"
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist Ordner-Format ('0'-nicht ändern, 'default'-für Standard):"
+    )
     CHANGE_TRACK_FILE_FORMAT = "Track-Dateiformat ('0' überspringen):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video-Dateiformat ('0'-nicht ändern, 'default'-für Standard):"
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video-Dateiformat ('0'-nicht ändern, 'default'-für Standard):"
+    )
     CHANGE_SHOW_PROGRESS = "Fortschritt anzeigen ('0'-Nein, '1'-Ja):"
     CHANGE_SHOW_TRACKINFO = "Song-Informationen anzeigen ('0'-Nein, '1'-Ja):"
     CHANGE_SAVE_ALBUM_INFO = "AlbumInfo.txt speichern ('0'-Nein, '1'-Ja):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Songtexte hinzufügen ('0'-No, '1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Songtext Proxy-Server ('0'-not modify):"
-    CHANGE_ADD_LRC_FILE = "Songtexte mit Zeitcode speichern (.lrc Datei) ('0'-Nein, '1'-Ja):"
+    CHANGE_ADD_LRC_FILE = (
+        "Songtexte mit Zeitcode speichern (.lrc Datei) ('0'-Nein, '1'-Ja):"
+    )
     CHANGE_ADD_TYPE_FOLDER = "Unterordner für jede Kategorie erstellen, Z.B. Album/Video/Playlist('0'-Nein, '1'-Ja):"
     CHANGE_MULITHREAD_DOWNLOAD = "Multi-Thread Download('0'-Nein, '1'-Ja):"
     CHANGE_USE_DOWNLOAD_DELAY = "Downloads zeitverzögert starten ('0'-nein, '1'-ja):"
@@ -114,13 +132,13 @@ class LangGerman(object):
     MODEL_ARTIST_PROPERTY = "KÜNSTLER-EIGENSCHAFT"
     MODEL_PLAYLIST_PROPERTY = "PLAYLIST-EIGENSCHAFT"
 
-    MODEL_TITLE = 'Titel'
-    MODEL_TRACK_NUMBER = 'Titelnummer'
-    MODEL_VIDEO_NUMBER = 'Videonummer'
-    MODEL_RELEASE_DATE = 'Veröffentlichungsdatum'
-    MODEL_VERSION = 'Version'
-    MODEL_EXPLICIT = 'Explicit'
-    MODEL_ALBUM = 'Album'
-    MODEL_ID = 'ID'
-    MODEL_NAME = 'Name'
-    MODEL_TYPE = 'Typ'
+    MODEL_TITLE = "Titel"
+    MODEL_TRACK_NUMBER = "Titelnummer"
+    MODEL_VIDEO_NUMBER = "Videonummer"
+    MODEL_RELEASE_DATE = "Veröffentlichungsdatum"
+    MODEL_VERSION = "Version"
+    MODEL_EXPLICIT = "Explicit"
+    MODEL_ALBUM = "Album"
+    MODEL_ID = "ID"
+    MODEL_NAME = "Name"
+    MODEL_TYPE = "Typ"

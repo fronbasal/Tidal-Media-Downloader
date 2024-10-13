@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   decryption.py
 @Time    :   2019/02/27
 @Author  :   Yaron Huang 
 @Version :   1.0
 @Contact :   yaronhuang@qq.com
 @Desc    :   HIGH Quality Track Decryption;File From Project 'RedSea'
-'''
+"""
 import base64
 
 from Crypto.Cipher import AES
@@ -15,14 +15,14 @@ from Crypto.Util import Counter
 
 
 def decrypt_security_token(security_token):
-    '''
+    """
     Decrypts security token into key and nonce pair
 
     security_token should match the securityToken value from the web response
-    '''
+    """
 
     # Do not change this
-    master_key = 'UIlTTEMmmLfGowo/UC60x2H45W6MdGgTRfo/umg4754='
+    master_key = "UIlTTEMmmLfGowo/UC60x2H45W6MdGgTRfo/umg4754="
 
     # Decode the base64 strings to ascii strings
     master_key = base64.b64decode(master_key)
@@ -46,18 +46,18 @@ def decrypt_security_token(security_token):
 
 
 def decrypt_file(efile, dfile, key, nonce):
-    '''
+    """
     Decrypts an encrypted MQA file given the file, key and nonce
-    '''
+    """
 
     # Initialize counter and file decryptor
     counter = Counter.new(64, prefix=nonce, initial_value=0)
     decryptor = AES.new(key, AES.MODE_CTR, counter=counter)
 
     # Open and decrypt
-    with open(efile, 'rb') as eflac:
+    with open(efile, "rb") as eflac:
         flac = decryptor.decrypt(eflac.read())
 
         # Replace with decrypted file
-        with open(dfile, 'wb') as dflac:
+        with open(dfile, "wb") as dflac:
             dflac.write(flac)

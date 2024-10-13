@@ -11,7 +11,7 @@
 import json
 import requests
 
-__KEYS_JSON__ = '''
+__KEYS_JSON__ = """
 {
     "version": "1.0.1",
     "keys": [
@@ -57,52 +57,56 @@ __KEYS_JSON__ = '''
         }
     ]
 }
-'''
+"""
 __API_KEYS__ = json.loads(__KEYS_JSON__)
-__ERROR_KEY__ = {
-    'platform': 'None',
-    'formats': '',
-    'clientId': '',
-    'clientSecret': '',
-                    'valid': 'False',
-},
+__ERROR_KEY__ = (
+    {
+        "platform": "None",
+        "formats": "",
+        "clientId": "",
+        "clientSecret": "",
+        "valid": "False",
+    },
+)
 
 
 def getNum():
-    return len(__API_KEYS__['keys'])
+    return len(__API_KEYS__["keys"])
 
 
 def getItem(index: int):
-    if index < 0 or index >= len(__API_KEYS__['keys']):
+    if index < 0 or index >= len(__API_KEYS__["keys"]):
         return __ERROR_KEY__
-    return __API_KEYS__['keys'][index]
+    return __API_KEYS__["keys"][index]
 
 
 def isItemValid(index: int):
     item = getItem(index)
-    return item['valid'] == 'True'
+    return item["valid"] == "True"
 
 
 def getItems():
-    return __API_KEYS__['keys']
+    return __API_KEYS__["keys"]
 
 
 def getLimitIndexs():
     array = []
-    for i in range(len(__API_KEYS__['keys'])):
+    for i in range(len(__API_KEYS__["keys"])):
         array.append(str(i))
     return array
 
 
 def getVersion():
-    return __API_KEYS__['version']
+    return __API_KEYS__["version"]
 
 
 # Load from gist
 try:
-    respond = requests.get('https://api.github.com/gists/48d01f5a24b4b7b37f19443977c22cd6')
+    respond = requests.get(
+        "https://api.github.com/gists/48d01f5a24b4b7b37f19443977c22cd6"
+    )
     if respond.status_code == 200:
-        content = respond.json()['files']['tidal-api-key.json']['content']
+        content = respond.json()["files"]["tidal-api-key.json"]["content"]
         __API_KEYS__ = json.loads(content)
 except:
     pass

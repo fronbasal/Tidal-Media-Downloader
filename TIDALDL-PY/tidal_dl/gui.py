@@ -12,22 +12,24 @@ import importlib
 import sys
 import _thread
 
-from events import *
-from printf import *
+from .events import *
+from .printf import *
 
 
 def enableGui():
     try:
-        importlib.import_module('PyQt5')
-        importlib.import_module('qt_material')
+        importlib.import_module("PyQt5")
+        importlib.import_module("qt_material")
         return True
     except Exception as e:
         return False
 
 
 if not enableGui():
+
     def startGui():
         Printf.err("Not support gui. Please type: `pip3 install PyQt5 qt_material`")
+
 else:
     from PyQt5.QtCore import Qt, QObject
     from PyQt5.QtGui import QTextCursor, QKeyEvent
@@ -44,14 +46,18 @@ else:
     class MainView(QtWidgets.QWidget):
         s_downloadEnd = pyqtSignal(str, bool, str)
 
-        def __init__(self, ) -> None:
+        def __init__(
+            self,
+        ) -> None:
             super().__init__()
             self.initView()
             self.setMinimumSize(800, 620)
             self.setWindowTitle("TIDAL-DL")
 
         def __info__(self, msg):
-            QtWidgets.QMessageBox.information(self, 'Info', msg, QtWidgets.QMessageBox.Yes)
+            QtWidgets.QMessageBox.information(
+                self, "Info", msg, QtWidgets.QMessageBox.Yes
+            )
 
         def __output__(self, text):
             cursor = self.c_printTextEdit.textCursor()
@@ -69,7 +75,13 @@ else:
             self.c_combVQuality = QtWidgets.QComboBox()
 
             # Supported types for search
-            self.m_supportType = [Type.Album, Type.Playlist, Type.Track, Type.Video, Type.Artist]
+            self.m_supportType = [
+                Type.Album,
+                Type.Playlist,
+                Type.Track,
+                Type.Video,
+                Type.Artist,
+            ]
             for item in self.m_supportType:
                 self.c_combType.addItem(item.name, item)
 
@@ -81,16 +93,22 @@ else:
             self.c_combVQuality.setCurrentText(SETTINGS.videoQuality.name)
 
             # init table
-            columnNames = ['#', 'Title', 'Artists', 'Quality']
+            columnNames = ["#", "Title", "Artists", "Quality"]
             self.c_tableInfo = QtWidgets.QTableWidget()
             self.c_tableInfo.setColumnCount(len(columnNames))
             self.c_tableInfo.setRowCount(0)
             self.c_tableInfo.setShowGrid(False)
             self.c_tableInfo.verticalHeader().setVisible(False)
-            self.c_tableInfo.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-            self.c_tableInfo.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+            self.c_tableInfo.setSelectionBehavior(
+                QtWidgets.QAbstractItemView.SelectRows
+            )
+            self.c_tableInfo.setSelectionMode(
+                QtWidgets.QAbstractItemView.ExtendedSelection
+            )
             self.c_tableInfo.horizontalHeader().setStretchLastSection(True)
-            self.c_tableInfo.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+            self.c_tableInfo.horizontalHeader().setSectionResizeMode(
+                QtWidgets.QHeaderView.ResizeMode.ResizeToContents
+            )
             self.c_tableInfo.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
             self.c_tableInfo.setFocusPolicy(Qt.NoFocus)
             for index, name in enumerate(columnNames):
@@ -161,18 +179,18 @@ else:
             self.s_type = self.c_combType.currentData()
             self.s_text = self.c_lineSearch.text()
 
-            if self.s_text.startswith('http'):
+            if self.s_text.startswith("http"):
                 tmpType, tmpId = TIDAL_API.parseUrl(self.s_text)
                 if tmpType == Type.Null:
-                    self.__info__('Url not support！')
+                    self.__info__("Url not support！")
                     return
                 elif tmpType not in self.m_supportType:
-                    self.__info__(f'Type[{tmpType.name}] not support！')
+                    self.__info__(f"Type[{tmpType.name}] not support！")
                     return
 
                 tmpData = TIDAL_API.getTypeData(tmpId, tmpType)
                 if tmpData is None:
-                    self.__info__('Url is wrong!')
+                    self.__info__("Url is wrong!")
                     return
                 self.s_type = tmpType
                 self.s_array = [tmpData]
@@ -180,10 +198,12 @@ else:
                 self.c_combType.setCurrentText(tmpType.name)
             else:
                 self.s_result = TIDAL_API.search(self.s_text, self.s_type)
-                self.s_array = TIDAL_API.getSearchResultItems(self.s_result, self.s_type)
+                self.s_array = TIDAL_API.getSearchResultItems(
+                    self.s_result, self.s_type
+                )
 
             if len(self.s_array) <= 0:
-                self.__info__('No result！')
+                self.__info__("No result！")
                 return
 
             self.setSearchResults(self.s_array, self.s_type)
@@ -204,31 +224,31 @@ else:
                     self.addItem(index, 3, item.quality)
                 elif s_type in [Type.Playlist]:
                     self.addItem(index, 1, item.title)
-                    self.addItem(index, 2, '')
-                    self.addItem(index, 3, '')
+                    self.addItem(index, 2, "")
+                    self.addItem(index, 3, "")
                 elif s_type in [Type.Artist]:
                     self.addItem(index, 1, item.name)
-                    self.addItem(index, 2, '')
-                    self.addItem(index, 3, '')
+                    self.addItem(index, 2, "")
+                    self.addItem(index, 3, "")
             self.c_tableInfo.viewport().update()
 
         def download(self):
             if self.c_tableInfo.selectionModel().hasSelection() == False:
-                self.__info__('Please select a row first.')
+                self.__info__("Please select a row first.")
                 return
 
             rows = self.c_tableInfo.selectionModel().selectedRows()
             items = []
             for row in rows:
                 items.append(self.s_array[row.row()])
-            
+
             self.__downloadFunc__(items)
-        
+
         def __downloadFunc__(self, items):
             self.c_btnDownload.setEnabled(False)
 
             def __thread_download__(model: MainView, items):
-                itemTitle = ''
+                itemTitle = ""
                 type = model.s_type
                 try:
                     for item in items:
@@ -237,7 +257,7 @@ else:
                         else:
                             itemTitle = item.title
                         start_type(type, item)
-                    model.s_downloadEnd.emit('Download Success!', True, '')
+                    model.s_downloadEnd.emit("Download Success!", True, "")
                 except Exception as e:
                     model.s_downloadEnd.emit(itemTitle, False, str(e))
 
@@ -254,7 +274,9 @@ else:
 
         def checkLogin(self):
             if not loginByConfig():
-                self.__info__('Login failed. Please log in using the command line first.')
+                self.__info__(
+                    "Login failed. Please log in using the command line first."
+                )
             else:
                 self.__showSelfPlaylists__()
 
@@ -286,7 +308,7 @@ else:
         aigpy.cmd.enableColor(False)
 
         app = QtWidgets.QApplication(sys.argv)
-        apply_stylesheet(app, theme='dark_blue.xml')
+        apply_stylesheet(app, theme="dark_blue.xml")
 
         window = MainView()
         window.show()
@@ -294,7 +316,8 @@ else:
 
         app.exec_()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     SETTINGS.read(getProfilePath())
     TOKEN.read(getTokenPath())
     startGui()

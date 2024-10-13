@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
+"""
 @File    :   arabic.py
 @Time    :   2020/08/19
 @Author  :   shhade for hack
 @Version :   1.0
 @Contact :   
 @Desc    :   
-'''
+"""
 
 
 class LangArabic(object):
@@ -78,17 +78,29 @@ class LangArabic(object):
     CHANGE_CHECK_EXIST = "التحقق من وجود الملف قبل التحميل('0'-No,'1'-Yes):"
     CHANGE_ARTIST_BEFORE_TITLE = "اضف اسم الفنان قبل اسم الاغنية('0'-No,'1'-Yes):"
     CHANGE_INCLUDE_EP = "اضافة مسطلحات فردي او ثنائي الى الغنية('0'-No,'1'-Yes):"
-    CHANGE_ALBUMID_BEFORE_FOLDER = "اضف رقم التتبع قبل اسم مجلد الالبوم('0'-No,'1'-Yes):"
+    CHANGE_ALBUMID_BEFORE_FOLDER = (
+        "اضف رقم التتبع قبل اسم مجلد الالبوم('0'-No,'1'-Yes):"
+    )
     CHANGE_SAVE_COVERS = "حفظ صورة الالبوم('0'-No,'1'-Yes):"
     CHANGE_LANGUAGE = "اختر لغة"
-    CHANGE_ALBUM_FOLDER_FORMAT = "Album folder format('0'-not modify,'default'-to set default):"
-    CHANGE_PLAYLIST_FOLDER_FORMAT = "Playlist folder format('0'-not modify,'default'-to set default):"
-    CHANGE_TRACK_FILE_FORMAT = "Track file format('0'-not modify,'default'-to set default):"
-    CHANGE_VIDEO_FILE_FORMAT = "Video file format('0'-not modify,'default'-to set default):"
+    CHANGE_ALBUM_FOLDER_FORMAT = (
+        "Album folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_PLAYLIST_FOLDER_FORMAT = (
+        "Playlist folder format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_TRACK_FILE_FORMAT = (
+        "Track file format('0'-not modify,'default'-to set default):"
+    )
+    CHANGE_VIDEO_FILE_FORMAT = (
+        "Video file format('0'-not modify,'default'-to set default):"
+    )
     CHANGE_SHOW_PROGRESS = "Show progress('0'-No,'1'-Yes):"
     CHANGE_SHOW_TRACKINFO = "Show track info('0'-No,'1'-Yes):"
     CHANGE_SAVE_ALBUM_INFO = "Save AlbumInfo.txt('0'-No,'1'-Yes):"
-    CHANGE_DOWNLOAD_VIDEOS = "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    CHANGE_DOWNLOAD_VIDEOS = (
+        "Download videos (when downloading playlists, albums, mixes)('0'-No,'1'-Yes):"
+    )
     CHANGE_ADD_LYRICS = "Add lyrics('0'-No,'1'-Yes):"
     CHANGE_LYRICS_SERVER_PROXY = "Lyrics server proxy('0'-not modify):"
     CHANGE_ADD_LRC_FILE = "Save timed lyrics .lrc file ('0'-No,'1'-Yes):"
@@ -114,13 +126,13 @@ class LangArabic(object):
     MODEL_ARTIST_PROPERTY = "ملكية الفنان"
     MODEL_PLAYLIST_PROPERTY = "ملكية قائمة الاغاني"
 
-    MODEL_TITLE = 'الاسم'
-    MODEL_TRACK_NUMBER = 'رقم الاغنية'
-    MODEL_VIDEO_NUMBER = 'رقم الفديو'
-    MODEL_RELEASE_DATE = 'عام الاصدار'
-    MODEL_VERSION = 'الاصدار'
-    MODEL_EXPLICIT = 'توقيع الفنان'
-    MODEL_ALBUM = 'الالبوم'
-    MODEL_ID = 'رقم التتبع'
-    MODEL_NAME = 'الاسم'
-    MODEL_TYPE = 'النوع'
+    MODEL_TITLE = "الاسم"
+    MODEL_TRACK_NUMBER = "رقم الاغنية"
+    MODEL_VIDEO_NUMBER = "رقم الفديو"
+    MODEL_RELEASE_DATE = "عام الاصدار"
+    MODEL_VERSION = "الاصدار"
+    MODEL_EXPLICIT = "توقيع الفنان"
+    MODEL_ALBUM = "الالبوم"
+    MODEL_ID = "رقم التتبع"
+    MODEL_NAME = "الاسم"
+    MODEL_TYPE = "النوع"
