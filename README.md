@@ -27,6 +27,7 @@
   </a>
 </div>
 <p align="center">
+This is a fork of the original Tidal-Media-Downloader repository. It adds additional functionality aimed at embedding the tool into a different webapp. 
   «Tidal-Media-Downloader» is an application that lets you download videos and tracks from Tidal. It supports two version: tidal-dl and tidal-gui. (This repository only contains tidal-dl, and the release isn't the newest gui version.)
     <br>
         <a href="https://github.com/yaronzz/Tidal-Media-Downloader-PRO/releases">Download</a> |
@@ -35,30 +36,33 @@
     <br>
 </p>
 
-## 📺 Installation 
+## 📺 Installation
 
 ```shell
 pip3 install tidal-dl --upgrade
 ```
 
-| USE                                                   | FUNCTION                   |
-| ----------------------------------------------------- | -------------------------- |
-| tidal-dl                                              | Show interactive interface |
-| tidal-dl -h                                           | Show help-message          |
-| tidal-dl -l "https://tidal.com/browse/track/70973230" | Download link              |
-| tidal-dl -g                                           | Show simple-gui            |
+| USE                                                      | FUNCTION                   |
+|----------------------------------------------------------|----------------------------|
+| tidal-dl                                                 | Show interactive interface |
+| tidal-dl -h                                              | Show help-message          |
+| tidal-dl -l "https://tidal.com/browse/track/70973230"    | Download link              |
+| tidal-dl -l "https://tidal.com/browse/track/70973230" -j | Output JSON for item       |
+| tidal-dl -g                                              | Show simple-gui            |
 
 If you are using windows system, you can use [tidal-pro](https://github.com/yaronzz/Tidal-Media-Downloader-PRO)
 
 ### Nightly Builds
 
-|Download nightly builds from continuous integration: 	| [![Build Status][Build]][Actions] 
-|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Download nightly builds from continuous integration: 	 | [![Build Status][Build]][Actions] 
+|--------------------------------------------------------|-----------------------------------|
 
 [Actions]: https://github.com/yaronzz/Tidal-Media-Downloader/actions
+
 [Build]: https://github.com/yaronzz/Tidal-Media-Downloader/workflows/Tidal%20Media%20Downloader/badge.svg
 
 ## 🤖 Features
+
 - Download album \ track \ video \ playlist \ artist-albums
 
 - Add metadata to songs
@@ -78,7 +82,7 @@ If you are using windows system, you can use [tidal-pro](https://github.com/yaro
 ### Album
 
 | Tag               | Example value                        |
-| ----------------- | ------------------------------------ |
+|-------------------|--------------------------------------|
 | {ArtistName}      | The Beatles                          |
 | {AlbumArtistName} | The Beatles                          |
 | {Flag}            | M/A/E  (Master/Dolby Atmos/Explicit) |
@@ -98,7 +102,7 @@ If you are using windows system, you can use [tidal-pro](https://github.com/yaro
 ### Track
 
 | Tag               | Example Value                              |
-| ----------------- | ------------------------------------------ |
+|-------------------|--------------------------------------------|
 | {TrackNumber}     | 01                                         |
 | {ArtistName}      | The Beatles                                |
 | {ArtistsName}     | The Beatles                                |
@@ -113,24 +117,25 @@ If you are using windows system, you can use [tidal-pro](https://github.com/yaro
 
 ### Video
 
-| Tag               | Example Value                              |
-| ----------------- | ------------------------------------------ |
-| {VideoNumber}     | 00                                         |
-| {ArtistName}      | DMX                                        |
-| {ArtistsName}     | DMX, Westside Gunn                         |
-| {VideoTitle}      | Hood Blues                                 |
-| {ExplicitFlag}    | (*Explicit*)                               |
-| {VideoYear}       | 2021                                       |
-| {TrackID}         | 188932980                                  |
+| Tag            | Example Value      |
+|----------------|--------------------|
+| {VideoNumber}  | 00                 |
+| {ArtistName}   | DMX                |
+| {ArtistsName}  | DMX, Westside Gunn |
+| {VideoTitle}   | Hood Blues         |
+| {ExplicitFlag} | (*Explicit*)       |
+| {VideoYear}    | 2021               |
+| {TrackID}      | 188932980          |
 
 ## ☕ Support
 
-If you really like my projects and want to support me, you can buy me a coffee and star this project. 
+If you really like my projects and want to support me, you can buy me a coffee and star this project.
 
 <a href="https://www.buymeacoffee.com/yaronzz" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 ## 🎂 Contributors
-This project exists thanks to all the people who contribute. 
+
+This project exists thanks to all the people who contribute.
 
 <a href="https://github.com/yaronzz/Tidal-Media-Downloader/graphs/contributors"><img src="https://contributors-img.web.app/image?repo=yaronzz/Tidal-Media-Downloader" /></a>
 
@@ -142,8 +147,9 @@ This project exists thanks to all the people who contribute.
 - [tidal-wiki](https://github.com/Fokka-Engineering/TIDAL/wiki)
 
 ## 📜 Disclaimer
+
 - Private use only.
-- Need a Tidal-HIFI subscription. 
+- Need a Tidal-HIFI subscription.
 - You should not use this method to distribute or pirate music.
 - It may be illegal to use this in your country, so be informed.
 
