@@ -1,0 +1,80 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "tidal-dl"
+version = "2025.10.1"
+description = "Download music and videos from Tidal (Refactored)"
+authors = [
+    "Yaronzz <yaronhuang@foxmail.com>",
+    "Fronbasal <fronbasal@users.noreply.github.com>"
+]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/fronbasal/Tidal-Media-Downloader"
+repository = "https://github.com/fronbasal/Tidal-Media-Downloader"
+documentation = "https://github.com/fronbasal/Tidal-Media-Downloader/blob/master/README.md"
+keywords = ["tidal", "download", "music", "downloader"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+packages = [
+    { include = "tidal_dl", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+requests = ">=2.32"
+pycryptodome = ">=3.9.0"
+pydub = ">=0.25.1"
+prettytable = ">=3.16.0"
+mutagen = "^1.47.0"
+colorama = "^0.4.6"
+certifi = "^2025.10.5"
+pycparser = "^2.23"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.0.0"
+pytest-cov = ">=3.0.0"
+flake8 = ">=4.0.0"
+mypy = ">=0.950"
+isort = ">=5.10.0"
+
+[tool.poetry.scripts]
+tidal-dl = "tidal_dl.main:main"
+
+[tool.black]
+line-length = 40
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=tidal_dl --cov-report=term-missing"
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = "E203"

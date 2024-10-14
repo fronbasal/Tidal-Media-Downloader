@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Build package
+        run: poetry build
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: v${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload wheel
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.whl
+
+      - name: Upload sdist
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.tar.gz
