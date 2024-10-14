@@ -1,157 +1,199 @@
-<br>
-    <a href="https://github.com/yaronzz/Tidal-Media-Downloader-PRO">[GUI-REPOSITORY]</a>
-<br>
+# Tidal-Media-Downloader
 
-![Tidal-Media-Downloader](https://socialify.git.ci/yaronzz/Tidal-Media-Downloader/image?description=1&font=Rokkitt&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Dark)
+> **MAJOR REWRITE NOTICE**: This fork has undergone a complete architectural refactoring to follow modern Python best practices. While it aims for 100% CLI compatibility with the original, **there may be breaking changes**! Also ships without the GUI.
 
+**Tidal-Media-Downloader** is a command-line tool for downloading music and videos from Tidal with metadata tagging support.
 
-<div align="center">
-  <h1>Tidal-Media-Downloader</h1>
-  <a href="https://github.com/yaronzz/Tidal-Media-Downloader/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/yaronzz/Tidal-Media-Downloader.svg?style=flat-square" alt="">
-  </a>
-  <a href="https://github.com/yaronzz/Tidal-Media-Downloader/releases">
-    <img src="https://img.shields.io/github/v/release/yaronzz/Tidal-Media-Downloader.svg?style=flat-square" alt="">
-  </a>
-  <a href="https://www.python.org/">
-    <img src="https://img.shields.io/github/issues/yaronzz/Tidal-Media-Downloader.svg?style=flat-square" alt="">
-  </a>
-  <a href="https://github.com/yaronzz/Tidal-Media-Downloader">
-    <img src="https://img.shields.io/github/downloads/yaronzz/Tidal-Media-Downloader/total?label=tidal-gui%20download" alt="">
-  </a>
-  <a href="https://pypi.org/project/tidal-dl/">
-    <img src="https://img.shields.io/pypi/dm/tidal-dl?label=tidal-dl%20download" alt="">
-  </a>
-  <a href="https://github.com/yaronzz/Tidal-Media-Downloader/actions/workflows/build.yml">
-    <img src="https://github.com/yaronzz/Tidal-Media-Downloader/actions/workflows/build.yml/badge.svg" alt="">
-  </a>
-</div>
-<p align="center">
-  «Tidal-Media-Downloader» is an application that lets you download videos and tracks from Tidal. It supports two version: tidal-dl and tidal-gui. (This repository only contains tidal-dl, and the release isn't the newest gui version.)
-    <br>
-        <a href="https://github.com/yaronzz/Tidal-Media-Downloader-PRO/releases">Download</a> |
-        <a href="https://doc.yaronzz.com/post/tidal_dl_installation/">Documentation</a> |
-        <a href="https://doc.yaronzz.com/post/tidal_dl_installation_chn/">中文文档</a> |
-    <br>
-</p>
+## Installation
 
-## 📺 Installation 
+## Quick Start
 
-```shell
-pip3 install tidal-dl --upgrade
+```bash
+# Interactive mode (legacy behavior maintained)
+tidal-dl
+
+# Download a track
+tidal-dl -l "https://tidal.com/browse/track/70973230"
+
+# Download with quality setting
+tidal-dl -l "https://tidal.com/browse/track/70973230" -q Master
+
+# Get JSON metadata
+tidal-dl -l "https://tidal.com/browse/track/70973230" -j
+
+# Download playlist
+tidal-dl -l "https://tidal.com/browse/playlist/UUID"
+
+# Set output directory
+tidal-dl -o "/path/to/downloads" -l "URL"
 ```
 
-| USE                                                   | FUNCTION                   |
-| ----------------------------------------------------- | -------------------------- |
-| tidal-dl                                              | Show interactive interface |
-| tidal-dl -h                                           | Show help-message          |
-| tidal-dl -l "https://tidal.com/browse/track/70973230" | Download link              |
-| tidal-dl -g                                           | Show simple-gui            |
+## Features
 
-If you are using windows system, you can use [tidal-pro](https://github.com/yaronzz/Tidal-Media-Downloader-PRO)
+- ✅ Download albums, tracks, videos, playlists, artist catalogs
+- ✅ Automatic metadata tagging (album art, artist, title, etc.)
+- ✅ Multiple quality options: Normal, High, HiFi, Master, Max
+- ✅ Video resolution selection: P240, P360, P480, P720, P1080
+- ✅ Configurable path formatting with templates
+- ✅ Multi-threaded downloads (optional)
+- ✅ Progress indicators
+- ✅ Check for existing files before downloading
+- ✅ Lyrics download (.lrc files)
+- ✅ Album info text files
 
-### Nightly Builds
+## Command-Line Options
 
-|Download nightly builds from continuous integration: 	| [![Build Status][Build]][Actions] 
-|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-
-[Actions]: https://github.com/yaronzz/Tidal-Media-Downloader/actions
-[Build]: https://github.com/yaronzz/Tidal-Media-Downloader/workflows/Tidal%20Media%20Downloader/badge.svg
-
-## 🤖 Features
-- Download album \ track \ video \ playlist \ artist-albums
-
-- Add metadata to songs
-
-- Selectable video resolution and track quality
-
-## 💽 User Interface
-
-<img src="https://i.loli.net/2020/08/19/gqW6zHI1SrKlomC.png" alt="image" style="zoom: 50%;" />
-
-![image-20220708105823257](https://s2.loli.net/2022/07/08/vV6HsxugwoDyGr8.png)
-
-![image-20200806013705425](https://i.loli.net/2020/08/06/sPLowIlCGyOdpVN.png)
-
-## Settings - Possible Tags
-
-### Album
-
-| Tag               | Example value                        |
-| ----------------- | ------------------------------------ |
-| {ArtistName}      | The Beatles                          |
-| {AlbumArtistName} | The Beatles                          |
-| {Flag}            | M/A/E  (Master/Dolby Atmos/Explicit) |
-| {AlbumID}         | 55163243                             |
-| {AlbumYear}       | 1963                                 |
-| {AlbumTitle}      | Please Please Me (Remastered)        |
-| {AudioQuality}    | LOSSLESS                             |
-| {DurationSeconds} | 1919                                 |
-| {Duration}        | 31:59                                |
-| {NumberOfTracks}  | 14                                   |
-| {NumberOfVideos}  | 0                                    |
-| {NumberOfVolumes} | 1                                    |
-| {ReleaseDate}     | 1963-03-22                           |
-| {RecordType}      | ALBUM                                |
-| {None}            |                                      |
-
-### Track
-
-| Tag               | Example Value                              |
-| ----------------- | ------------------------------------------ |
-| {TrackNumber}     | 01                                         |
-| {ArtistName}      | The Beatles                                |
-| {ArtistsName}     | The Beatles                                |
-| {TrackTitle}      | I Saw Her Standing There (Remastered 2009) |
-| {ExplicitFlag}    | (*Explicit*)                               |
-| {AlbumYear}       | 1963                                       |
-| {AlbumTitle}      | Please Please Me (Remastered)              |
-| {AudioQuality}    | LOSSLESS                                   |
-| {DurationSeconds} | 173                                        |
-| {Duration}        | 02:53                                      |
-| {TrackID}         | 55163244                                   |
-
-### Video
-
-| Tag               | Example Value                              |
-| ----------------- | ------------------------------------------ |
-| {VideoNumber}     | 00                                         |
-| {ArtistName}      | DMX                                        |
-| {ArtistsName}     | DMX, Westside Gunn                         |
-| {VideoTitle}      | Hood Blues                                 |
-| {ExplicitFlag}    | (*Explicit*)                               |
-| {VideoYear}       | 2021                                       |
-| {TrackID}         | 188932980                                  |
-
-## ☕ Support
-
-If you really like my projects and want to support me, you can buy me a coffee and star this project. 
-
-<a href="https://www.buymeacoffee.com/yaronzz" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
-
-## 🎂 Contributors
-This project exists thanks to all the people who contribute. 
-
-<a href="https://github.com/yaronzz/Tidal-Media-Downloader/graphs/contributors"><img src="https://contributors-img.web.app/image?repo=yaronzz/Tidal-Media-Downloader" /></a>
-
-## 🎨 Libraries and reference
-
-- [aigpy](https://github.com/yaronzz/AIGPY)
-- [python-tidal](https://github.com/tamland/python-tidal)
-- [redsea](https://github.com/redsudo/RedSea)
-- [tidal-wiki](https://github.com/Fokka-Engineering/TIDAL/wiki)
-
-## 📜 Disclaimer
-- Private use only.
-- Need a Tidal-HIFI subscription. 
-- You should not use this method to distribute or pirate music.
-- It may be illegal to use this in your country, so be informed.
-
-## Developing
-
-```shell
-pip3 uninstall tidal-dl
-pip3 install -r requirements.txt --user
-python3 setup.py install
 ```
+usage: tidal-dl [-h] [-v] [-l URL] [-o PATH] [-q QUALITY] [-r RESOLUTION] 
+                [-j] [-n]
+
+Download music and videos from Tidal
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+  -l URL, --link URL    Tidal URL, ID, or file path to download
+  -o PATH, --output PATH
+                        Download destination path
+  -q QUALITY, --quality QUALITY
+                        Audio quality: Normal, High, HiFi, Master, Max
+  -r RESOLUTION, --resolution RESOLUTION
+                        Video resolution: P240, P360, P480, P720, P1080
+  -j, --json            Output item metadata as JSON (requires --link)
+  -n, --non-interactive
+                        Non-interactive mode with JSON output
+```
+
+## Configuration
+
+Configuration is stored in `~/.tidal-dl/settings.json`. You can modify:
+
+- Download path
+- Audio/video quality defaults
+- Path naming templates
+- Behavior flags (check existing, save covers, etc.)
+
+### Path Format Templates
+
+#### Album Folder Format
+```
+{ArtistName}/{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]
+```
+
+#### Track File Format
+```
+{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}
+```
+
+#### Available Tags
+
+| Tag               | Description                          | Example                    |
+|-------------------|--------------------------------------|----------------------------|
+| {ArtistName}      | Primary artist                       | The Beatles                |
+| {AlbumArtistName} | Album artist                         | The Beatles                |
+| {Flag}            | Quality flags (M/A/E)               | [M] (Master)               |
+| {AlbumID}         | Tidal album ID                       | 55163243                   |
+| {AlbumYear}       | Release year                         | 1963                       |
+| {AlbumTitle}      | Album name                           | Please Please Me           |
+| {TrackNumber}     | Track number                         | 01                         |
+| {TrackTitle}      | Track name                           | I Saw Her Standing There   |
+| {ExplicitFlag}    | Explicit content indicator           | (Explicit)                 |
+| {AudioQuality}    | Audio quality                        | LOSSLESS                   |
+| {Duration}        | Track/album duration                 | 3:45                       |
+
+## Authentication
+
+On first run, you'll need to authenticate:
+
+1. Run `tidal-dl` 
+2. Follow the URL provided to authorize the app
+3. Credentials are saved for future use in `~/.tidal-dl/token.json`
+
+You can also login with an access token:
+```bash
+tidal-dl
+# Choose option 3: Login by access token
+```
+
+## What's Different in This Refactor?
+
+### Improved
+- 🎯 **Modern Python**: Type hints, dataclasses, proper OOP patterns
+- 🎯 **Better Error Handling**: Specific exception types, proper logging
+- 🎯 **Clean Architecture**: Separation of concerns (API, Download, Config, CLI)
+- 🎯 **Maintainability**: PEP 8 compliant, documented, testable
+- 🎯 **Packaging**: Proper `pyproject.toml`, automated releases
+
+### Removed
+- ❌ **GUI Interface**: Use original repo for GUI version
+- ❌ **Multi-language Support**: English only (for now)
+- ❌ **Colored Terminal Output**: Standard logging instead
+
+### Compatibility
+- ✅ All CLI arguments work identically to original
+- ✅ Config file format migration supported
+- ✅ Same download behavior and file naming
+- ⚠️ Interactive menu simplified (no color, English only)
+
+## Development
+
+### Project Structure
+```
+tidal-dl/
+├── src/
+│   └── tidal_dl/
+│       ├── __init__.py
+│       ├── api_client.py      # Tidal API wrapper
+│       ├── app.py             # Application orchestrator
+│       ├── cli.py             # CLI argument parsing
+│       ├── config.py          # Configuration management
+│       ├── download_manager.py # Download logic
+│       ├── path_builder.py    # Path formatting
+│       ├── models.py          # Data models
+│       ├── enums.py           # Enumerations
+│       └── decryption.py      # Audio decryption
+├── tests/                     # Unit tests
+├── pyproject.toml            # Modern Python packaging
+├── setup.py                  # Backward compatibility
+└── README.md
+```
+
+### Running Tests
+```bash
+pip install -e ".[dev]"
+pytest
+```
+
+### Building
+```bash
+python -m build
+```
+
+## Known Issues
+
+- Interactive menu lacks colored output (planned)
+- Multi-language support not yet re-implemented
+- Some edge cases in path formatting may differ slightly
+
+## Contributing
+
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Ensure `flake8` and `mypy` pass
+5. Submit a pull request
+
+## License
+
+Apache License 2.0 - See [LICENSE](LICENSE) file
+
+## Credits
+
+- Original: [yaronzz/Tidal-Media-Downloader](https://github.com/yaronzz/Tidal-Media-Downloader)
+- This fork: [fronbasal/Tidal-Media-Downloader](https://github.com/fronbasal/Tidal-Media-Downloader)
+
+## Disclaimer
+
+This tool is for educational purposes only. Please respect artists and support them by purchasing their music. Tidal is a trademark of Aspiro AB.
 
