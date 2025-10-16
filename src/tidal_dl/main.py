@@ -35,7 +35,7 @@ def mainCommand():
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
-            "hvgljo:q:r:n",
+            "hvgl:o:q:r:jn",
             [
                 "help",
                 "version",
