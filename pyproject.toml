@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tidal-dl"
-version = "2025.10"
+version = "2025.10.1"
 description = "Download music and videos from Tidal (Refactored)"
 authors = [
     "Yaronzz <yaronhuang@foxmail.com>",
@@ -40,6 +40,10 @@ requests = ">=2.32"
 pycryptodome = ">=3.9.0"
 pydub = ">=0.25.1"
 prettytable = ">=3.16.0"
+mutagen = "^1.47.0"
+colorama = "^0.4.6"
+certifi = "^2025.10.5"
+pycparser = "^2.23"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.0.0"

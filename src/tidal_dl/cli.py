@@ -18,7 +18,7 @@ from tidal_dl.enums import (
 class TidalCLI:
     """Command-line interface handler."""
 
-    VERSION = "2025.10"
+    VERSION = "2025.10.1"
 
     def __init__(
         self,

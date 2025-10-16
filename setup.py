@@ -5,7 +5,7 @@
 from setuptools import setup, find_packages
 
 # Read version from package
-__version__ = "2025.10"
+__version__ = "2025.10.1"
 
 setup(
     name='tidal-dl',
@@ -27,10 +27,14 @@ setup(
     python_requires='>=3.8',
 
     install_requires=[
-        "requests>=2.25.1",
-        "pycryptodome>=3.9.0",
-        "pydub>=0.25.1",
-        "prettytable>=2.0.0",
+        "requests>=2.32"
+        "pycryptodome>=3.9.0"
+        "pydub>=0.25.1"
+        "prettytable>=3.16.0"
+        "mutagen>=1.47.0"
+        "colorama>=0.4.6"
+        "certifi=>2025.10.5"
+        "pycparser>=2.23"
     ],
 
     entry_points={
