@@ -105,6 +105,18 @@ class TidalCLI:
             help="Output item metadata as JSON (requires --link)",
         )
 
+        parser.add_argument(
+            "--convert-flac",
+            action="store_true",
+            help="Convert FLAC-in-MP4 files to proper FLAC with embedded cover art (Max quality only)",
+        )
+
+        parser.add_argument(
+            "--no-flac-conversion",
+            action="store_true", 
+            help="Disable automatic FLAC conversion for Max quality downloads",
+        )
+
         return parser
 
     def parse_args(

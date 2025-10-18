@@ -9,7 +9,8 @@
 @Desc    :
 """
 
-from tidal_dl.download import *
+from tidal_dl.download_manager import *
+from tidal_dl.logger import error, success, info, debug, display_album_info
 
 """
 =================================
@@ -19,7 +20,7 @@ START DOWNLOAD
 
 
 def start_album(obj: Album):
-    Printf.album(obj)
+    display_album_info(obj)
     tracks, videos = TIDAL_API.getItems(
         obj.id, Type.Album
     )
@@ -82,7 +83,7 @@ def start_mix(obj: Mix):
 def start_file(string):
     txt = tidal_dl.aigpy.file.getContent(string)
     if tidal_dl.aigpy.string.isNull(txt):
-        Printf.err("Nothing can read!")
+        error("Nothing can read!")
         return
     array = txt.split("\n")
     for item in array:
@@ -112,7 +113,7 @@ def start_type(etype: Type, obj):
 
 def start(string):
     if tidal_dl.aigpy.string.isNull(string):
-        Printf.err(
+        error(
             "Please enter something."
         )
         return
@@ -132,7 +133,7 @@ def start(string):
                 )
             )
         except Exception as e:
-            Printf.err(
+            error(
                 str(e)
                 + " ["
                 + item
@@ -143,7 +144,7 @@ def start(string):
         try:
             start_type(etype, obj)
         except Exception as e:
-            Printf.err(str(e))
+            error(str(e))
 
 
 """

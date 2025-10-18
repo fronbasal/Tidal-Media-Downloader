@@ -81,6 +81,7 @@ class Settings:
     use_playlist_folder: bool = True
     show_progress: bool = True
     show_track_info: bool = True
+    convert_flac: bool = True  # Auto-convert FLAC-in-MP4 to proper FLAC (Max quality only)
 
     # Interface settings
     language: int = 0
@@ -177,6 +178,7 @@ class Settings:
             "multiThread": "multi_thread",
             "downloadDelay": "download_delay",
             "usePlaylistFolder": "use_playlist_folder",
+            "convertFlac": "convert_flac",
             "albumFolderFormat": "album_folder",
             "playlistFolderFormat": "playlist_folder",
             "trackFileFormat": "track_file",

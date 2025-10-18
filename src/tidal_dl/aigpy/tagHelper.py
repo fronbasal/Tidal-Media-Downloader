@@ -62,7 +62,38 @@ class TagTool(object):
 
         self._filepath = filePath
         self._ext = __extension__(filePath)
-        self._handle = File(filePath)
+        
+        try:
+            self._handle = File(filePath)
+        except Exception as e:
+            print(f"[DEBUG] TagTool: File() threw exception: {e}")
+            self._handle = None
+        
+        # Special handling for .flac files that might be MP4 containers
+        if (self._handle is None or not hasattr(self._handle, 'tags')) and self._ext == 'flac':
+            # If mutagen failed to open a .flac file, it might be FLAC data in MP4 container
+            # Try to open it as MP4 instead
+            try:
+                from mutagen.mp4 import MP4
+                self._handle = MP4(filePath)
+                if self._handle is not None:
+                    self._ext = 'm4a'  # Use MP4 tagging for this file
+            except Exception as e:
+                print(f"[DEBUG] TagTool: MP4 attempt failed with exception: {e}")
+                # If MP4 also fails, leave as None
+                pass
+
+        # Use mutagen's built-in file type detection instead of extension
+        if self._handle is not None:
+            # Determine actual file type from mutagen's detection
+            file_type = type(self._handle).__name__.lower()
+            print(f"[DEBUG] TagTool: Final file type: {file_type}, using extension: {self._ext}")
+            if 'mp4' in file_type or 'm4a' in file_type:
+                self._ext = 'm4a'  # Treat all MP4 containers as M4A for tagging
+            elif 'flac' in file_type:
+                self._ext = 'flac'
+            elif 'mp3' in file_type or 'id3' in file_type:
+                self._ext = 'mp3'
 
         self.title = ''
         self.album = ''
@@ -82,15 +113,21 @@ class TagTool(object):
         self.__load__()
 
     def save(self, coverPath: str = None):
+        print(f"[DEBUG] TagTool.save(): ext={self._ext}, coverPath={coverPath}")
         try:
             if 'mp3' in self._ext:
+                print(f"[DEBUG] TagTool.save(): Using MP3 tagging")
                 return self.__saveMp3__(coverPath)
             if 'flac' in self._ext:
+                print(f"[DEBUG] TagTool.save(): Using FLAC tagging")
                 return self.__saveFlac__(coverPath)
             if 'mp4' in self._ext or 'm4a' in self._ext:
+                print(f"[DEBUG] TagTool.save(): Using MP4 tagging")
                 return self.__saveMp4__(coverPath)
+            print(f"[DEBUG] TagTool.save(): No matching format for ext={self._ext}")
             return False
         except Exception as e:
+            print(f"[DEBUG] TagTool.save(): Exception occurred: {e}")
             return False, str(e)
 
     def addPic(self, converPath: str = None):
@@ -188,6 +225,8 @@ class TagTool(object):
         self.lyrics = self.__getTagItem__('lyrics')
 
     def __saveMp4__(self, coverPath):
+        if self._handle.tags is None:
+            self._handle.add_tags()
         self._handle.tags['\xa9nam'] = self.title
         self._handle.tags['\xa9alb'] = self.album
         self._handle.tags['aART'] = __tryList__(self.albumartist)
@@ -208,7 +247,7 @@ class TagTool(object):
         self.album = self.__getTagItem__('\xa9alb')
         self.albumartist = self.__getTagItem__('aART')
         self.artist = self.__getTagItem__('\xa9ART')
-        self.copyright = self.__getTagItem__('\cprt')
+        self.copyright = self.__getTagItem__(r'\cprt')
         self.tracknumber = self.__getTagItem__('trkn')
         self.totaltrack = self.__getTagItem__('trkn')
         self.discnumber = self.__getTagItem__('disk')
@@ -224,11 +263,16 @@ class TagTool(object):
         return ''
 
     def __savePic__(self, coverPath):
+        print(f"[DEBUG] __savePic__: coverPath={coverPath}, ext={self._ext}")
         data = __content__(coverPath)
         if data is None:
+            print(f"[DEBUG] __savePic__: No cover data retrieved")
             return
+        else:
+            print(f"[DEBUG] __savePic__: Retrieved cover data, size={len(data)} bytes")
 
         if 'flac' in self._ext:
+            print(f"[DEBUG] __savePic__: Adding FLAC picture")
             pic = flac.Picture()
             pic.data = data
             if '.jpg' in coverPath:
@@ -237,8 +281,11 @@ class TagTool(object):
             self._handle.add_picture(pic)
 
         if 'mp3' in self._ext:
+            print(f"[DEBUG] __savePic__: Adding MP3 APIC")
             self._handle.tags.add(APIC(encoding=3, data=data))
 
         if 'mp4' in self._ext or 'm4a' in self._ext:
+            print(f"[DEBUG] __savePic__: Adding MP4 cover")
             pic = mp4.MP4Cover(data)
             self._handle.tags['covr'] = [pic]
+            print(f"[DEBUG] __savePic__: MP4 cover added successfully")

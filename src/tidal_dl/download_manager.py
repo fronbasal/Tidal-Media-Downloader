@@ -4,11 +4,11 @@
 
 import logging
 import os
+import subprocess
 from concurrent.futures import (
     ThreadPoolExecutor,
 )
 
-import tidal_dl.aigpy
 from tidal_dl.decryption import (
     decrypt_file,
     decrypt_security_token,
@@ -24,9 +24,139 @@ from tidal_dl.path_builder import (
     getTrackPath,
     getVideoPath,
 )
-from tidal_dl.printf import Printf
+from tidal_dl.logger import error, success, info, debug, display_track_info
 from tidal_dl.settings import SETTINGS
-from tidal_dl.tidal import TIDAL_API
+from tidal_dl.enums import AudioQuality
+from tidal_dl.printf import Printf  # Keep for now, will replace gradually
+from tidal_dl.tidal import *
+
+
+def _convert_flac_inplace(file_path: str) -> bool:
+    """
+    Convert FLAC-in-MP4 to proper FLAC with embedded cover art in place.
+    
+    Args:
+        file_path: Path to the FLAC-in-MP4 file
+        
+    Returns:
+        True if conversion succeeded, False otherwise
+    """
+    try:
+        from mutagen import flac, mp4
+        from mutagen.flac import Picture
+        
+        debug(f"Converting FLAC-in-MP4 to proper FLAC: {file_path}")
+        
+        # Step 1: Read metadata from original MP4 file
+        mp4_file = mp4.MP4(file_path)
+        
+        # Step 2: Extract raw FLAC audio using ffmpeg to stdout
+        ffmpeg_process = subprocess.run([
+            'ffmpeg', '-i', file_path,
+            '-vn',  # No video
+            '-c:a', 'copy',  # Copy audio without re-encoding
+            '-f', 'flac',  # Force FLAC format
+            '-'  # Output to stdout
+        ], check=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        
+        flac_audio_data = ffmpeg_process.stdout
+        debug(f"Extracted {len(flac_audio_data)} bytes of FLAC audio data")
+        
+        # Step 3: Write FLAC data back to the same file
+        with open(file_path, 'wb') as f:
+            f.write(flac_audio_data)
+        
+        # Step 4: Open the newly created FLAC file and add metadata
+        flac_file = flac.FLAC(file_path)
+        
+        # Convert MP4 metadata to FLAC format
+        if '\xa9nam' in mp4_file.tags:
+            flac_file['TITLE'] = mp4_file.tags['\xa9nam']
+        if '\xa9alb' in mp4_file.tags:
+            flac_file['ALBUM'] = mp4_file.tags['\xa9alb']
+        if '\xa9ART' in mp4_file.tags:
+            flac_file['ARTIST'] = mp4_file.tags['\xa9ART']
+        if 'aART' in mp4_file.tags:
+            flac_file['ALBUMARTIST'] = mp4_file.tags['aART']
+        if '\xa9day' in mp4_file.tags:
+            flac_file['DATE'] = mp4_file.tags['\xa9day']
+        if '\xa9gen' in mp4_file.tags:
+            flac_file['GENRE'] = mp4_file.tags['\xa9gen']
+        if '\xa9wrt' in mp4_file.tags:
+            flac_file['COMPOSER'] = mp4_file.tags['\xa9wrt']
+        if 'cprt' in mp4_file.tags:
+            flac_file['COPYRIGHT'] = mp4_file.tags['cprt']
+        if '\xa9lyr' in mp4_file.tags:
+            flac_file['LYRICS'] = mp4_file.tags['\xa9lyr']
+        
+        # Handle track/disc numbers
+        if 'trkn' in mp4_file.tags:
+            track_info = mp4_file.tags['trkn'][0]
+            if len(track_info) >= 1:
+                flac_file['TRACKNUMBER'] = str(track_info[0])
+            if len(track_info) >= 2 and track_info[1] > 0:
+                flac_file['TRACKTOTAL'] = str(track_info[1])
+        
+        if 'disk' in mp4_file.tags:
+            disc_info = mp4_file.tags['disk'][0]
+            if len(disc_info) >= 1:
+                flac_file['DISCNUMBER'] = str(disc_info[0])
+            if len(disc_info) >= 2 and disc_info[1] > 0:
+                flac_file['DISCTOTAL'] = str(disc_info[1])
+        
+        # Step 5: Add cover art - prioritize cover.jpg in same directory
+        cover_data = None
+        
+        # First, try to use cover.jpg from the same directory
+        cover_jpg_path = os.path.join(os.path.dirname(file_path), 'cover.jpg')
+        if os.path.exists(cover_jpg_path):
+            try:
+                with open(cover_jpg_path, 'rb') as f:
+                    cover_data = f.read()
+                debug(f"Using cover.jpg: {cover_jpg_path}")
+            except Exception as e:
+                debug(f"Failed to read cover.jpg: {e}")
+        
+        # Fallback to embedded cover art in MP4
+        if cover_data is None and 'covr' in mp4_file.tags:
+            cover_data = bytes(mp4_file.tags['covr'][0])
+            debug("Using embedded MP4 cover art")
+        
+        # Add cover art to FLAC if we have any
+        if cover_data:
+            picture = Picture()
+            picture.data = cover_data
+            picture.type = 3  # Cover (front)
+            
+            # Determine MIME type
+            if cover_data[:4] == b'\xff\xd8\xff\xe0':
+                picture.mime = 'image/jpeg'
+            elif cover_data[:8] == b'\x89PNG\r\n\x1a\n':
+                picture.mime = 'image/png'
+            else:
+                picture.mime = 'image/jpeg'  # Default fallback
+            
+            picture.desc = 'Cover'
+            picture.width = 0  # Will be filled by mutagen
+            picture.height = 0  # Will be filled by mutagen
+            picture.depth = 0  # Will be filled by mutagen
+            
+            # Clear existing pictures and add new one
+            flac_file.clear_pictures()
+            flac_file.add_picture(picture)
+            debug("Cover art embedded in FLAC")
+        else:
+            debug("No cover art found to embed")
+        
+        # Save the FLAC file with metadata
+        flac_file.save()
+        
+        debug(f"Successfully converted FLAC-in-MP4 to proper FLAC: {file_path}")
+        return True
+        
+    except Exception as e:
+        error(f"Failed to convert FLAC: {e}")
+        return False
 
 
 def _is_skip(
@@ -93,7 +223,17 @@ def _set_metadata(
     lyrics: str,
 ):
     """Set metadata tags on audio file."""
+    # Debug: Check if file exists before tagging
+    if not os.path.exists(filepath):
+        raise Exception(f"File does not exist: {filepath}")
+    
     obj = tidal_dl.aigpy.tag.TagTool(filepath)
+    
+    # Debug: Check if TagTool was created successfully
+    if not hasattr(obj, '_handle') or obj._handle is None:
+        raise Exception(f"TagTool failed to initialize for: {filepath}")
+    
+    
     obj.album = track.album.title
     obj.title = track.title
     if not tidal_dl.aigpy.string.isNull(
@@ -135,7 +275,11 @@ def _set_metadata(
     coverpath = TIDAL_API.getCoverUrl(
         album.cover, "1280", "1280"
     )
-    obj.save(coverpath)
+    
+    # Debug: Log before saving
+    debug(f"Saving tags with coverpath: {coverpath}")
+    result = obj.save(coverpath)
+    debug(f"Tag save result: {result}")
 
 
 def downloadCover(album: Album):
@@ -238,7 +382,7 @@ def downloadVideo(
             stream.m3u8Url
         ).content
         if m3u8content is None:
-            Printf.err(
+            error(
                 f"DL Video[{video.title}] getM3u8 failed."
             )
             return (
@@ -250,7 +394,7 @@ def downloadVideo(
             m3u8content
         )
         if len(urls) <= 0:
-            Printf.err(
+            error(
                 f"DL Video[{video.title}] getTsUrls failed."
             )
             return (
@@ -264,15 +408,15 @@ def downloadVideo(
             )
         )
         if check:
-            Printf.success(video.title)
+            success(video.title)
             return True
         else:
-            Printf.err(
+            error(
                 f"DL Video[{video.title}] failed.{msg}"
             )
             return False, msg
     except Exception as e:
-        Printf.err(
+        error(
             f"DL Video[{video.title}] failed.{str(e)}"
         )
         return False, str(e)
@@ -286,6 +430,8 @@ def downloadTrack(
     partSize=1048576,
 ):
     """Download a single track."""
+    debug(f"downloadTrack called for: {track.title}")
+    debug(f"album parameter: {album}")
     try:
         stream = TIDAL_API.getStreamUrl(
             track.id,
@@ -302,7 +448,7 @@ def downloadTrack(
             SETTINGS.showTrackInfo
             and not SETTINGS.multiThread
         ):
-            Printf.track(track, stream)
+            display_track_info(track, stream)
 
         if userProgress is not None:
             userProgress.updateStream(
@@ -310,49 +456,51 @@ def downloadTrack(
             )
 
         # check exist
-        if _is_skip(path, stream.url):
+        file_already_exists = _is_skip(path, stream.url)
+        if file_already_exists:
             Printf.success(
                 tidal_dl.aigpy.path.getFileName(
                     path
                 )
                 + " (skip:already exists!)"
             )
-            return True, ""
-
-        # download
-        logging.info(
-            "[DL Track] name="
-            + tidal_dl.aigpy.path.getFileName(
-                path
+            # Still try to apply metadata even if file exists (for debugging)
+            print("[DEBUG] File exists, but attempting to tag anyway for debugging...")
+        else:
+            # download
+            logging.info(
+                "[DL Track] name="
+                + tidal_dl.aigpy.path.getFileName(
+                    path
+                )
+                + "\nurl="
+                + stream.url
             )
-            + "\nurl="
-            + stream.url
-        )
 
-        tool = (
-            tidal_dl.aigpy.download.DownloadTool(
-                path + ".part",
-                stream.urls,
+            tool = (
+                tidal_dl.aigpy.download.DownloadTool(
+                    path + ".part",
+                    stream.urls,
+                )
             )
-        )
-        tool.setUserProgress(
-            userProgress
-        )
-        tool.setPartSize(partSize)
-        check, err = tool.start(
-            SETTINGS.showProgress
-            and not SETTINGS.multiThread
-        )
-        if not check:
-            Printf.err(
-                f"DL Track '{track.title}' failed: {str(err)}"
+            tool.setUserProgress(
+                userProgress
             )
-            return False, str(err)
+            tool.setPartSize(partSize)
+            check, err = tool.start(
+                SETTINGS.showProgress
+                and not SETTINGS.multiThread
+            )
+            if not check:
+                error(
+                    f"DL Track '{track.title}' failed: {str(err)}"
+                )
+                return False, str(err)
 
-        # encrypted -> decrypt and remove encrypted file
-        _decrypt_if_needed(
-            stream, path + ".part", path
-        )
+            # encrypted -> decrypt and remove encrypted file
+            _decrypt_if_needed(
+                stream, path + ".part", path
+            )
 
         # contributors
         try:
@@ -382,18 +530,35 @@ def downloadTrack(
         except Exception:
             lyrics = ""
 
-        _set_metadata(
-            track,
-            album,
-            path,
-            contributors,
-            lyrics,
-        )
-        Printf.success(track.title)
+        try:
+            _set_metadata(
+                track,
+                album,
+                path,
+                contributors,
+                lyrics,
+            )
+        except Exception as e:
+            error(f"Failed to set metadata for '{track.title}': {str(e)}")
+            # Continue with download success even if tagging fails
+        
+        # Auto-convert FLAC-in-MP4 to proper FLAC for Max quality (unless disabled)
+        # Handle case where convertFlac setting might be None (from old config files)
+        convert_flac = getattr(SETTINGS, 'convertFlac', True) if SETTINGS.convertFlac is not None else True
+        
+        if (path.endswith('.flac') and 
+            convert_flac and 
+            SETTINGS.audioQuality == AudioQuality.Max):
+            if _convert_flac_inplace(path):
+                info(f"Converted to proper FLAC: {os.path.basename(path)}")
+            else:
+                error("FLAC conversion failed!")
+        
+        success(track.title)
 
         return True, ""
     except Exception as e:
-        Printf.err(
+        error(
             f"DL Track '{track.title}' failed: {str(e)}"
         )
         return False, str(e)

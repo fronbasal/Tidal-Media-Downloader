@@ -99,6 +99,14 @@ class Printf(object):
                     "-r or --resolution",
                     "video resolution('P1080', 'P720', 'P480', 'P360')",
                 ],
+                [
+                    "--convert-flac",
+                    "convert FLAC-in-MP4 to proper FLAC with embedded cover (Max quality only)",
+                ],
+                [
+                    "--no-flac-conversion", 
+                    "disable automatic FLAC conversion for Max quality downloads",
+                ],
             ],
         )
         print(tb)
