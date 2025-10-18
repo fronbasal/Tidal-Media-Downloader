@@ -97,7 +97,7 @@ def mainCommand():
         "-v",
         "--version",
         action="version",
-        version="tidal-dl 2025.10.2",
+        version="tidal-dl 2025.10.3",
     )
 
     parser.add_argument(

@@ -21,7 +21,7 @@ from tidal_dl.model import *
 from tidal_dl.paths import *
 from tidal_dl.settings import *
 
-VERSION = "2025.10.2"
+VERSION = "2025.10.3"
 __LOGO__ = rf"""
 ::::::::::: ::::::::::: :::::::::      :::     :::                     :::::::::  :::        
     :+:         :+:     :+:    :+:   :+: :+:   :+:                     :+:    :+: :+:        

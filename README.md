@@ -5,22 +5,22 @@
 ## Command-Line Options
 
 ```
-usage: tidal-dl [-h] [-v] [-l URL] [-o PATH] [-q QUALITY] [-r RESOLUTION] 
-                [-j] [-n]
+usage: tidal-dl [-h] [-v] [-g] [-l URL] [-o PATH] [-q {Normal,High,HiFi,Master,Max}] [-r {P240,P360,P480,P720,P1080}] [-j] [--no-flac-conversion]
 
 Download music and videos from Tidal
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
-  -l URL, --link URL    Tidal URL, ID, or file path to download
-  -o PATH, --output PATH
-                        Download destination path
-  -q QUALITY, --quality QUALITY
-                        Audio quality: Normal, High, HiFi, Master, Max
-  -r RESOLUTION, --resolution RESOLUTION
-                        Video resolution: P240, P360, P480, P720, P1080
+  -g, --gui             Launch graphical user interface
+  -l, --link URL        Tidal URL, ID, or file path to download
+  -o, --output PATH     Download destination path
+  -q, --quality {Normal,High,HiFi,Master,Max}
+                        Audio quality for tracks
+  -r, --resolution {P240,P360,P480,P720,P1080}
+                        Video resolution
   -j, --json            Output item metadata as JSON (requires --link)
+  --no-flac-conversion  Disable automatic FLAC conversion for Max quality downloads
 ```
 
 ## License
