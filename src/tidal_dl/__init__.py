@@ -6,9 +6,9 @@ Tidal-DL - Download music and videos from Tidal
 Refactored codebase maintaining 100% CLI compatibility with original.
 """
 
-__version__ = "2025.10.1"
+__version__ = "2025.10.2"
 
-# Re-export main entry point
-from tidal_dl.main import main
+# Don't import anything at module level to avoid side effects
+# Functions and classes can be imported individually as needed
 
-__all__ = ["main"]
+__all__ = []

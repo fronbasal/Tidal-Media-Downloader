@@ -35,7 +35,7 @@ def mainCommand():
     try:
         opts, args = getopt.getopt(
             sys.argv[1:],
-            "hvgl:o:q:r:jn",
+            "hvgl:o:q:r:j",
             [
                 "help",
                 "version",
@@ -45,7 +45,6 @@ def mainCommand():
                 "quality=",
                 "resolution=",
                 "json",
-                "non-interactive",
             ],
         )
     except getopt.GetoptError as errmsg:
@@ -98,12 +97,6 @@ def mainCommand():
         if opt in ("-j", "--json"):
             json_mode = True
             continue
-        if opt in (
-            "-n",
-            "--non-interactive",
-        ):
-            non_interactive = True
-            continue
 
     # special option: retrieve json data of item
     # can only be used in junction with link option
@@ -121,7 +114,7 @@ def mainCommand():
             )
             output = {
                 "type": etype.name,
-                "data": tidal_dl.aigpy.modelHelper.modelToDict(
+                "data": tidal_dl.aigpy.model.modelToDict(
                     obj
                 ),
             }
@@ -130,13 +123,7 @@ def mainCommand():
                     output, indent=4
                 )
             )
-            if non_interactive:
-                # Additionally download the item
-                from tidal_dl.events import (
-                    start_type,
-                )
-
-                start_type(etype, obj)
+            return
         except Exception as e:
             Printf.err(str(e))
         return
@@ -220,13 +207,8 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# !/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""API client wrapper - re-exports existing TIDAL_API for compatibility."""
-
-# For now, we re-export the existing singleton TIDAL_API
-# This maintains 100% compatibility with the original codebase
-from tidal_dl.tidal import TIDAL_API
-
-__all__ = ["TIDAL_API"]
+else:
+    # Only import TIDAL_API when this module is imported as a library
+    # This avoids side effects when running as a script
+    from tidal_dl.tidal import TIDAL_API
+    __all__ = ["TIDAL_API"]

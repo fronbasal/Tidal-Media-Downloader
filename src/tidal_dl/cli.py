@@ -18,7 +18,7 @@ from tidal_dl.enums import (
 class TidalCLI:
     """Command-line interface handler."""
 
-    VERSION = "2025.10.1"
+    VERSION = "2025.10.2"
 
     def __init__(
         self,
@@ -103,13 +103,6 @@ class TidalCLI:
             "--json",
             action="store_true",
             help="Output item metadata as JSON (requires --link)",
-        )
-
-        parser.add_argument(
-            "-n",
-            "--non-interactive",
-            action="store_true",
-            help="Non-interactive mode with JSON output (requires --json and --link)",
         )
 
         return parser

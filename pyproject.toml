@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tidal-dl"
-version = "2025.10.1"
+version = "2025.10.2"
 description = "Download music and videos from Tidal (Refactored)"
 authors = [
     "Yaronzz <yaronhuang@foxmail.com>",

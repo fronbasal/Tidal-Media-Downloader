@@ -21,7 +21,7 @@ from tidal_dl.model import *
 from tidal_dl.paths import *
 from tidal_dl.settings import *
 
-VERSION = "2025.10.1"
+VERSION = "2025.10.2"
 __LOGO__ = rf"""
 ::::::::::: ::::::::::: :::::::::      :::     :::                     :::::::::  :::        
     :+:         :+:     :+:    :+:   :+: :+:   :+:                     :+:    :+: :+:        
@@ -90,10 +90,6 @@ class Printf(object):
                 [
                     "-j or --json",
                     "output item json (needs -l)",
-                ],
-                [
-                    "-n or --non-interactive",
-                    "non-interactive download with json output (needs -j, -l)",
                 ],
                 [
                     "-q or --quality",
