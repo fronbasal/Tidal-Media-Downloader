@@ -23,6 +23,11 @@ def __extension__(filepath: str):
     return str.lower(ret)
 
 
+def __should_debug__(verbose=False):
+    """Check if debug messages should be shown based on verbose parameter."""
+    return verbose
+
+
 def __content__(filepath: str):
     if filepath is None:
         return None
@@ -56,7 +61,8 @@ def __tryList__(obj):
 
 
 class TagTool(object):
-    def __init__(self, filePath):
+    def __init__(self, filePath, verbose=False):
+        self._verbose = verbose
         if os.path.isfile(filePath) is False:
             return
 
@@ -66,7 +72,8 @@ class TagTool(object):
         try:
             self._handle = File(filePath)
         except Exception as e:
-            print(f"[DEBUG] TagTool: File() threw exception: {e}")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] TagTool: File() threw exception: {e}")
             self._handle = None
         
         # Special handling for .flac files that might be MP4 containers
@@ -79,7 +86,8 @@ class TagTool(object):
                 if self._handle is not None:
                     self._ext = 'm4a'  # Use MP4 tagging for this file
             except Exception as e:
-                print(f"[DEBUG] TagTool: MP4 attempt failed with exception: {e}")
+                if __should_debug__(self._verbose):
+                    print(f"[DEBUG] TagTool: MP4 attempt failed with exception: {e}")
                 # If MP4 also fails, leave as None
                 pass
 
@@ -87,7 +95,8 @@ class TagTool(object):
         if self._handle is not None:
             # Determine actual file type from mutagen's detection
             file_type = type(self._handle).__name__.lower()
-            print(f"[DEBUG] TagTool: Final file type: {file_type}, using extension: {self._ext}")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] TagTool: Final file type: {file_type}, using extension: {self._ext}")
             if 'mp4' in file_type or 'm4a' in file_type:
                 self._ext = 'm4a'  # Treat all MP4 containers as M4A for tagging
             elif 'flac' in file_type:
@@ -113,21 +122,27 @@ class TagTool(object):
         self.__load__()
 
     def save(self, coverPath: str = None):
-        print(f"[DEBUG] TagTool.save(): ext={self._ext}, coverPath={coverPath}")
+        if __should_debug__(self._verbose):
+            print(f"[DEBUG] TagTool.save(): ext={self._ext}, coverPath={coverPath}")
         try:
             if 'mp3' in self._ext:
-                print(f"[DEBUG] TagTool.save(): Using MP3 tagging")
+                if __should_debug__(self._verbose):
+                    print(f"[DEBUG] TagTool.save(): Using MP3 tagging")
                 return self.__saveMp3__(coverPath)
             if 'flac' in self._ext:
-                print(f"[DEBUG] TagTool.save(): Using FLAC tagging")
+                if __should_debug__(self._verbose):
+                    print(f"[DEBUG] TagTool.save(): Using FLAC tagging")
                 return self.__saveFlac__(coverPath)
             if 'mp4' in self._ext or 'm4a' in self._ext:
-                print(f"[DEBUG] TagTool.save(): Using MP4 tagging")
+                if __should_debug__(self._verbose):
+                    print(f"[DEBUG] TagTool.save(): Using MP4 tagging")
                 return self.__saveMp4__(coverPath)
-            print(f"[DEBUG] TagTool.save(): No matching format for ext={self._ext}")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] TagTool.save(): No matching format for ext={self._ext}")
             return False
         except Exception as e:
-            print(f"[DEBUG] TagTool.save(): Exception occurred: {e}")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] TagTool.save(): Exception occurred: {e}")
             return False, str(e)
 
     def addPic(self, converPath: str = None):
@@ -263,16 +278,20 @@ class TagTool(object):
         return ''
 
     def __savePic__(self, coverPath):
-        print(f"[DEBUG] __savePic__: coverPath={coverPath}, ext={self._ext}")
+        if __should_debug__(self._verbose):
+            print(f"[DEBUG] __savePic__: coverPath={coverPath}, ext={self._ext}")
         data = __content__(coverPath)
         if data is None:
-            print(f"[DEBUG] __savePic__: No cover data retrieved")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] __savePic__: No cover data retrieved")
             return
         else:
-            print(f"[DEBUG] __savePic__: Retrieved cover data, size={len(data)} bytes")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] __savePic__: Retrieved cover data, size={len(data)} bytes")
 
         if 'flac' in self._ext:
-            print(f"[DEBUG] __savePic__: Adding FLAC picture")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] __savePic__: Adding FLAC picture")
             pic = flac.Picture()
             pic.data = data
             if '.jpg' in coverPath:
@@ -281,11 +300,14 @@ class TagTool(object):
             self._handle.add_picture(pic)
 
         if 'mp3' in self._ext:
-            print(f"[DEBUG] __savePic__: Adding MP3 APIC")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] __savePic__: Adding MP3 APIC")
             self._handle.tags.add(APIC(encoding=3, data=data))
 
         if 'mp4' in self._ext or 'm4a' in self._ext:
-            print(f"[DEBUG] __savePic__: Adding MP4 cover")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] __savePic__: Adding MP4 cover")
             pic = mp4.MP4Cover(data)
             self._handle.tags['covr'] = [pic]
-            print(f"[DEBUG] __savePic__: MP4 cover added successfully")
+            if __should_debug__(self._verbose):
+                print(f"[DEBUG] __savePic__: MP4 cover added successfully")

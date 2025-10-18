@@ -30,6 +30,7 @@ class Settings(tidal_dl.aigpy.model.ModelBase):
     multiThread = False
     downloadDelay = True
     convertFlac = True  # Auto-convert FLAC-in-MP4 to proper FLAC (Max quality only)
+    verbose = False  # Enable debug/verbose logging
 
     downloadPath = "./download/"
     audioQuality = AudioQuality.Normal

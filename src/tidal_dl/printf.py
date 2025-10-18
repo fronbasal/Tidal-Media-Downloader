@@ -72,8 +72,12 @@ class Printf(object):
                     "show help-message",
                 ],
                 [
-                    "-v or --version",
+                    "-V or --version",
                     "show version",
+                ],
+                [
+                    "-v or --verbose",
+                    "enable debug output",
                 ],
                 [
                     "-g or --gui",

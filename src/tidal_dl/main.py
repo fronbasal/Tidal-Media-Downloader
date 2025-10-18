@@ -8,7 +8,7 @@ import sys
 import tidal_dl.aigpy
 from tidal_dl import apiKey
 from tidal_dl.config import ConfigManager
-from tidal_dl.logger import error, success, info, debug, logo
+from tidal_dl.logger import error, success, info, debug, logo, configure_logging
 from tidal_dl.events import (
     changeApiKey,
     changePathSettings,
@@ -50,6 +50,7 @@ def sync_legacy_to_modern_config(config_manager):
     config_manager.settings.language = SETTINGS.language
     config_manager.settings.api_key_index = SETTINGS.apiKeyIndex
     config_manager.settings.convert_flac = SETTINGS.convertFlac
+    config_manager.settings.verbose = SETTINGS.verbose
     config_manager.save_settings()
 
 
@@ -72,6 +73,7 @@ def sync_modern_to_legacy_config(config_manager):
     SETTINGS.language = config_manager.settings.language
     SETTINGS.apiKeyIndex = config_manager.settings.api_key_index
     SETTINGS.convertFlac = config_manager.settings.convert_flac
+    SETTINGS.verbose = config_manager.settings.verbose
     SETTINGS.save()
 
 
@@ -94,10 +96,17 @@ def mainCommand():
     )
 
     parser.add_argument(
-        "-v",
+        "-V",
         "--version",
         action="version",
         version="tidal-dl 2025.10.3",
+    )
+
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable verbose/debug output",
     )
 
     parser.add_argument(
@@ -169,6 +178,15 @@ def mainCommand():
     except SystemExit:
         # argparse handles help/version and exits gracefully
         return
+
+    # Configure logging level based on verbose flag
+    configure_logging(verbose=args.verbose)
+    
+    # Update verbose setting in both config systems based on command line arg
+    config_manager.settings.verbose = args.verbose
+    SETTINGS.verbose = args.verbose
+    if args.verbose:
+        config_manager.save_settings()
 
     # Handle special cases
     if args.gui:
@@ -243,6 +261,10 @@ def main():
     """Main entry point - maintains interactive mode from original."""
     SETTINGS.read(getProfilePath())
     TOKEN.read(getTokenPath())
+    
+    # Configure logging based on stored verbose setting
+    configure_logging(verbose=getattr(SETTINGS, 'verbose', False))
+    
     TIDAL_API.apiKey = apiKey.getItem(
         SETTINGS.apiKeyIndex
     )

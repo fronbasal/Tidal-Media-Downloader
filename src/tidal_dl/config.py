@@ -86,6 +86,7 @@ class Settings:
     # Interface settings
     language: int = 0
     api_key_index: int = 0
+    verbose: bool = False  # Enable debug/verbose logging
 
     # Path formats
     path_formats: PathFormats = field(

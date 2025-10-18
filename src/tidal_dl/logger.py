@@ -47,12 +47,16 @@ class ColoredFormatter(logging.Formatter):
 _logger: Optional[logging.Logger] = None
 
 
-def setup_logger(name: str = "tidal-dl", level: int = logging.INFO) -> logging.Logger:
+def setup_logger(name: str = "tidal-dl", level: int = logging.INFO, verbose: bool = False) -> logging.Logger:
     """Set up the global logger with colored console output."""
     global _logger
     
     if _logger is not None:
         return _logger
+    
+    # Set level based on verbose flag
+    if verbose:
+        level = logging.DEBUG
     
     _logger = logging.getLogger(name)
     _logger.setLevel(level)
@@ -83,6 +87,14 @@ def get_logger() -> logging.Logger:
     if _logger is None:
         _logger = setup_logger()
     return _logger
+
+
+def configure_logging(verbose: bool = False) -> None:
+    """Configure logging level based on verbose flag."""
+    global _logger
+    # Force re-initialization of logger
+    _logger = None
+    setup_logger(verbose=verbose)
 
 
 # Convenience functions that match Printf interface

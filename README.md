@@ -5,13 +5,14 @@
 ## Command-Line Options
 
 ```
-usage: tidal-dl [-h] [-v] [-g] [-l URL] [-o PATH] [-q {Normal,High,HiFi,Master,Max}] [-r {P240,P360,P480,P720,P1080}] [-j] [--no-flac-conversion]
+usage: tidal-dl [-h] [-V] [-v] [-g] [-l URL] [-o PATH] [-q {Normal,High,HiFi,Master,Max}] [-r {P240,P360,P480,P720,P1080}] [-j] [--no-flac-conversion]
 
 Download music and videos from Tidal
 
 options:
   -h, --help            show this help message and exit
-  -v, --version         show program's version number and exit
+  -V, --version         show program's version number and exit
+  -v, --verbose         enable verbose/debug output
   -g, --gui             Launch graphical user interface
   -l, --link URL        Tidal URL, ID, or file path to download
   -o, --output PATH     Download destination path

@@ -13,6 +13,7 @@ from tidal_dl.enums import (
     AudioQuality,
     VideoQuality,
 )
+from tidal_dl.logger import configure_logging
 
 
 class TidalCLI:
@@ -41,10 +42,17 @@ class TidalCLI:
         )
 
         parser.add_argument(
-            "-v",
+            "-V",
             "--version",
             action="version",
             version=f"%(prog)s {self.VERSION}",
+        )
+
+        parser.add_argument(
+            "-v",
+            "--verbose",
+            action="store_true",
+            help="Enable verbose/debug output",
         )
 
         parser.add_argument(
@@ -134,6 +142,13 @@ class TidalCLI:
         self, args: argparse.Namespace
     ):
         """Apply parsed arguments to configuration."""
+        # Configure logging level first
+        if hasattr(args, 'verbose'):
+            configure_logging(verbose=args.verbose)
+            if args.verbose:
+                self.config.settings.verbose = True
+                self.config.save_settings()
+            
         if args.output:
             self.config.settings.download_path = (
                 args.output
