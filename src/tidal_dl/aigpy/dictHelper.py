@@ -6,7 +6,7 @@
 @Author  :   Yaronzz
 @Version :   2.0
 @Contact :   yaronhuang@foxmail.com
-@Desc    :  
+@Desc    :
 """
 
 
@@ -29,7 +29,9 @@ class DictTool(dict):
     def __contains__(self, k):
         if isinstance(k, str):
             kn = k.lower()
-            if not self.kp.__contains__(kn):
+            if not self.kp.__contains__(
+                kn
+            ):
                 return False
             k = kn
         return super().__contains__(k)

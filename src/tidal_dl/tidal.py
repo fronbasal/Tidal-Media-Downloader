@@ -16,7 +16,9 @@ from xml.etree import ElementTree
 
 import requests
 from urllib3 import disable_warnings
-from urllib3.exceptions import InsecureRequestWarning
+from urllib3.exceptions import (
+    InsecureRequestWarning,
+)
 
 disable_warnings(InsecureRequestWarning)
 requests.DEFAULT_RETRIES = 5
@@ -33,11 +35,26 @@ class TidalAPI(object):
             "clientSecret": "vRAdA108tlvkJpTsGZS8rGZ7xTlbJ0qaZ2K9saEzsgY=",
         }
 
+    def _get_proxies(self):
+        """Build proxies dict from settings for use with requests library."""
+        proxies = {}
+        if SETTINGS.httpProxy:
+            proxies["http"] = (
+                SETTINGS.httpProxy
+            )
+        if SETTINGS.httpsProxy:
+            proxies["https"] = (
+                SETTINGS.httpsProxy
+            )
+        return (
+            proxies if proxies else None
+        )
+
     def __get__(
-            self,
-            path,
-            params={},
-            urlpre="https://api.tidalhifi.com/v1/",
+        self,
+        path,
+        params={},
+        urlpre="https://api.tidalhifi.com/v1/",
     ):
         header = {}
         header = {
@@ -53,21 +70,22 @@ class TidalAPI(object):
                     urlpre + path,
                     headers=header,
                     params=params,
+                    proxies=self._get_proxies(),
                 )
                 if (
-                        respond.url.find(
-                            "playbackinfopostpaywall"
-                        )
-                        != -1
-                        and SETTINGS.downloadDelay
-                        is not False
+                    respond.url.find(
+                        "playbackinfopostpaywall"
+                    )
+                    != -1
+                    and SETTINGS.downloadDelay
+                    is not False
                 ):
                     # random sleep between 0.5 and 5 seconds and print it
                     sleep_time = (
-                            random.randint(
-                                500, 5000
-                            )
-                            / 1000
+                        random.randint(
+                            500, 5000
+                        )
+                        / 1000
                     )
                     print(
                         f"Sleeping for {sleep_time} seconds, to mimic human behaviour and prevent too many requests error"
@@ -77,15 +95,15 @@ class TidalAPI(object):
                     )
 
                 if (
-                        respond.status_code
-                        == 429
+                    respond.status_code
+                    == 429
                 ):
                     print(
                         "Too many requests, waiting for 20 seconds..."
                     )
                     # Loop countdown 20 seconds and print the remaining time
                     for i in range(
-                            20, 0, -1
+                        20, 0, -1
                     ):
                         time.sleep(1)
                         print(
@@ -98,18 +116,18 @@ class TidalAPI(object):
                     respond.text
                 )
                 if (
-                        "status"
-                        not in result
+                    "status"
+                    not in result
                 ):
                     return result
 
                 if (
-                        "userMessage"
-                        in result
-                        and result[
                     "userMessage"
-                ]
-                        is not None
+                    in result
+                    and result[
+                        "userMessage"
+                    ]
+                    is not None
                 ):
                     errmsg += result[
                         "userMessage"
@@ -124,7 +142,7 @@ class TidalAPI(object):
         raise Exception(errmsg)
 
     def __getItems__(
-            self, path, params={}
+        self, path, params={}
     ):
         params["limit"] = 50
         params["offset"] = 0
@@ -135,15 +153,15 @@ class TidalAPI(object):
                 path, params
             )
             if (
-                    "totalNumberOfItems"
-                    in data
+                "totalNumberOfItems"
+                in data
             ):
                 total = data[
                     "totalNumberOfItems"
                 ]
             if (
-                    total > 0
-                    and total <= len(ret)
+                total > 0
+                and total <= len(ret)
             ):
                 return ret
 
@@ -155,46 +173,43 @@ class TidalAPI(object):
         return ret
 
     def __getResolutionList__(
-            self, url
+        self, url
     ):
         ret = []
         txt = requests.get(
-            url
+            url,
+            proxies=self._get_proxies(),
         ).content.decode("utf-8")
         # array = txt.split("#EXT-X-STREAM-INF")
         array = txt.split("#")
         for item in array:
             if (
-                    "RESOLUTION="
-                    not in item
+                "RESOLUTION="
+                not in item
             ):
                 continue
             if (
-                    "EXT-X-STREAM-INF:"
-                    not in item
+                "EXT-X-STREAM-INF:"
+                not in item
             ):
                 continue
             stream = VideoStreamUrl()
-            stream.codec = (
-                tidal_dl.aigpy.string.getSub(
-                    item,
-                    'CODECS="',
-                    '"',
-                )
+            stream.codec = tidal_dl.aigpy.string.getSub(
+                item,
+                'CODECS="',
+                '"',
             )
             stream.m3u8Url = (
-                    "http"
-                    + tidal_dl.aigpy.string.getSubOnlyStart(
-                item, "http"
-            ).strip()
-            )
-            stream.resolution = (
-                tidal_dl.aigpy.string.getSub(
-                    item,
-                    "RESOLUTION=",
-                    "http",
+                "http"
+                + tidal_dl.aigpy.string.getSubOnlyStart(
+                    item, "http"
                 ).strip()
             )
+            stream.resolution = tidal_dl.aigpy.string.getSub(
+                item,
+                "RESOLUTION=",
+                "http",
+            ).strip()
             stream.resolution = (
                 stream.resolution.split(
                     ","
@@ -209,11 +224,11 @@ class TidalAPI(object):
         return ret
 
     def __post__(
-            self,
-            path,
-            data,
-            auth=None,
-            urlpre="https://auth.tidal.com/v1/oauth2",
+        self,
+        path,
+        data,
+        auth=None,
+        urlpre="https://auth.tidal.com/v1/oauth2",
     ):
         for index in range(3):
             try:
@@ -222,6 +237,7 @@ class TidalAPI(object):
                     data=data,
                     auth=auth,
                     verify=False,
+                    proxies=self._get_proxies(),
                 ).json()
                 return result
             except Exception as e:
@@ -240,8 +256,8 @@ class TidalAPI(object):
             data,
         )
         if (
-                "status" in result
-                and result["status"] != 200
+            "status" in result
+            and result["status"] != 200
         ):
             raise Exception(
                 "Device authorization failed. Please choose another apikey."
@@ -263,10 +279,10 @@ class TidalAPI(object):
             result["interval"]
         )
         return (
-                "http://"
-                + self.key.verificationUrl
-                + "/"
-                + self.key.userCode
+            "http://"
+            + self.key.verificationUrl
+            + "/"
+            + self.key.userCode
         )
 
     def checkAuthStatus(self) -> bool:
@@ -286,13 +302,13 @@ class TidalAPI(object):
             "/token", data, auth
         )
         if (
-                "status" in result
-                and result["status"] != 200
+            "status" in result
+            and result["status"] != 200
         ):
             if (
-                    result["status"] == 400
-                    and result["sub_status"]
-                    == 1002
+                result["status"] == 400
+                and result["sub_status"]
+                == 1002
             ):
                 return False
             else:
@@ -319,7 +335,7 @@ class TidalAPI(object):
         return True
 
     def verifyAccessToken(
-            self, accessToken
+        self, accessToken
     ) -> bool:
         header = {
             "authorization": "Bearer {}".format(
@@ -329,17 +345,18 @@ class TidalAPI(object):
         result = requests.get(
             "https://api.tidal.com/v1/sessions",
             headers=header,
+            proxies=self._get_proxies(),
         ).json()
 
         if (
-                "status" in result
-                and result["status"] != 200
+            "status" in result
+            and result["status"] != 200
         ):
             return False
         return True
 
     def refreshAccessToken(
-            self, refreshToken
+        self, refreshToken
     ) -> bool:
         data = {
             "client_id": self.apiKey[
@@ -357,8 +374,8 @@ class TidalAPI(object):
             "/token", data, auth
         )
         if (
-                "status" in result
-                and result["status"] != 200
+            "status" in result
+            and result["status"] != 200
         ):
             return False
 
@@ -378,7 +395,7 @@ class TidalAPI(object):
         return True
 
     def loginByAccessToken(
-            self, accessToken, userid=None
+        self, accessToken, userid=None
     ):
         header = {
             "authorization": "Bearer {}".format(
@@ -388,20 +405,21 @@ class TidalAPI(object):
         result = requests.get(
             "https://api.tidal.com/v1/sessions",
             headers=header,
+            proxies=self._get_proxies(),
         ).json()
         if (
-                "status" in result
-                and result["status"] != 200
+            "status" in result
+            and result["status"] != 200
         ):
             raise Exception(
                 "Login failed!"
             )
 
         if not tidal_dl.aigpy.string.isNull(
-                userid
+            userid
         ):
             if str(
-                    result["userId"]
+                result["userId"]
             ) != str(userid):
                 raise Exception(
                     "User mismatch! Please use your own accesstoken.",
@@ -428,7 +446,7 @@ class TidalAPI(object):
         )
 
     def getPlaylist(
-            self, id
+        self, id
     ) -> Playlist:
         return tidal_dl.aigpy.model.dictToModel(
             self.__get__(
@@ -438,7 +456,7 @@ class TidalAPI(object):
         )
 
     def getPlaylistSelf(
-            self,
+        self,
     ) -> List[Playlist]:
         ret = self.__get__(
             f"users/{self.key.userId}/playlists"
@@ -485,7 +503,7 @@ class TidalAPI(object):
         return None, mix
 
     def getTypeData(
-            self, id, type: Type
+        self, id, type: Type
     ):
         if type == Type.Album:
             return self.getAlbum(id)
@@ -502,14 +520,14 @@ class TidalAPI(object):
         return None
 
     def search(
-            self,
-            text: str,
-            type: Type,
-            offset: int = 0,
-            limit: int = 10,
+        self,
+        text: str,
+        type: Type,
+        offset: int = 0,
+        limit: int = 10,
     ) -> SearchResult:
         typeStr = (
-                type.name.upper() + "S"
+            type.name.upper() + "S"
         )
 
         if type == Type.Null:
@@ -529,9 +547,9 @@ class TidalAPI(object):
         )
 
     def getSearchResultItems(
-            self,
-            result: SearchResult,
-            type: Type,
+        self,
+        result: SearchResult,
+        type: Type,
     ):
         if type == Type.Track:
             return result.tracks.items
@@ -584,10 +602,10 @@ class TidalAPI(object):
         videos = []
         for item in data:
             if (
-                    item["type"] == "track"
-                    and item["item"][
-                "streamReady"
-            ]
+                item["type"] == "track"
+                and item["item"][
+                    "streamReady"
+                ]
             ):
                 tracks.append(
                     tidal_dl.aigpy.model.dictToModel(
@@ -605,7 +623,7 @@ class TidalAPI(object):
         return tracks, videos
 
     def getArtistAlbums(
-            self, id, includeEP=False
+        self, id, includeEP=False
     ):
         data = self.__getItems__(
             f"artists/{str(id)}/albums"
@@ -633,7 +651,7 @@ class TidalAPI(object):
 
     # from https://github.com/Dniel97/orpheusdl-tidal/blob/master/interface.py#L582
     def parse_mpd(
-            self, xml: bytes
+        self, xml: bytes
     ) -> list:
         # Removes default namespace definition, don't do that!
         xml = re.sub(
@@ -650,15 +668,15 @@ class TidalAPI(object):
         tracks = []
 
         for period in root.findall(
-                "Period"
+            "Period"
         ):
             for (
-                    adaptation_set
+                adaptation_set
             ) in period.findall(
                 "AdaptationSet"
             ):
                 for (
-                        rep
+                    rep
                 ) in adaptation_set.findall(
                     "Representation"
                 ):
@@ -667,8 +685,8 @@ class TidalAPI(object):
                         "contentType"
                     )
                     if (
-                            content_type
-                            != "audio"
+                        content_type
+                        != "audio"
                     ):
                         raise ValueError(
                             "Only supports audio MPDs!"
@@ -679,7 +697,7 @@ class TidalAPI(object):
                         "codecs"
                     ).upper()
                     if codec.startswith(
-                            "MP4A"
+                        "MP4A"
                     ):
                         codec = "AAC"
 
@@ -706,8 +724,8 @@ class TidalAPI(object):
                         "SegmentTimeline"
                     )
                     if (
-                            seg_timeline
-                            is not None
+                        seg_timeline
+                        is not None
                     ):
                         seg_time_list = (
                             []
@@ -715,13 +733,13 @@ class TidalAPI(object):
                         cur_time = 0
 
                         for (
-                                s
+                            s
                         ) in seg_timeline.findall(
                             "S"
                         ):
                             # Media segments start time
                             if s.get(
-                                    "t"
+                                "t"
                             ):
                                 cur_time = int(
                                     s.get(
@@ -731,16 +749,16 @@ class TidalAPI(object):
 
                             # Segment reference
                             for (
-                                    i
+                                i
                             ) in range(
                                 (
-                                        int(
-                                            s.get(
-                                                "r"
-                                            )
-                                            or 0
+                                    int(
+                                        s.get(
+                                            "r"
                                         )
-                                        + 1
+                                        or 0
+                                    )
+                                    + 1
                                 )
                             ):
                                 seg_time_list.append(
@@ -780,24 +798,24 @@ class TidalAPI(object):
         return tracks
 
     def getStreamUrl(
-            self, id, quality: AudioQuality
+        self, id, quality: AudioQuality
     ):
         squality = "HI_RES"
         if (
-                quality
-                == AudioQuality.Normal
+            quality
+            == AudioQuality.Normal
         ):
             squality = "LOW"
         elif (
-                quality == AudioQuality.High
+            quality == AudioQuality.High
         ):
             squality = "HIGH"
         elif (
-                quality == AudioQuality.HiFi
+            quality == AudioQuality.HiFi
         ):
             squality = "LOSSLESS"
         elif (
-                quality == AudioQuality.Max
+            quality == AudioQuality.Max
         ):
             squality = "HI_RES_LOSSLESS"
 
@@ -815,8 +833,8 @@ class TidalAPI(object):
         )
 
         if (
-                "vnd.tidal.bt"
-                in resp.manifestMimeType
+            "vnd.tidal.bt"
+            in resp.manifestMimeType
         ):
             manifest = json.loads(
                 base64.b64decode(
@@ -842,8 +860,8 @@ class TidalAPI(object):
             ret.urls = [ret.url]
             return ret
         elif (
-                "dash+xml"
-                in resp.manifestMimeType
+            "dash+xml"
+            in resp.manifestMimeType
         ):
             xmldata = base64.b64decode(
                 resp.manifest
@@ -853,12 +871,10 @@ class TidalAPI(object):
             ret.soundQuality = (
                 resp.audioQuality
             )
-            ret.codec = (
-                tidal_dl.aigpy.string.getSub(
-                    xmldata,
-                    'codecs="',
-                    '"',
-                )
+            ret.codec = tidal_dl.aigpy.string.getSub(
+                xmldata,
+                'codecs="',
+                '"',
             )
             ret.encryptionKey = ""  # manifest['keyId'] if 'keyId' in manifest else ""
             ret.urls = self.parse_mpd(
@@ -874,7 +890,7 @@ class TidalAPI(object):
         )
 
     def getVideoStreamUrl(
-            self, id, quality: VideoQuality
+        self, id, quality: VideoQuality
     ):
         paras = {
             "videoquality": "HIGH",
@@ -890,8 +906,8 @@ class TidalAPI(object):
         )
 
         if (
-                "vnd.tidal.emu"
-                in resp.manifestMimeType
+            "vnd.tidal.emu"
+            in resp.manifestMimeType
         ):
             manifest = json.loads(
                 base64.b64decode(
@@ -905,7 +921,7 @@ class TidalAPI(object):
             index = 0
             for item in array:
                 if icmp <= int(
-                        item.resolutions[1]
+                    item.resolutions[1]
                 ):
                     break
                 index += 1
@@ -923,33 +939,34 @@ class TidalAPI(object):
         )
 
     def getCoverUrl(
-            self,
-            sid,
-            width="320",
-            height="320",
+        self,
+        sid,
+        width="320",
+        height="320",
     ):
         if sid is None:
             return ""
         return f"https://resources.tidal.com/images/{sid.replace('-', '/')}/{width}x{height}.jpg"
 
     def getCoverData(
-            self,
-            sid,
-            width="320",
-            height="320",
+        self,
+        sid,
+        width="320",
+        height="320",
     ):
         url = self.getCoverUrl(
             sid, width, height
         )
         try:
             return requests.get(
-                url
+                url,
+                proxies=self._get_proxies(),
             ).content
         except:
             return ""
 
     def getArtistsName(
-            self, artists=[]
+        self, artists=[]
     ):
         array = list(
             item.name
@@ -958,28 +975,28 @@ class TidalAPI(object):
         return ", ".join(array)
 
     def getFlag(
-            self,
-            data,
-            type: Type,
-            short=True,
-            separator=" / ",
+        self,
+        data,
+        type: Type,
+        short=True,
+        separator=" / ",
     ):
         master = False
         atmos = False
         explicit = False
         if (
-                type == Type.Album
-                or type == Type.Track
+            type == Type.Album
+            or type == Type.Track
         ):
             if (
-                    data.audioQuality
-                    == "HI_RES"
+                data.audioQuality
+                == "HI_RES"
             ):
                 master = True
             if (
-                    type == Type.Album
-                    and "DOLBY_ATMOS"
-                    in data.audioModes
+                type == Type.Album
+                and "DOLBY_ATMOS"
+                in data.audioModes
             ):
                 atmos = True
             if data.explicit is True:
@@ -988,9 +1005,9 @@ class TidalAPI(object):
             if data.explicit is True:
                 explicit = True
         if (
-                not master
-                and not atmos
-                and not explicit
+            not master
+            and not atmos
+            and not explicit
         ):
             return ""
         array = []
@@ -1020,7 +1037,7 @@ class TidalAPI(object):
 
         url = url.lower()
         for index, item in enumerate(
-                Type
+            Type
         ):
             if item.name.lower() in url:
                 etype = item
@@ -1036,7 +1053,9 @@ class TidalAPI(object):
         return Type.Null, url
 
     def getByString(self, string):
-        if tidal_dl.aigpy.string.isNull(string):
+        if tidal_dl.aigpy.string.isNull(
+            string
+        ):
             raise Exception(
                 "Please enter something."
             )
@@ -1046,11 +1065,11 @@ class TidalAPI(object):
             string
         )
         for index, item in enumerate(
-                Type
+            Type
         ):
             if (
-                    etype != Type.Null
-                    and etype != item
+                etype != Type.Null
+                and etype != item
             ):
                 continue
             if item == Type.Null:

@@ -13,13 +13,15 @@ from tidal_dl.enums import (
     AudioQuality,
     VideoQuality,
 )
-from tidal_dl.logger import configure_logging
+from tidal_dl.logger import (
+    configure_logging,
+)
 
 
 class TidalCLI:
     """Command-line interface handler."""
 
-    VERSION = "2025.10.1"
+    VERSION = "2025.12"
 
     def __init__(
         self,
@@ -121,7 +123,7 @@ class TidalCLI:
 
         parser.add_argument(
             "--no-flac-conversion",
-            action="store_true", 
+            action="store_true",
             help="Disable automatic FLAC conversion for Max quality downloads",
         )
 
@@ -143,12 +145,16 @@ class TidalCLI:
     ):
         """Apply parsed arguments to configuration."""
         # Configure logging level first
-        if hasattr(args, 'verbose'):
-            configure_logging(verbose=args.verbose)
+        if hasattr(args, "verbose"):
+            configure_logging(
+                verbose=args.verbose
+            )
             if args.verbose:
-                self.config.settings.verbose = True
+                self.config.settings.verbose = (
+                    True
+                )
                 self.config.save_settings()
-            
+
         if args.output:
             self.config.settings.download_path = (
                 args.output

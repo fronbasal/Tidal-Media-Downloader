@@ -4,17 +4,21 @@
 """
 @File    :   ffmpegHelper.py
 @Time    :   2018/12/17
-@Author  :   Yaron Huang 
+@Author  :   Yaron Huang
 @Version :   1.0
 @Contact :   yaronhuang@qq.com
-@Desc    :  
+@Desc    :
 """
 import asyncio
 import subprocess
 import sys
 
 
-def convert(srcPath, descPath, bitrate: int = 1600):
+def convert(
+    srcPath,
+    descPath,
+    bitrate: int = 1600,
+):
     command = (
         'ffmpeg -v quiet -y -i "%s" -acodec libmp3lame -abr true '
         f"-b:a {bitrate} "
@@ -28,8 +32,12 @@ def convert(srcPath, descPath, bitrate: int = 1600):
         )
     else:
         formattedCommand = command % (
-            str(srcPath).replace("$", r"\$"),
-            str(descPath).replace("$", r"\$"),
+            str(srcPath).replace(
+                "$", r"\$"
+            ),
+            str(descPath).replace(
+                "$", r"\$"
+            ),
         )
 
     process = subprocess.Popen(
@@ -41,7 +49,10 @@ def convert(srcPath, descPath, bitrate: int = 1600):
     _, proc_err = process.communicate()
 
     if process.returncode != 0:
-        message = "Convert failed." + proc_err.decode('utf-8')
+        message = (
+            "Convert failed."
+            + proc_err.decode("utf-8")
+        )
         return False, message
 
     return True, ""
@@ -50,15 +61,16 @@ def convert(srcPath, descPath, bitrate: int = 1600):
 def isEnable():
     try:
         process = subprocess.Popen(
-            ['ffmpeg', '-version'],
+            ["ffmpeg", "-version"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            encoding="utf-8"
+            encoding="utf-8",
         )
     except FileNotFoundError:
         return False
 
     return True
+
 
 # t = isEnable()
 # convert('e://test.webm', 'e://test.mp3', 159489)

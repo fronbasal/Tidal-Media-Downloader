@@ -3,10 +3,10 @@
 """
 @File    :   stringHelper.py
 @Time    :   2019/03/11
-@Author  :   Yaronzz 
+@Author  :   Yaronzz
 @Version :   2.0
 @Contact :   yaronhuang@foxmail.com
-@Desc    :  
+@Desc    :
 """
 
 
@@ -22,20 +22,30 @@ def isNotNull(word):
     return True
 
 
-def isChinese(word, checkPunctuation=False):
-    punctuationStr = '，。！？【】（）％＃＠＆１２３４５６７８９０：'
+def isChinese(
+    word, checkPunctuation=False
+):
+    punctuationStr = "，。！？【】（）％＃＠＆１２３４５６７８９０："
     for ch in word:
-        if '\u4e00' <= ch <= '\u9fff':
+        if "\u4e00" <= ch <= "\u9fff":
             return True
-        if checkPunctuation and punctuationStr.find(ch) != -1:
+        if (
+            checkPunctuation
+            and punctuationStr.find(ch)
+            != -1
+        ):
             return True
     return False
 
 
 def convertPunctuationToEnglish(word):
-    table = {ord(f): ord(t) for f, t in zip(
-        u'，。！？【】（）％＃＠＆１２３４５６７８９０：',
-        u',.!?[]()%#@&1234567890:')}
+    table = {
+        ord(f): ord(t)
+        for f, t in zip(
+            "，。！？【】（）％＃＠＆１２３４５６７８９０：",
+            ",.!?[]()%#@&1234567890:",
+        )
+    }
     ret = word.translate(table)
     return ret
 
@@ -64,7 +74,7 @@ def getSubOnlyStart(string, start):
     if start not in string:
         return ""
     index = string.index(start)
-    return string[index + len(start):]
+    return string[index + len(start) :]
 
 
 def getSubOnlyEnd(string, end):
@@ -74,15 +84,23 @@ def getSubOnlyEnd(string, end):
     return string[0:index]
 
 
-def getSub(string, start=None, end=None):
+def getSub(
+    string, start=None, end=None
+):
     if start is None and end is None:
         return string
     if end is None:
-        return getSubOnlyStart(string, start)
+        return getSubOnlyStart(
+            string, start
+        )
     if start is None:
-        return getSubOnlyEnd(string, end)
+        return getSubOnlyEnd(
+            string, end
+        )
 
-    string = getSubOnlyStart(string, start)
+    string = getSubOnlyStart(
+        string, start
+    )
     if string == "":
         return ""
 

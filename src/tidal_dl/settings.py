@@ -16,7 +16,9 @@ from tidal_dl.enums import *
 from tidal_dl.lang.language import *
 
 
-class Settings(tidal_dl.aigpy.model.ModelBase):
+class Settings(
+    tidal_dl.aigpy.model.ModelBase
+):
     checkExist = True
     includeEP = True
     saveCovers = True
@@ -31,6 +33,8 @@ class Settings(tidal_dl.aigpy.model.ModelBase):
     downloadDelay = True
     convertFlac = True  # Auto-convert FLAC-in-MP4 to proper FLAC (Max quality only)
     verbose = False  # Enable debug/verbose logging
+    httpProxy = None  # HTTP proxy URL
+    httpsProxy = None  # HTTPS proxy URL
 
     downloadPath = "./download/"
     audioQuality = AudioQuality.Normal

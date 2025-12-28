@@ -11,7 +11,9 @@
 import tidal_dl.aigpy
 
 
-class StreamUrl(tidal_dl.aigpy.model.ModelBase):
+class StreamUrl(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.trackid = None
@@ -33,7 +35,9 @@ class VideoStreamUrl(
         self.m3u8Url = None
 
 
-class Artist(tidal_dl.aigpy.model.ModelBase):
+class Artist(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.id = None
@@ -42,7 +46,9 @@ class Artist(tidal_dl.aigpy.model.ModelBase):
         self.picture = None
 
 
-class Album(tidal_dl.aigpy.model.ModelBase):
+class Album(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.id = None
@@ -62,7 +68,9 @@ class Album(tidal_dl.aigpy.model.ModelBase):
         self.artists = Artist()
 
 
-class Playlist(tidal_dl.aigpy.model.ModelBase):
+class Playlist(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.uuid = None
@@ -75,7 +83,9 @@ class Playlist(tidal_dl.aigpy.model.ModelBase):
         self.squareImage = None
 
 
-class Track(tidal_dl.aigpy.model.ModelBase):
+class Track(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.id = None
@@ -96,7 +106,9 @@ class Track(tidal_dl.aigpy.model.ModelBase):
         self.playlist = None
 
 
-class Video(tidal_dl.aigpy.model.ModelBase):
+class Video(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.id = None
@@ -115,7 +127,9 @@ class Video(tidal_dl.aigpy.model.ModelBase):
         self.playlist = None
 
 
-class Mix(tidal_dl.aigpy.model.ModelBase):
+class Mix(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.id = None
@@ -123,7 +137,9 @@ class Mix(tidal_dl.aigpy.model.ModelBase):
         self.videos = Video()
 
 
-class Lyrics(tidal_dl.aigpy.model.ModelBase):
+class Lyrics(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.trackId = None
@@ -190,7 +206,9 @@ class SearchResult(
         )
 
 
-class LoginKey(tidal_dl.aigpy.model.ModelBase):
+class LoginKey(
+    tidal_dl.aigpy.model.ModelBase
+):
     def __init__(self) -> None:
         super().__init__()
         self.deviceCode = None

@@ -107,8 +107,25 @@ def getVersion():
 
 # Load from gist
 try:
+    # Note: We can't use SETTINGS here as it creates a circular import
+    # Proxy support for this initial gist load can be added via environment variables
+    import os
+
+    proxies = {}
+    if os.environ.get("HTTP_PROXY"):
+        proxies["http"] = os.environ[
+            "HTTP_PROXY"
+        ]
+    if os.environ.get("HTTPS_PROXY"):
+        proxies["https"] = os.environ[
+            "HTTPS_PROXY"
+        ]
+
     respond = requests.get(
-        "https://api.github.com/gists/48d01f5a24b4b7b37f19443977c22cd6"
+        "https://api.github.com/gists/48d01f5a24b4b7b37f19443977c22cd6",
+        proxies=(
+            proxies if proxies else None
+        ),
     )
     if respond.status_code == 200:
         content = respond.json()[

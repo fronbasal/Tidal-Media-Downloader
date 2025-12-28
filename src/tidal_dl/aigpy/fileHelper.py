@@ -3,17 +3,20 @@
 """
 @File    :   fileHelper.py
 @Time    :   2019/03/11
-@Author  :   Yaronzz 
+@Author  :   Yaronzz
 @Version :   2.0
 @Contact :   yaronhuang@foxmail.com
-@Desc    :  
+@Desc    :
 """
 
 import hashlib
 import json
 import os
 
-from tidal_dl.aigpy.pathHelper import getDirName, mkdirs
+from tidal_dl.aigpy.pathHelper import (
+    getDirName,
+    mkdirs,
+)
 
 
 def getSize(path: str) -> int:
@@ -22,8 +25,11 @@ def getSize(path: str) -> int:
     return os.path.getsize(path)
 
 
-def getHash(path: str, blockSize: int = 2 * 1024 * 1024) -> str:
-    with open(path, 'rb') as f:
+def getHash(
+    path: str,
+    blockSize: int = 2 * 1024 * 1024,
+) -> str:
+    with open(path, "rb") as f:
         sha1 = hashlib.sha1()
         while True:
             data = f.read(blockSize)
@@ -35,7 +41,7 @@ def getHash(path: str, blockSize: int = 2 * 1024 * 1024) -> str:
 
 def getMD5(path: str):
     m = hashlib.md5()
-    with open(path, 'rb') as fp:
+    with open(path, "rb") as fp:
         while True:
             data = fp.read(4096)
             if not data:
@@ -45,50 +51,84 @@ def getMD5(path: str):
     return m.hexdigest()
 
 
-def getContent(path: str, isBin: bool = False, encoding: str = None):
+def getContent(
+    path: str,
+    isBin: bool = False,
+    encoding: str = None,
+):
     size = getSize(path)
     if size <= 0:
         return ""
 
-    mode = 'r' if not isBin else "rb"
-    with open(path, mode, encoding=encoding) as fd:
+    mode = "r" if not isBin else "rb"
+    with open(
+        path, mode, encoding=encoding
+    ) as fd:
         content = fd.read(size)
     return content
 
 
 def getJson(path, encoding: str = None):
     try:
-        with open(path, 'r', encoding=encoding) as f:
+        with open(
+            path, "r", encoding=encoding
+        ) as f:
             text = f.read()
             return json.loads(text)
     except:
         return {}
 
 
-def getLines(path: str, encoding: str = None) -> list:
-    content = getContent(path, False, encoding)
+def getLines(
+    path: str, encoding: str = None
+) -> list:
+    content = getContent(
+        path, False, encoding
+    )
     if content == "":
         return []
-    return content.split('\n')
+    return content.split("\n")
 
 
-def write(path: str, content, mode: str, encoding: str = None):
+def write(
+    path: str,
+    content,
+    mode: str,
+    encoding: str = None,
+):
     try:
-        with open(path, mode, encoding=encoding) as fd:
+        with open(
+            path,
+            mode,
+            encoding=encoding,
+        ) as fd:
             fd.write(content)
         return True
     except:
         return False
 
 
-def writeLines(path: str, lines: list, mode: str, encoding: str = None):
+def writeLines(
+    path: str,
+    lines: list,
+    mode: str,
+    encoding: str = None,
+):
     content = "\n".join(lines)
-    return write(path, content, mode, encoding)
+    return write(
+        path, content, mode, encoding
+    )
 
 
-def writeJson(path: str, data: dict, encoding: str = None):
+def writeJson(
+    path: str,
+    data: dict,
+    encoding: str = None,
+):
     try:
-        with open(path, 'w', encoding=encoding) as f:
+        with open(
+            path, "w", encoding=encoding
+        ) as f:
             f.write(json.dumps(data))
             f.flush()
         return True
@@ -96,7 +136,9 @@ def writeJson(path: str, data: dict, encoding: str = None):
         return False
 
 
-def createEmptyFile(filePath: str, size: int):
+def createEmptyFile(
+    filePath: str, size: int
+):
     try:
         # Create dir
         path = getDirName(filePath)

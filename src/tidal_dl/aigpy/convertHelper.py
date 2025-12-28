@@ -6,12 +6,17 @@
 @Author  :  Yaronzz
 @Version :  1.0
 @Contact :  yaronhuang@foxmail.com
-@Desc    :  
+@Desc    :
 """
-from tidal_dl.aigpy.memoryHelper import Unit, unitFix
+from tidal_dl.aigpy.memoryHelper import (
+    Unit,
+    unitFix,
+)
 
 
-def getMemoryUnitString(num: float, unit: Unit) -> str:
+def getMemoryUnitString(
+    num: float, unit: Unit
+) -> str:
     """Convert the unit to string, eg: num(2653)unit(MB) -> '2.59 GB'
 
     Args:
@@ -22,5 +27,9 @@ def getMemoryUnitString(num: float, unit: Unit) -> str:
         [string]: target string, keep two decimal places
     """
     value, newUnit = unitFix(num, unit)
-    string = str(round(value, 2)) + ' ' + newUnit.name
+    string = (
+        str(round(value, 2))
+        + " "
+        + newUnit.name
+    )
     return string

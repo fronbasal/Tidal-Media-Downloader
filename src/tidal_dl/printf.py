@@ -21,7 +21,7 @@ from tidal_dl.model import *
 from tidal_dl.paths import *
 from tidal_dl.settings import *
 
-VERSION = "2025.10.1"
+VERSION = "2025.12"
 __LOGO__ = rf"""
 ::::::::::: ::::::::::: :::::::::      :::     :::                     :::::::::  :::        
     :+:         :+:     :+:    :+:   :+: :+:   :+:                     :+:    :+: :+:        
@@ -51,7 +51,9 @@ class Printf(object):
     def __gettable__(columns, rows):
         tb = prettytable.PrettyTable()
         tb.field_names = list(
-            tidal_dl.aigpy.cmd.green(item)
+            tidal_dl.aigpy.cmd.green(
+                item
+            )
             for item in columns
         )
         tb.align = "l"
@@ -108,7 +110,7 @@ class Printf(object):
                     "convert FLAC-in-MP4 to proper FLAC with embedded cover (Max quality only)",
                 ],
                 [
-                    "--no-flac-conversion", 
+                    "--no-flac-conversion",
                     "disable automatic FLAC conversion for Max quality downloads",
                 ],
             ],
@@ -117,16 +119,12 @@ class Printf(object):
 
     @staticmethod
     def checkVersion():
-        onlineVer = (
-            tidal_dl.aigpy.pip.getLastVersion(
-                "tidal-dl"
-            )
+        onlineVer = tidal_dl.aigpy.pip.getLastVersion(
+            "tidal-dl"
         )
         if onlineVer is not None:
-            icmp = (
-                tidal_dl.aigpy.system.cmpVersion(
-                    onlineVer, VERSION
-                )
+            icmp = tidal_dl.aigpy.system.cmpVersion(
+                onlineVer, VERSION
             )
             if icmp > 0:
                 Printf.info(
@@ -235,6 +233,14 @@ class Printf(object):
                 [
                     LANG.select.SETTING_DOWNLOAD_DELAY,
                     data.downloadDelay,
+                ],
+                [
+                    "HTTP Proxy",
+                    data.httpProxy if data.httpProxy else "None",
+                ],
+                [
+                    "HTTPS Proxy",
+                    data.httpsProxy if data.httpsProxy else "None",
                 ],
             ],
         )
@@ -348,10 +354,10 @@ class Printf(object):
 
     @staticmethod
     def enterPath(
-            string,
-            errmsg,
-            retWord="0",
-            default="",
+        string,
+        errmsg,
+        retWord="0",
+        default="",
     ):
         while True:
             ret = tidal_dl.aigpy.cmd.inputPath(
@@ -376,7 +382,7 @@ class Printf(object):
 
     @staticmethod
     def enterLimit(
-            string, errmsg, limit=[]
+        string, errmsg, limit=[]
     ):
         while True:
             ret = tidal_dl.aigpy.cmd.inputLimit(
@@ -399,12 +405,14 @@ class Printf(object):
 
     @staticmethod
     def enterFormat(
-            string, current, default
+        string, current, default
     ):
         ret = Printf.enter(string)
         if (
-                ret == "0"
-                or tidal_dl.aigpy.string.isNull(ret)
+            ret == "0"
+            or tidal_dl.aigpy.string.isNull(
+                ret
+            )
         ):
             return current
         if ret.lower() == "default":
@@ -505,8 +513,8 @@ class Printf(object):
 
     @staticmethod
     def track(
-            data: Track,
-            stream: StreamUrl = None,
+        data: Track,
+        stream: StreamUrl = None,
     ):
         tb = Printf.__gettable__(
             [
@@ -568,8 +576,8 @@ class Printf(object):
 
     @staticmethod
     def video(
-            data: Video,
-            stream: VideoStreamUrl = None,
+        data: Video,
+        stream: VideoStreamUrl = None,
     ):
         tb = Printf.__gettable__(
             [
@@ -586,7 +594,7 @@ class Printf(object):
                     (
                         data.album.title
                         if data.album
-                           != None
+                        != None
                         else None
                     ),
                 ],
@@ -752,15 +760,23 @@ class Printf(object):
         )
         tb = prettytable.PrettyTable()
         tb.field_names = [
-            tidal_dl.aigpy.cmd.green("Index"),
-            tidal_dl.aigpy.cmd.green("Valid"),
-            tidal_dl.aigpy.cmd.green("Platform"),
-            tidal_dl.aigpy.cmd.green("Formats"),
+            tidal_dl.aigpy.cmd.green(
+                "Index"
+            ),
+            tidal_dl.aigpy.cmd.green(
+                "Valid"
+            ),
+            tidal_dl.aigpy.cmd.green(
+                "Platform"
+            ),
+            tidal_dl.aigpy.cmd.green(
+                "Formats"
+            ),
         ]
         tb.align = "l"
 
         for index, item in enumerate(
-                items
+            items
         ):
             tb.add_row(
                 [
@@ -770,7 +786,7 @@ class Printf(object):
                             "True"
                         )
                         if item["valid"]
-                           == "True"
+                        == "True"
                         else tidal_dl.aigpy.cmd.red(
                             "False"
                         )

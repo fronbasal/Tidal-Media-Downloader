@@ -6,11 +6,13 @@
 @Author  :   Yaronzz
 @Version :   2.0
 @Contact :   yaronhuang@foxmail.com
-@Desc    :  
+@Desc    :
 """
 import json
 import tidal_dl.aigpy
-from tidal_dl.aigpy.dictHelper import DictTool
+from tidal_dl.aigpy.dictHelper import (
+    DictTool,
+)
 
 
 class ModelBase(object):
@@ -23,17 +25,26 @@ def modelToDict(model):
     if not __isModel__(model):
         return None
 
-    members = [attr for attr in dir(model) if not callable(getattr(model, attr)) and not attr.startswith("_")]
+    members = [
+        attr
+        for attr in dir(model)
+        if not callable(
+            getattr(model, attr)
+        )
+        and not attr.startswith("_")
+    ]
 
     pr = {}
     for name in members:
         value = getattr(model, name)
-        if name[0] == '_':
+        if name[0] == "_":
             continue
         if callable(value):
             continue
         if __isModelList__(value):
-            value = modelListToDictList(value)
+            value = modelListToDictList(
+                value
+            )
         if __isModel__(value):
             value = modelToDict(value)
         pr[name] = value
@@ -46,21 +57,36 @@ def dictToModel(indict, model):
     ret = model
     maps = DictTool(indict)
 
-    members = [attr for attr in dir(ret) if not callable(getattr(model, attr)) and not attr.startswith("_")]
+    members = [
+        attr
+        for attr in dir(ret)
+        if not callable(
+            getattr(model, attr)
+        )
+        and not attr.startswith("_")
+    ]
 
     for key in members:
         if key.lower() not in maps:
-            if __isObject__(getattr(ret, key)):
+            if __isObject__(
+                getattr(ret, key)
+            ):
                 setattr(ret, key, None)
             continue
 
         # 判断是否为字典数组
         lvalue = maps[key.lower()]
         if __isDictList__(lvalue):
-            value = dictListToModelList(lvalue, getattr(ret, key))
+            value = dictListToModelList(
+                lvalue,
+                getattr(ret, key),
+            )
         # 判断是否为字典
         elif __isDict__(lvalue):
-            value = dictToModel(lvalue, getattr(ret, key))
+            value = dictToModel(
+                lvalue,
+                getattr(ret, key),
+            )
         else:
             value = lvalue
 
@@ -74,7 +100,9 @@ def dictListToModelList(jList, model):
     ret = []
     for item in jList:
         tmpMode = model.__class__()
-        data = dictToModel(item, tmpMode)
+        data = dictToModel(
+            item, tmpMode
+        )
         ret.append(data)
     return ret
 

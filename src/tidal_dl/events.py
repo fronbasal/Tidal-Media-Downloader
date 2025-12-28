@@ -10,7 +10,13 @@
 """
 
 from tidal_dl.download_manager import *
-from tidal_dl.logger import error, success, info, debug, display_album_info
+from tidal_dl.logger import (
+    error,
+    success,
+    info,
+    debug,
+    display_album_info,
+)
 
 """
 =================================
@@ -81,13 +87,21 @@ def start_mix(obj: Mix):
 
 
 def start_file(string):
-    txt = tidal_dl.aigpy.file.getContent(string)
-    if tidal_dl.aigpy.string.isNull(txt):
+    txt = (
+        tidal_dl.aigpy.file.getContent(
+            string
+        )
+    )
+    if tidal_dl.aigpy.string.isNull(
+        txt
+    ):
         error("Nothing can read!")
         return
     array = txt.split("\n")
     for item in array:
-        if tidal_dl.aigpy.string.isNull(item):
+        if tidal_dl.aigpy.string.isNull(
+            item
+        ):
             continue
         if item[0] == "#":
             continue
@@ -112,15 +126,17 @@ def start_type(etype: Type, obj):
 
 
 def start(string):
-    if tidal_dl.aigpy.string.isNull(string):
-        error(
-            "Please enter something."
-        )
+    if tidal_dl.aigpy.string.isNull(
+        string
+    ):
+        error("Please enter something.")
         return
 
     strings = string.split(" ")
     for item in strings:
-        if tidal_dl.aigpy.string.isNull(item):
+        if tidal_dl.aigpy.string.isNull(
+            item
+        ):
             continue
         if os.path.exists(item):
             start_file(item)
@@ -270,6 +286,24 @@ def changeSettings():
         + "):"
     )
     LANG.setLang(SETTINGS.language)
+
+    # HTTP Proxy settings
+    httpProxy = Printf.enter(
+        "HTTP Proxy (leave empty for none):"
+    )
+    if httpProxy and httpProxy.strip():
+        SETTINGS.httpProxy = httpProxy.strip()
+    else:
+        SETTINGS.httpProxy = None
+
+    httpsProxy = Printf.enter(
+        "HTTPS Proxy (leave empty for none):"
+    )
+    if httpsProxy and httpsProxy.strip():
+        SETTINGS.httpsProxy = httpsProxy.strip()
+    else:
+        SETTINGS.httpsProxy = None
+
     SETTINGS.save()
 
 
@@ -352,7 +386,9 @@ def loginByWeb():
 
         print(
             LANG.select.AUTH_NEXT_STEP.format(
-                tidal_dl.aigpy.cmd.green(url),
+                tidal_dl.aigpy.cmd.green(
+                    url
+                ),
                 tidal_dl.aigpy.cmd.yellow(
                     __displayTime__(
                         TIDAL_API.key.authCheckTimeout

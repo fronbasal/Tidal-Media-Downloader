@@ -26,7 +26,11 @@ class Unit(Enum):
     TB = 4
 
 
-def convert(num: float, srcUnit: Unit, desUnit: Unit) -> float:
+def convert(
+    num: float,
+    srcUnit: Unit,
+    desUnit: Unit,
+) -> float:
     """Convert memory unit, support gb/mb/kb/byte
 
     Args:
@@ -57,7 +61,11 @@ def convert(num: float, srcUnit: Unit, desUnit: Unit) -> float:
         return 0
 
 
-def unitFix(num: float, srcUnit: Unit = Unit.BYTE, maxUnit: Unit = Unit.GB) -> (float, Unit):
+def unitFix(
+    num: float,
+    srcUnit: Unit = Unit.BYTE,
+    maxUnit: Unit = Unit.GB,
+) -> (float, Unit):
     """Automatic conversion to appropriate units"""
     try:
         num = float(num)

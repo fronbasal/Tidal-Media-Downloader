@@ -173,7 +173,9 @@ def getAlbumPath(album: Album) -> str:
         R"{None}", ""
     )
     retpath = retpath.strip()
-    return os.path.join(SETTINGS.downloadPath, retpath)
+    return os.path.join(
+        SETTINGS.downloadPath, retpath
+    )
 
 
 def getPlaylistPath(
@@ -201,7 +203,9 @@ def getPlaylistPath(
     retpath = retpath.replace(
         R"{PlaylistName}", playlistName
     )
-    return os.path.join(SETTINGS.downloadPath, retpath)
+    return os.path.join(
+        SETTINGS.downloadPath, retpath
+    )
 
 
 def getTrackPath(
@@ -330,8 +334,7 @@ def getVideoPath(
 ) -> str:
     """Get file path for video - 100% compatible with original."""
     base = os.path.join(
-        SETTINGS.downloadPath,
-        "Video"
+        SETTINGS.downloadPath, "Video"
     )
     number = str(
         video.trackNumber

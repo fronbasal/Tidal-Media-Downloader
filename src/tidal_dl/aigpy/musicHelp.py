@@ -6,14 +6,16 @@
 @Author  :  Yaronzz
 @Version :  1.0
 @Contact :  yaronhuang@foxmail.com
-@Desc    :  
+@Desc    :
 """
-from tidal_dl.aigpy.modelHelper import ModelBase
+from tidal_dl.aigpy.modelHelper import (
+    ModelBase,
+)
 
 
 class MusicBase(ModelBase):
-    id = ''
-    name = ''
+    id = ""
+    name = ""
 
 
 class User(MusicBase):
@@ -40,6 +42,7 @@ class Show(MusicBase):
 class Playlist(MusicBase):
     isOwn = False
     tracks = Track()
+
 
 # class AccountData(object):
 #     def __init__(self, dbPath: str):

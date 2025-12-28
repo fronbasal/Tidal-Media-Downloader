@@ -81,12 +81,32 @@ class Settings:
     use_playlist_folder: bool = True
     show_progress: bool = True
     show_track_info: bool = True
-    convert_flac: bool = True  # Auto-convert FLAC-in-MP4 to proper FLAC (Max quality only)
+    convert_flac: bool = (
+        True  # Auto-convert FLAC-in-MP4 to proper FLAC (Max quality only)
+    )
 
     # Interface settings
     language: int = 0
     api_key_index: int = 0
-    verbose: bool = False  # Enable debug/verbose logging
+    verbose: bool = (
+        False  # Enable debug/verbose logging
+    )
+
+    # Network settings
+    http_proxy: Optional[str] = (
+        None  # HTTP proxy URL (e.g., "http://proxy.example.com:8080")
+    )
+    https_proxy: Optional[str] = (
+        None  # HTTPS proxy URL (e.g., "http://proxy.example.com:8080")
+    )
+
+    # Path formats
+    http_proxy: Optional[str] = (
+        None  # HTTP proxy URL (e.g., "http://proxy.example.com:8080")
+    )
+    https_proxy: Optional[str] = (
+        None  # HTTPS proxy URL (e.g., "http://proxy.example.com:8080")
+    )
 
     # Path formats
     path_formats: PathFormats = field(
@@ -184,6 +204,8 @@ class Settings:
             "playlistFolderFormat": "playlist_folder",
             "trackFileFormat": "track_file",
             "videoFileFormat": "video_file",
+            "httpProxy": "http_proxy",
+            "httpsProxy": "https_proxy",
         }
 
         normalized = {}

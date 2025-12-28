@@ -61,13 +61,15 @@ def _convert_flac_inplace(
 
         # Step 0: Check if the file is actually an MP4 container or a true FLAC file
         # Read first few bytes to check the file signature
-        with open(file_path, 'rb') as f:
+        with open(file_path, "rb") as f:
             header = f.read(12)
 
         # FLAC files start with "fLaC" (0x664C6143)
         # MP4 files start with ftyp box (typically at offset 4)
-        if header[0:4] == b'fLaC':
-            debug("File is already a proper FLAC file, no conversion needed")
+        if header[0:4] == b"fLaC":
+            debug(
+                "File is already a proper FLAC file, no conversion needed"
+            )
             return True
 
         # If it's not a FLAC file, it should be an MP4 container
@@ -350,7 +352,9 @@ def _set_metadata(
 
     obj = tidal_dl.aigpy.tag.TagTool(
         filepath,
-        verbose=getattr(SETTINGS, 'verbose', False)
+        verbose=getattr(
+            SETTINGS, "verbose", False
+        ),
     )
 
     # Debug: Check if TagTool was created successfully
@@ -417,8 +421,7 @@ def downloadCover(album: Album):
     if album is None:
         return
     path = os.path.join(
-        getAlbumPath(album),
-        "cover.jpg"
+        getAlbumPath(album), "cover.jpg"
     )
     url = TIDAL_API.getCoverUrl(
         album.cover, "1280", "1280"
@@ -438,7 +441,9 @@ def downloadAlbumInfo(
     path = getAlbumPath(album)
     tidal_dl.aigpy.path.mkdirs(path)
 
-    info_path = os.path.join(path, "AlbumInfo.txt")
+    info_path = os.path.join(
+        path, "AlbumInfo.txt"
+    )
     infos = ""
     infos += "[ID]          %s\n" % (
         str(album.id)
@@ -512,8 +517,25 @@ def downloadVideo(
             + stream.m3u8Url
         )
 
+        # Build proxies dict from SETTINGS
+        proxies = None
+        if (
+            SETTINGS.httpProxy
+            or SETTINGS.httpsProxy
+        ):
+            proxies = {}
+            if SETTINGS.httpProxy:
+                proxies["http"] = (
+                    SETTINGS.httpProxy
+                )
+            if SETTINGS.httpsProxy:
+                proxies["https"] = (
+                    SETTINGS.httpsProxy
+                )
+
         m3u8content = requests.get(
-            stream.m3u8Url
+            stream.m3u8Url,
+            proxies=proxies,
         ).content
         if m3u8content is None:
             error(
@@ -567,9 +589,15 @@ def downloadTrack(
     debug(
         f"downloadTrack called for: {track.title}"
     )
-    debug(f"album parameter: {album.title if album else 'None'}")
-    debug(f"playlist parameter: {playlist.title if playlist else 'None'}")
-    debug(f"track ID: {track.id if track else 'None'}")
+    debug(
+        f"album parameter: {album.title if album else 'None'}"
+    )
+    debug(
+        f"playlist parameter: {playlist.title if playlist else 'None'}"
+    )
+    debug(
+        f"track ID: {track.id if track else 'None'}"
+    )
     try:
         stream = TIDAL_API.getStreamUrl(
             track.id,
@@ -607,16 +635,30 @@ def downloadTrack(
                 + " (skip:already exists!)"
             )
             # Skip metadata processing for existing files in normal mode (unless verbose)
-            if not getattr(SETTINGS, 'verbose', False):
-                debug("File exists, skipping metadata processing in normal mode")
+            if not getattr(
+                SETTINGS,
+                "verbose",
+                False,
+            ):
+                debug(
+                    "File exists, skipping metadata processing in normal mode"
+                )
                 # But still check if FLAC conversion is needed
                 # (in case file was downloaded before conversion feature was added)
-                skip_to_flac_conversion = True
+                skip_to_flac_conversion = (
+                    True
+                )
             else:
-                debug("File exists, but re-applying metadata due to verbose mode")
-                skip_to_flac_conversion = False
+                debug(
+                    "File exists, but re-applying metadata due to verbose mode"
+                )
+                skip_to_flac_conversion = (
+                    False
+                )
         else:
-            skip_to_flac_conversion = False
+            skip_to_flac_conversion = (
+                False
+            )
             # download
             logging.info(
                 "[DL Track] name="
@@ -627,9 +669,26 @@ def downloadTrack(
                 + stream.url
             )
 
+            # Build proxies dict from SETTINGS
+            proxies = None
+            if (
+                SETTINGS.httpProxy
+                or SETTINGS.httpsProxy
+            ):
+                proxies = {}
+                if SETTINGS.httpProxy:
+                    proxies["http"] = (
+                        SETTINGS.httpProxy
+                    )
+                if SETTINGS.httpsProxy:
+                    proxies["https"] = (
+                        SETTINGS.httpsProxy
+                    )
+
             tool = tidal_dl.aigpy.download.DownloadTool(
                 path + ".part",
                 stream.urls,
+                proxies=proxies,
             )
             tool.setUserProgress(
                 userProgress
@@ -671,13 +730,15 @@ def downloadTrack(
                 )
                 if SETTINGS.lyricFile:
                     lrcPath = (
-                        path.rsplit(".", 1)[
-                            0
-                        ]
+                        path.rsplit(
+                            ".", 1
+                        )[0]
                         + ".lrc"
                     )
                     tidal_dl.aigpy.file.write(
-                        lrcPath, lyrics, "w"
+                        lrcPath,
+                        lyrics,
+                        "w",
                     )
             except Exception:
                 lyrics = ""
@@ -698,9 +759,18 @@ def downloadTrack(
 
         # Auto-convert FLAC-in-MP4 to proper FLAC for Max quality (unless disabled)
         # Handle case where convertFlac setting might be None (from old config files)
-        convert_flac = getattr(SETTINGS, "convertFlac", True)
+        convert_flac = getattr(
+            SETTINGS,
+            "convertFlac",
+            True,
+        )
         if convert_flac is None:
             convert_flac = True
+
+        # Debug: Log the conversion check conditions
+        debug(
+            f"FLAC conversion check: path={path}, ends_with_flac={path.endswith('.flac')}, convert_flac={convert_flac}, audioQuality={SETTINGS.audioQuality}, is_Max={SETTINGS.audioQuality == AudioQuality.Max}"
+        )
 
         if (
             path.endswith(".flac")
@@ -708,18 +778,27 @@ def downloadTrack(
             and SETTINGS.audioQuality
             == AudioQuality.Max
         ):
+            info(
+                f"Starting FLAC conversion for: {os.path.basename(path)}"
+            )
             if _convert_flac_inplace(
                 path
             ):
-                debug(
+                success(
                     f"Converted to proper FLAC: {os.path.basename(path)}"
                 )
             else:
                 error(
                     "FLAC conversion failed!"
                 )
+        else:
+            debug(
+                f"Skipping FLAC conversion (one or more conditions not met)"
+            )
 
-        success(f"Successfully downloaded: {track.title}")
+        success(
+            f"Successfully downloaded: {track.title}"
+        )
 
         return True, ""
     except Exception as e:

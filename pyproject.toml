@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tidal-dl"
-version = "2025.10.1"
+version = "2025.12"
 description = "Download music and videos from Tidal (Refactored)"
 authors = [
     "Yaronzz <yaronhuang@foxmail.com>",
@@ -23,8 +23,6 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -35,14 +33,14 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.9"
+python = ">=3.12"
 requests = ">=2.32"
 pycryptodome = ">=3.9.0"
 pydub = ">=0.25.1"
-prettytable = ">=3.16.0"
+prettytable = ">=3.17.0"
 mutagen = "^1.47.0"
 colorama = "^0.4.6"
-certifi = "^2025.10.5"
+certifi = "^2025"
 pycparser = "^2.23"
 
 [tool.poetry.group.dev.dependencies]
@@ -64,7 +62,7 @@ profile = "black"
 line_length = 120
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.12"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = false
