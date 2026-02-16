@@ -5,7 +5,7 @@
 from setuptools import setup, find_packages
 
 # Read version from package
-__version__ = "2025.12"
+__version__ = "2025.12.1"
 
 setup(
     name='tidal-dl',

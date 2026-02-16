@@ -17,6 +17,7 @@ from tidal_dl.logger import (
     debug,
     display_album_info,
 )
+from tidal_dl import apiKey
 
 """
 =================================

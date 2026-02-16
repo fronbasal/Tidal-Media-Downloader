@@ -21,7 +21,7 @@ from tidal_dl.logger import (
 class TidalCLI:
     """Command-line interface handler."""
 
-    VERSION = "2025.12"
+    VERSION = "2025.12.1"
 
     def __init__(
         self,

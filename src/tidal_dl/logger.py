@@ -160,7 +160,7 @@ def warning(message: str) -> None:
 
 def logo() -> None:
     """Display the application logo."""
-    VERSION = "2025.12"
+    VERSION = "2025.12.1"
     logo_text = f"""
 ::::::::::: ::::::::::: :::::::::      :::     :::                     :::::::::  :::        
     :+:         :+:     :+:    :+:   :+: :+:   :+:                     :+:    :+: :+:        
